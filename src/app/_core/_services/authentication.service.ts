@@ -24,13 +24,13 @@ export class AuthenticationService {
         
         return this.http.post('http://localhost:8080/api/authenticate', body, options)
             .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                
+                // login successful if there's a jwt token in the response               
                 let user = response.json();
-                console.log(user);
+                
                 if (user.token) {
+                    
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user.token));
+                    localStorage.setItem('currentUser', user.token);
                 }
                 else{
                     throw new Error("Authentication failed. Username or password is incorrect.");

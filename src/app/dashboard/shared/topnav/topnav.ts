@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../_core/_services/user.service';
 
 @Component({
     moduleId: module.id,
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
 })
 
 export class TopNavComponent {
+	private userLogged : string; // name of the user logged
+
+	constructor	(private userService : UserService){
+
+	}		
+
+	ngOnInit(){
+
+		this.userService.check().subscribe( data => this.userLogged = data.name );
+	}
+
 	changeTheme(color: string): void {
 		var link: any = ('<link>');
 		link

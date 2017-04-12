@@ -11,6 +11,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
 import { CoreModule } from './_core/core.module';
 import { AlertService } from './_core/_services/alert.service';
+import { UserService } from './_core/_services/user.service';
+import { HttpClient} from './_core/_helpers/httpClient';
 import { AuthGuard } from './_core/_guards/index';
 
 
@@ -31,7 +33,12 @@ import { AuthGuard } from './_core/_guards/index';
   declarations: [
     AppComponent
   ],
-  providers:[AlertService,AuthGuard],
+  providers:[
+    AlertService,
+    UserService,
+    AuthGuard,
+    HttpClient
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
