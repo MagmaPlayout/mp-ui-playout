@@ -1,0 +1,53 @@
+.mp-list-box {
+    display: inline-table;
+    width: 22%;
+    height: 100%;
+    margin: 10px;
+    bottom:0px;
+}
+
+.mp-video-box {
+    display: inline-table;
+    width: 21%;
+    height: 100%;
+    margin: 10px;
+    padding-right: 0px;
+    margin-right: 0px;
+   
+}
+
+.mp-video-box video{
+    background-color:black;
+}
+
+.mp-timer{
+    background-color: dimgrey;
+    color:white;
+    margin-top: 20px;
+    padding-left: 10px;
+    
+}
+
+.mp-sketch-preview{
+    background-color: limegreen;
+    color:white;
+    margin-top: 40px;
+    padding-left: 10px;
+    height: 200px;
+    
+}
+.input-group.stylish-input-group{
+    margin-bottom: 20px;
+}
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
