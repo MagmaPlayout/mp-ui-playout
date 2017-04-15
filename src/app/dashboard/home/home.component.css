@@ -51,3 +51,28 @@
     border:0;
     background:transparent;
 }
+
+
+
+
+
+div.scroll-list {
+      overflow: auto;
+      max-height: 70vh;
+    }
+    
+    .drag-over-border {
+      border: #ff525b dashed 2px;
+    }
+    
+    .drag-target-border {
+       border: #00bfff dashed 2px;
+    }
+
+    .drag-target-border-green {
+       border: #3c763d dashed 2px;
+    }
+
+    .drag-handle {
+        cursor: move;
+    }

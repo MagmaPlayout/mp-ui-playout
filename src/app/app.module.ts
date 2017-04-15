@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { AlertModule } from 'ng2-bootstrap';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LoginModule } from './login/login.module';
 import { CoreModule } from './_core/core.module';

@@ -8,6 +8,7 @@
     
     
     <div class="panel panel-default mp-list-box">
+
         <div class="panel-heading">Sketches</div>
         <div class="panel-body">
             <div class="input-group stylish-input-group">
@@ -20,14 +21,20 @@
             </div>
 
             <ul class="list-group"> 
-                <li class="list-group-item"> <span class="badge">1</span> Clima </li> 
-                <li class="list-group-item"> <span class="badge">1</span> Reloj </li> 
-                <li class="list-group-item"> <span class="badge">1</span> Mosca </li> 
+                <li draggable *ngFor="let item of sketches"
+                    [dragOverClass]="'drag-over-border'"
+                    [dragData]="item" class="list-group-item"
+                    [dragScope]="item.type">
+                    {{item.name}}
+                    <span class="badge">1</span>
+               </li>               
             </ul>
         </div>
     </div>
 
-    <div class="panel panel-default mp-list-box">
+
+    <div class="panel panel-default mp-list-box" droppable 
+      [dragOverClass]="'drag-target-border'" (onDrop)="onMediasDrop($event)" [dropScope]="'-'">
         <div class="panel-heading">Medias</div>
         <div class="panel-body">
             <div class="input-group stylish-input-group">
@@ -39,14 +46,20 @@
                     </span>
             </div>
             <ul class="list-group"> 
-                <li class="list-group-item"> <span class="badge">1</span> Clip1 </li> 
-                <li class="list-group-item"> <span class="badge">1</span> Clip2 </li> 
-                <li class="list-group-item"> <span class="badge">1</span> Clip3 </li> 
+                <li draggable *ngFor="let item of medias"
+               [dragOverClass]="'drag-over-border'"
+               [dragData]="item" class="list-group-item">
+               {{item.name}}
+               <span class="badge">1</span>
+               </li>
+               
             </ul>
         </div>
     </div>
 
-    <div class="panel panel-default mp-list-box">
+
+    <div class="panel panel-default mp-list-box" droppable 
+         [dragOverClass]="'drag-target-border'" (onDrop)="onPlayoutDrop($event)">
         <div class="panel-heading">Playout</div>
         <div class="panel-body">
             <div class="input-group stylish-input-group">
@@ -59,9 +72,13 @@
             </div>
 
             <ul class="list-group"> 
-                <li class="list-group-item"> <span class="badge">1</span> Clip1 </li> 
-                <li class="list-group-item"> <span class="badge">1</span> Clip2</li> 
-                <li class="list-group-item"> <span class="badge">1</span> Clip3</li> 
+                 <li draggable *ngFor="let item of playout"
+                  [dragOverClass]="'drag-over-border'"
+                  [dragData]="item" class="list-group-item">
+                  {{item.name}}
+                  <span class="badge">1</span>
+                  </li>
+              
             </ul>
             
         </div>
@@ -79,8 +96,10 @@
              <div class="mp-timer">timer2</div>
 
              <div class="mp-timer">timer3</div>
+            <!--  (onDrop)="onSketchesDrop($event)"-->
+             <div class="mp-sketch-preview" droppable [dragOverClass]="'drag-target-border-green'" [dropScope]="'sketch'">
 
-             <div class="mp-sketch-preview"></div>
+             </div>
 
 
         </div>
