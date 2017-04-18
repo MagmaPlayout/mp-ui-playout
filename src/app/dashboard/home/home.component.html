@@ -24,7 +24,7 @@
                 <li draggable *ngFor="let item of sketches"
                     [dragOverClass]="'drag-over-border'"
                     [dragData]="item" class="list-group-item"
-                    [dragScope]="item.type">
+                    [dragScope]="'sketch'">
                     {{item.name}}
                     <span class="badge">1</span>
                </li>               
@@ -48,7 +48,8 @@
             <ul class="list-group"> 
                 <li draggable *ngFor="let item of medias"
                [dragOverClass]="'drag-over-border'"
-               [dragData]="item" class="list-group-item">
+               [dragData]="item" class="list-group-item"
+               [dragScope]="'media'">
                {{item.name}}
                <span class="badge">1</span>
                </li>
@@ -59,7 +60,7 @@
 
 
     <div class="panel panel-default mp-list-box" droppable 
-         [dragOverClass]="'drag-target-border'" (onDrop)="onPlayoutDrop($event)">
+         [dragOverClass]="'drag-target-border'" [dropScope] = "'media'" (onDrop)="onPlayoutDrop($event)">
         <div class="panel-heading">Playout</div>
         <div class="panel-body">
             <div class="input-group stylish-input-group">
@@ -74,7 +75,8 @@
             <ul class="list-group"> 
                  <li draggable *ngFor="let item of playout"
                   [dragOverClass]="'drag-over-border'"
-                  [dragData]="item" class="list-group-item">
+                  [dragData]="item"
+                  class="list-group-item">
                   {{item.name}}
                   <span class="badge">1</span>
                   </li>
@@ -97,8 +99,8 @@
 
              <div class="mp-timer">timer3</div>
             <!--  (onDrop)="onSketchesDrop($event)"-->
-             <div class="mp-sketch-preview" droppable [dragOverClass]="'drag-target-border-green'" [dropScope]="'sketch'">
-
+             <div [innerHTML]="sketchContent" class="mp-sketch-preview" droppable [dragOverClass]="'drag-target-border-green'" [dropScope]="'sketch'" (onDrop)="onSketchDrop($event)">
+                    
              </div>
 
 

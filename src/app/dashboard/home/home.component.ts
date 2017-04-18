@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-
+import { MediaService } from '../../_core/_services/media.service';
+import { MediaModel } from '../../_core/_models/media.model';
+import { SketchModel } from '../../_core/_models/sketch.model';
 
 /**
 *	This class represents the lazy loaded HomeComponent.
@@ -12,45 +14,47 @@ import { Component } from '@angular/core';
 	styleUrls: ['home.component.css'],
 })
 export class HomeComponent {
-	sketches = [
-        {name: "Clima", type: "sketch"},
-        {name: "Reloj", type: "sketch"},
-        {name: "Mosca XYZ", type: "sketch"}
-	]
-       
+	medias : Array<MediaModel>;
+	sketches : Array<SketchModel>;
+	playout : Array<any> = [];
+	sketchContent : string;
 
-        
-	medias = [
-		{name: 'Los Simpsons', type: "media"},
-		{name: 'Publi Noche',type: "media"},
-		{name: 'Clip1',type: "media"},
-		{name: 'Clip2',type: "media"},
-		];
-	
-	playout = [
-		{name: 'Los Simpsons', type: "playout"},
-		{name: 'Clip1',type: "playout"},
-		{name: 'Clip2',type: "playout"},
-		];
+	constructor(private playoutService: MediaService){
+		
+		this.playoutService.init();
+		
+		this.playoutService.getMediaList().subscribe( data  => {
+			
+            this.medias = data;
+            
+        })
 
+		this.playoutService.getSketchList().subscribe( data  => {			
+            
+			this.sketches = data;         
+        })
+
+	}
 	
 	droppedSketches = [];
 	droppedItems = [];
 
-	onScketcheDrop(e: any) {
-		this.droppedSketches.push(e.dragData);
-		this.removeItem(e.dragData, this.sketches);
+	onSketchDrop(e: any) {
+		console.log(e.dragData);
+		let sketch : SketchModel;
+		sketch = e.dragData;
+		this.sketchContent = sketch.htmlContent;	
 	}
 
 	
 	onMediasDrop(e: any) {
-		this.medias.push(e.dragData);
+		this.medias.push(e.dragData.htmlContent);	
 		//this.removeItem(e.dragData, this.list2)
 	}
 	
 	onPlayoutDrop(e: any) {
 		this.playout.push(e.dragData);
-		//this.removeItem(e.dragData, this.list1)
+	
 	}
 
 	removeItem(item: any, list: Array<any>) {

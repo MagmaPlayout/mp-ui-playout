@@ -11,6 +11,7 @@ import { LoginModule } from './login/login.module';
 import { CoreModule } from './_core/core.module';
 import { AlertService } from './_core/_services/alert.service';
 import { UserService } from './_core/_services/user.service';
+import { MediaService } from './_core/_services/media.service';
 import { HttpClient} from './_core/_helpers/httpClient';
 import { AuthGuard } from './_core/_guards/index';
 
@@ -35,6 +36,7 @@ import { AuthGuard } from './_core/_guards/index';
   providers:[
     AlertService,
     UserService,
+    MediaService,
     AuthGuard,
     HttpClient
     ],
