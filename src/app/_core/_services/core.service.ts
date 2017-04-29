@@ -27,7 +27,7 @@ export class CoreService {
     playMedia(media:MediaModel) {
        
         this.socket = io(this.url);
-        this.socket.emit('core_playMedia', null); 
+        this.socket.emit('core_playMedia', media); 
 
         return () => {
             this.socket.disconnect();
