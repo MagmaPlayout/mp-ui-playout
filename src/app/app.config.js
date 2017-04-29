@@ -5,8 +5,9 @@
  */
 module.exports = {
 
-    "APIUrls" : {
-        "admin" : "http://localhost:8080/api/",
-        "ws_playout" : "http://localhost:8001"
+    "APIs" : {
+        "playout_ws" : "http://localhost:8002",
+        "admin" : "http://localhost:8080/api/", 
+        "core" : "http://localhost:8003"    
     }
 }

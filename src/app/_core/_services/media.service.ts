@@ -9,7 +9,7 @@ var config = require("../../app.config");
 /** TO-DO Media service pasaria a ser Playout.service si se usa ws */
 @Injectable()
 export class MediaService {
-  private url = config.APIUrls.ws_playout;  
+  private url = config.APIs.playout_ws;  
   private socket;
   
   /**

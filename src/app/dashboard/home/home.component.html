@@ -7,7 +7,7 @@
     </div>
     
     
-    <div class="panel panel-default mp-list-box">
+    <div class="panel panel-default mp-list-box" dnd-sortable-container [dropZones]="['sketch-zone']" [sortableData]="sketches">
 
         <div class="panel-heading">Sketches</div>
         <div class="panel-body">
@@ -21,76 +21,102 @@
             </div>
 
             <ul class="list-group"> 
-                <li draggable *ngFor="let item of sketches"
-                    [dragOverClass]="'drag-over-border'"
-                    [dragData]="item" class="list-group-item"
-                    [dragScope]="'sketch'">
-                    {{item.name}}
-                    <span class="badge">1</span>
+                <li *ngFor="let item of sketchLst; let i = index" class="list-group-item" [dropEnabled]="false" [dragData]="item" dnd-sortable [sortableIndex]="i">
+                   
+                    <div class="row">
+                        <div class="col-xs-12 col-md-7">
+                            <a href="#" class="profile-image" data-toggle="dropdown">
+                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTViOGU3ZmRhNDcgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWI4ZTdmZGE0NyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MC41IiB5PSI5NC41Ij4xNzF4MTgwPC90ZXh0PjwvZz48L2c+PC9zdmc+" width="20px" height="20px" class="img-circle"> </a>
+                            {{item.name}}
+                        </div>
+                        <div class="col-xs-6 col-md-5">
+                            <p>
+                                <a><span class="glyphicon glyphicon-ok-sign"></span></a>
+                                <a><span class="glyphicon glyphicon-eye-open"></span></a>
+                            </p>
+                            
+                        </div>
+                    </div>
                </li>               
             </ul>
         </div>
     </div>
 
 
-    <div class="panel panel-default mp-list-box" droppable 
-      [dragOverClass]="'drag-target-border'" (onDrop)="onMediasDrop($event)" [dropScope]="'-'">
+    <div class="panel panel-default mp-list-box"    
+        dnd-sortable-container [sortableData]="mediaLst" [dropZones]="['playoutItem']">
         <div class="panel-heading">Medias</div>
         <div class="panel-body">
             <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control"  placeholder="Search" >
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>  
-                    </span>
+                <input type="text" class="form-control"  placeholder="Search" >
+                <span class="input-group-addon">
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>  
+                </span>
             </div>
-            <ul class="list-group"> 
-                <li draggable *ngFor="let item of medias"
-               [dragOverClass]="'drag-over-border'"
-               [dragData]="item" class="list-group-item"
-               [dragScope]="'media'">
-               {{item.name}}
-               <span class="badge">1</span>
-               </li>
-               
+            <ul class="list-group">
+                <li *ngFor="let media of mediaLst; let x = index" class="list-group-item"
+                    dnd-sortable [sortableIndex]="x" [dragEnabled]="true"
+                    [dragData]="media">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-7">
+                            <a href="#" class="profile-image" data-toggle="dropdown">
+                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTViOGU3ZmRhNDcgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWI4ZTdmZGE0NyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MC41IiB5PSI5NC41Ij4xNzF4MTgwPC90ZXh0PjwvZz48L2c+PC9zdmc+" width="20px" height="20px" class="img-circle"> </a>
+                            {{media.name}}
+                        </div>
+                        <div class="col-xs-6 col-md-5">
+                            <p>
+                                <a><span class="glyphicon glyphicon-info-sign"></span></a>
+                                <a><span class="glyphicon glyphicon-plus-sign"></span></a>
+                            </p>
+                            
+                        </div>
+                    </div>      
+                </li>
             </ul>
         </div>
     </div>
 
-
-    <div class="panel panel-default mp-list-box" droppable 
-         [dragOverClass]="'drag-target-border'" [dropScope] = "'media'" (onDrop)="onPlayoutDrop($event)">
-        <div class="panel-heading">Playout</div>
-        <div class="panel-body">
+    <div class="panel panel-default mp-list-box" dnd-sortable-container  [sortableData]="playoutLst">
+        <div class="panel-heading">Playout list</div>
+        <div class="panel-body" dnd-droppable (onDropSuccess)="onPlayoutDrop($event)" [dropZones]="['playoutItem']">
             <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control"  placeholder="Search" >
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>  
-                    </span>
+                <input type="text" class="form-control"  placeholder="Search" >
+                <span class="input-group-addon">
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>  
+                </span>
             </div>
-
-            <ul class="list-group"> 
-                 <li draggable *ngFor="let item of playout"
-                  [dragOverClass]="'drag-over-border'"
-                  [dragData]="item"
-                  class="list-group-item">
-                  {{item.name}}
-                  <span class="badge">1</span>
-                  </li>
-              
+            <ul class="list-group">
+                <li *ngFor="let item of playoutLst; let x = index" class="list-group-item" dnd-sortable [sortableIndex]="x" [dragEnabled]="true" [dragData]="item"> 
+                    <div class="row">
+                        <div class="col-xs-12 col-md-7">
+                            <a href="#" class="profile-image" data-toggle="dropdown">
+                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTViOGU3ZmRhNDcgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWI4ZTdmZGE0NyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MC41IiB5PSI5NC41Ij4xNzF4MTgwPC90ZXh0PjwvZz48L2c+PC9zdmc+" width="20px" height="20px" class="img-circle"> </a>
+                            {{item.name}}
+                        </div>
+                        <div class="col-xs-6 col-md-5">
+                            <p>
+                                <a (click)="onDelPlItem(item)"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a (click)="onPlayPlItem(item)"><span class="glyphicon glyphicon-play-circle"></span></a>
+                            </p>
+                            
+                        </div>
+                    </div>    
+                </li>
             </ul>
-            
         </div>
     </div>
+              
+    
 
     <div class="panel panel-default mp-video-box">
         
-        <div class="panel-body">
+        <div class="panel-body" >
             <video width="223" height="200" controls>
-                <source src="movie.mp4" type="video/mp4">               
+                <source src="http://localhost:8001/consume/first" >               
             </video>
 
              <div class="mp-timer">timer1</div>
@@ -99,7 +125,7 @@
 
              <div class="mp-timer">timer3</div>
             <!--  (onDrop)="onSketchesDrop($event)"-->
-             <div [innerHTML]="sketchContent" class="mp-sketch-preview" droppable [dragOverClass]="'drag-target-border-green'" [dropScope]="'sketch'" (onDrop)="onSketchDrop($event)">
+            <div [innerHTML]="sketchContent | sanitizeHtml" class="mp-sketch-preview" dnd-droppable [dropZones]="['sketch-zone']" (onDropSuccess)="onSketchDrop($event)">
                     
              </div>
 
@@ -112,3 +138,4 @@
     </div>
 
 </div>
+

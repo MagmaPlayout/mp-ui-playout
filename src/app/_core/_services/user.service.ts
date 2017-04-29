@@ -17,7 +17,7 @@ export class UserService {
 
     public check() {
         
-        return this.http.get(config.APIUrls.admin + 'check', null, null)
+        return this.http.get(config.APIs.admin + 'check', null, null)
             .map(response => response.json(),
                 err => console.log("error")               
             )

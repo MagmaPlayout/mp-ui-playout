@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MediaService } from '../../_core/_services/media.service';
+import { CoreService } from '../../_core/_services/core.service';
 import { MediaModel } from '../../_core/_models/media.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 
@@ -14,54 +15,77 @@ import { SketchModel } from '../../_core/_models/sketch.model';
 	styleUrls: ['home.component.css'],
 })
 export class HomeComponent {
-	medias : Array<MediaModel>;
-	sketches : Array<SketchModel>;
-	playout : Array<any> = [];
+	
+	mediaLst : Array<MediaModel>;
+ 
+    playoutLst : Array<any> = []; 
+
+	sketchLst : Array<SketchModel>;
+	
 	sketchContent : string;
 
-	constructor(private playoutService: MediaService){
+	constructor(private playoutService: MediaService, private coreService : CoreService){
 		
 		this.playoutService.init();
 		
 		this.playoutService.getMediaList().subscribe( data  => {
 			
-            this.medias = data;
+            this.mediaLst = data;
             
         })
 
 		this.playoutService.getSketchList().subscribe( data  => {			
             
-			this.sketches = data;         
+			this.sketchLst = data;         
         })
 
 	}
-	
-	droppedSketches = [];
-	droppedItems = [];
 
-	onSketchDrop(e: any) {
-		console.log(e.dragData);
+	/**
+	 * Draw a sketch content inside sketchPreview box
+	 */
+	onSketchDrop($event: any) {
+
 		let sketch : SketchModel;
-		sketch = e.dragData;
+		sketch = $event.dragData;
 		this.sketchContent = sketch.htmlContent;	
 	}
-
 	
-	onMediasDrop(e: any) {
-		this.medias.push(e.dragData.htmlContent);	
-		//this.removeItem(e.dragData, this.list2)
+	/**
+	 * Add a media/pl to playout list
+	 */
+	onPlayoutDrop($event: any) {
+        this.playoutLst.push($event.dragData);
+		
 	}
-	
-	onPlayoutDrop(e: any) {
-		this.playout.push(e.dragData);
-	
+	/**
+	 * Remove a item from playout list
+	 */
+	onDelPlItem(item) {
+
+		this.removeItem(item, this.playoutLst);
+
 	}
 
+	/**
+	 * Play media/pl
+	 */
+	onPlayPlItem(item) {
+
+		this.coreService.playMedia(item);
+		
+	}
+
+	/**
+	 * Remove anything element of a list
+	 */
 	removeItem(item: any, list: Array<any>) {
+
 		let index = list.map((e) => {
 			return e.name
 		}).indexOf(item.name);
 		list.splice(index, 1);
 	}
+	
  }
 
