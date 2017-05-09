@@ -20,7 +20,7 @@ export class UserService {
         return this.http.get(config.APIs.admin + 'check', null, null)
             .map(response => response.json(),
                 err => console.log("error")               
-            )
+            );
           
     }
 

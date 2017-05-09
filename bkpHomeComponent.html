@@ -12,7 +12,7 @@
         <div class="panel-heading">Sketches</div>
         <div class="panel-body">
             <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control"  placeholder="Search" >
+                    <input type="text" class="form-control" (keyup)="onSearchMedia($event)" placeholder="Search" >
                     <span class="input-group-addon">
                         <button type="submit">
                             <span class="glyphicon glyphicon-search"></span>
@@ -21,7 +21,7 @@
             </div>
 
             <ul class="list-group"> 
-                <li *ngFor="let item of sketchLst; let i = index" class="list-group-item" [dropEnabled]="false" [dragData]="item" dnd-sortable [sortableIndex]="i">
+                <li *ngFor="let item of sketchFilterLst; let i = index" class="list-group-item" [dropEnabled]="false" [dragData]="item" dnd-sortable [sortableIndex]="i">
                    
                     <div class="row">
                         <div class="col-xs-12 col-md-7">
@@ -48,7 +48,7 @@
         <div class="panel-heading">Medias</div>
         <div class="panel-body">
             <div class="input-group stylish-input-group">
-                <input type="text" class="form-control"  placeholder="Search" >
+                <input type="text" class="form-control" (keyup)="onSearchMedia($event)"  placeholder="Search" >
                 <span class="input-group-addon">
                     <button type="submit">
                         <span class="glyphicon glyphicon-search"></span>
@@ -56,7 +56,7 @@
                 </span>
             </div>
             <ul class="list-group">
-                <li *ngFor="let media of mediaLst; let x = index" class="list-group-item"
+                <li *ngFor="let media of mediaFilterLst; let x = index" class="list-group-item"
                     dnd-sortable [sortableIndex]="x" [dragEnabled]="true"
                     [dragData]="media">
                     <div class="row">
@@ -82,7 +82,7 @@
         <div class="panel-heading">Playout list</div>
         <div class="panel-body" dnd-droppable (onDropSuccess)="onPlayoutDrop($event)" [dropZones]="['playoutItem']">
             <div class="input-group stylish-input-group">
-                <input type="text" class="form-control"  placeholder="Search" >
+                <input type="text" class="form-control" (keyup)="onSearchPlayout($event)"  placeholder="Search" >
                 <span class="input-group-addon">
                     <button type="submit">
                         <span class="glyphicon glyphicon-search"></span>
@@ -90,7 +90,7 @@
                 </span>
             </div>
             <ul class="list-group">
-                <li *ngFor="let item of playoutLst; let x = index" class="list-group-item" dnd-sortable [sortableIndex]="x" [dragEnabled]="true" [dragData]="item"> 
+                <li *ngFor="let item of playoutFilterLst; let x = index" class="list-group-item" dnd-sortable [sortableIndex]="x" [dragEnabled]="true" [dragData]="item"> 
                     <div class="row">
                         <div class="col-xs-12 col-md-7">
                             <a href="#" class="profile-image" data-toggle="dropdown">
@@ -116,7 +116,7 @@
         
         <div class="panel-body" >
             <video width="223" height="200" controls>
-                <source src="http://localhost:8100/consume/first" >               
+                <source src="http://localhost:8001/consume/first" >               
             </video>
 
              <div class="mp-timer">timer1</div>

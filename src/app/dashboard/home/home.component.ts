@@ -29,7 +29,7 @@ export class HomeComponent {
 		this.playoutService.init();
 		
 		this.playoutService.getMediaList().subscribe( data  => {
-			
+			console.log("holaaaa");
             this.mediaLst = data;
             
         })
@@ -38,6 +38,12 @@ export class HomeComponent {
             
 			this.sketchLst = data;         
         })
+
+		
+		this.coreService.getPlResp().subscribe( resp => {
+
+			this.playoutLst = resp;
+		});
 
 	}
 
@@ -55,6 +61,8 @@ export class HomeComponent {
 	 * Add a media/pl to playout list
 	 */
 	onPlayoutDrop($event: any) {
+
+		this.coreService.apndMedia($event.dragData);
         this.playoutLst.push($event.dragData);
 		
 	}
@@ -63,6 +71,7 @@ export class HomeComponent {
 	 */
 	onDelPlItem(item) {
 
+		this.coreService.removeMedia(item);
 		this.removeItem(item, this.playoutLst);
 
 	}
@@ -88,4 +97,3 @@ export class HomeComponent {
 	}
 	
  }
-
