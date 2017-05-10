@@ -29,7 +29,7 @@ export class HomeComponent {
 		this.playoutService.init();
 		
 		this.playoutService.getMediaList().subscribe( data  => {
-			console.log("holaaaa");
+
             this.mediaLst = data;
             
         })

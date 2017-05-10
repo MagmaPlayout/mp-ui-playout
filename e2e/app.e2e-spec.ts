@@ -1,10 +1,10 @@
-import { Ng2WebcamStreamingPage } from './app.po';
+import { MpPlayoutGuiPage } from './app.po';
 
-describe('ng2-webcam-streaming App', function() {
-  let page: Ng2WebcamStreamingPage;
+describe('mp-playout-gui App', () => {
+  let page: MpPlayoutGuiPage;
 
   beforeEach(() => {
-    page = new Ng2WebcamStreamingPage();
+    page = new MpPlayoutGuiPage();
   });
 
   it('should display message saying app works', () => {

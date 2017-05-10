@@ -1,6 +1,6 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
-export class Ng2WebcamStreamingPage {
+export class MpPlayoutGuiPage {
   navigateTo() {
     return browser.get('/');
   }
