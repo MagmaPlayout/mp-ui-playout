@@ -18,7 +18,7 @@ export class HomeComponent {
 	
 	mediaLst : Array<MediaModel>;
  
-    playoutLst : Array<any> = []; 
+    playoutLst : Array<any>; 
 
 	sketchLst : Array<SketchModel>;
 	
@@ -41,8 +41,8 @@ export class HomeComponent {
 
 		
 		this.coreService.getPlResp().subscribe( resp => {
-
-			this.playoutLst = resp;
+			console.log(resp.length);
+			this.playoutLst = resp.length == 0 ? new Array<any>() : resp;
 		});
 
 	}
