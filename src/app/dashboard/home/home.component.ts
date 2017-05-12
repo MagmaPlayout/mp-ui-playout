@@ -15,34 +15,35 @@ import { SketchModel } from '../../_core/_models/sketch.model';
 	styleUrls: ['home.component.css'],
 })
 export class HomeComponent {
-	
-	mediaLst : Array<MediaModel>;
- 
-    playoutLst : Array<any>; 
 
-	sketchLst : Array<SketchModel>;
+	sketchLst : Array<SketchModel> ;
 	
+	mediaLst : Array<MediaModel> = new Array<MediaModel>();
+ 
+    playoutLst : Array<any> = new Array<any>(); 
+
 	sketchContent : string;
 
 	constructor(private playoutService: MediaService, private coreService : CoreService){
 		
 		this.playoutService.init();
 		
-		this.playoutService.getMediaList().subscribe( data  => {
-
-            this.mediaLst = data;
+		this.playoutService.getMediaList().subscribe( resp  => {
+		
+			this.mediaLst = resp;
             
         })
 
-		this.playoutService.getSketchList().subscribe( data  => {			
-            
-			this.sketchLst = data;         
+		this.playoutService.getSketchList().subscribe( resp  => {	
+		
+			this.sketchLst = resp;         
         })
 
 		
 		this.coreService.getPlResp().subscribe( resp => {
-			console.log(resp.length);
-			this.playoutLst = resp.length == 0 ? new Array<any>() : resp;
+			
+			this.playoutLst = resp;
+
 		});
 
 	}
