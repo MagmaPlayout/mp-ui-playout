@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 import { MediaModel } from '../../_core/_models/media.model';
+import { PlayoutModel } from '../../_core/_models/playout.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 var config = require("../../app.config");
 
@@ -38,10 +39,10 @@ export class CoreService {
     /**
     * Send a PLAYNOW command to command-manager of the core-api
     */
-    apndMedia(media:MediaModel) {
+    apndMedia(poItem:PlayoutModel) {
        
         this.socket = io(this.url);
-        this.socket.emit('core_apnd', media); 
+        this.socket.emit('core_apnd', poItem); 
 
         return () => {
             this.socket.disconnect();
@@ -53,10 +54,38 @@ export class CoreService {
     /**
     * Send a REMOVE command to command-manager of the core-api
     */
-    removeMedia(media:MediaModel) {
+    remove(poItem:PlayoutModel) {
        
         this.socket = io(this.url);
-        this.socket.emit('core_remove', media); 
+        this.socket.emit('core_remove',poItem); 
+
+        return () => {
+            this.socket.disconnect();
+        };
+
+    }
+
+     /**
+    * Send a REMOVE command to command-manager of the core-api
+    */
+    goto(poItem:PlayoutModel) {
+       
+        this.socket = io(this.url);
+        this.socket.emit('core_goto',poItem); 
+
+        return () => {
+            this.socket.disconnect();
+        };
+
+    }
+
+     /**
+    * Send a REMOVE command to command-manager of the core-api
+    */
+    move(poItem:PlayoutModel) {
+       
+        this.socket = io(this.url);
+        this.socket.emit('core_move',poItem); 
 
         return () => {
             this.socket.disconnect();

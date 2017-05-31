@@ -21,21 +21,29 @@
             </div>
 
             <ul class="list-group"> 
-                <li *ngFor="let item of sketchLst; let i = index" class="list-group-item" [dropEnabled]="false" [dragData]="item" dnd-sortable [sortableIndex]="i">
+                <li *ngFor="let item of sketchLst; let i = index" class="list-group-item mp-item-sketch" [dropEnabled]="false" [dragData]="item" dnd-sortable [sortableIndex]="i">
                    
                     <div class="row">
-                        <div class="col-xs-12 col-md-7">
-                            <a href="#" class="profile-image" data-toggle="dropdown">
-                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTViOGU3ZmRhNDcgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWI4ZTdmZGE0NyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MC41IiB5PSI5NC41Ij4xNzF4MTgwPC90ZXh0PjwvZz48L2c+PC9zdmc+" width="20px" height="20px" class="img-circle"> </a>
-                            {{item.name}}
+                        <div class="col-xs-12 col-md-5">
+                            <a href="#" class="thumbnail">
+                                <img src="../../../assets/img/icons/sketchIcon_default.png"class="mp-thumbnail" > 
+                            </a>
+                           
                         </div>
-                        <div class="col-xs-6 col-md-5">
-                            <p>
-                                <a><span class="glyphicon glyphicon-ok-sign"></span></a>
-                                <a><span class="glyphicon glyphicon-eye-open"></span></a>
-                            </p>
-                            
+                         <div class="col-xs-6 col-md-7">
+                            <div class="row"> <b>{{item.name}}</b></div>
+                   
+                            <div class="row"><b><span class="label label-default">tags</span></b></div>                                      
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6"> </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <a><span class="glyphicon glyphicon-info-sign"></span></a>
+                                        <a><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                </div>
+                                                            
+                            </div>
                         </div>
+                      
                     </div>
                </li>               
             </ul>
@@ -56,23 +64,33 @@
                 </span>
             </div>
             <ul class="list-group">
-                <li *ngFor="let media of mediaLst; let x = index" class="list-group-item"
+                <li *ngFor="let media of mediaLst; let x = index" class="list-group-item mp-item-media"
                     dnd-sortable [sortableIndex]="x" [dragEnabled]="true"
                     [dragData]="media">
+
                     <div class="row">
-                        <div class="col-xs-12 col-md-7">
-                            <a href="#" class="profile-image" data-toggle="dropdown">
-                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTViOGU3ZmRhNDcgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWI4ZTdmZGE0NyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MC41IiB5PSI5NC41Ij4xNzF4MTgwPC90ZXh0PjwvZz48L2c+PC9zdmc+" width="20px" height="20px" class="img-circle"> </a>
-                            {{media.name}}
+                        <div class="col-xs-12 col-md-5">
+                            <a href="#" class="thumbnail">
+                                <img src="../../../assets/img/icons/mediaIcon_default.png"class="mp-thumbnail" > 
+                            </a>
+                           
                         </div>
-                        <div class="col-xs-6 col-md-5">
-                            <p>
-                                <a><span class="glyphicon glyphicon-info-sign"></span></a>
-                                <a><span class="glyphicon glyphicon-plus-sign"></span></a>
-                            </p>
-                            
+                         <div class="col-xs-6 col-md-7">
+                            <div class="row"> <b>{{media.name}}</b></div>
+                   
+                            <div class="row"><b><span class="label label-default">{{media.duration}}</span></b></div>                                      
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6"> </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <a><span class="glyphicon glyphicon-info-sign"></span></a>
+                                    <a><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                </div>
+                                                            
+                            </div>
                         </div>
-                    </div>      
+                      
+                    </div>
+                    
                 </li>
             </ul>
         </div>
@@ -90,21 +108,34 @@
                 </span>
             </div>
             <ul class="list-group">
-                <li *ngFor="let item of playoutLst; let x = index" class="list-group-item" dnd-sortable [sortableIndex]="x" [dragEnabled]="true" [dragData]="item"> 
-                    <div class="row">
-                        <div class="col-xs-12 col-md-7">
-                            <a href="#" class="profile-image" data-toggle="dropdown">
-                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTViOGU3ZmRhNDcgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNWI4ZTdmZGE0NyI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI2MC41IiB5PSI5NC41Ij4xNzF4MTgwPC90ZXh0PjwvZz48L2c+PC9zdmc+" width="20px" height="20px" class="img-circle"> </a>
-                            {{item.name}}
+                <li *ngFor="let item of playoutLst; let x = index;" class="list-group-item mp-item-playout" dnd-sortable 
+                [sortableIndex]="x" 
+                [dragEnabled]="true" 
+                [dragData]="item"
+                (onDragStart) = "onDragStartPo(item)"
+                (onDragEnd) = "onDragEndPo(item)"> 
+                      <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                            <a href="#" class="thumbnail">
+                                <img src="../../../assets/img/icons/playoutIcon_default.png"class="mp-thumbnail" > 
+                            </a>
+                           
                         </div>
-                        <div class="col-xs-6 col-md-5">
-                            <p>
-                                <a (click)="onDelPlItem(item)"><span class="glyphicon glyphicon-trash"></span></a>
-                                <a (click)="onPlayPlItem(item)"><span class="glyphicon glyphicon-play-circle"></span></a>
-                            </p>
-                            
+                         <div class="col-xs-6 col-md-7">
+                            <div class="row"> <b>{{item.media.name}}</b></div>
+                   
+                            <div class="row"><b><span class="label label-default">{{item.media.duration}}</span></b></div>                                      
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6"> </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <a (click)="onDelPlItem(item, x)"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a (click)="onPlayPlItem(item, x)"><span class="glyphicon glyphicon-play-circle"></span></a>
+                                </div>
+                                                            
+                            </div>
                         </div>
-                    </div>    
+                      
+                    </div>
                 </li>
             </ul>
         </div>
