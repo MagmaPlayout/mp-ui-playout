@@ -1,6 +1,6 @@
 export interface MediaModel{
     id : number;
-    name: number;
+    name: string;
     duration: string;
     frameRate : number;
     pathText : string;

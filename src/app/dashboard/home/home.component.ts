@@ -1,11 +1,12 @@
+import { AfterViewInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
+import { MediainfoComponent } from './mediainfo/mediainfo.component';
 import { MediaService } from '../../_core/_services/media.service';
 import { CoreService } from '../../_core/_services/core.service';
 import { MediaModel } from '../../_core/_models/media.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 import { PlayoutModel } from '../../_core/_models/playout.model';
-import { CommandModel } from '../../_core/_models/command.model';
-import {Popup} from 'ng2-opd-popup';
+
 
 /**
 *	This class represents the lazy loaded HomeComponent.
@@ -19,6 +20,11 @@ import {Popup} from 'ng2-opd-popup';
 })
 export class HomeComponent {
 
+	@ViewChild(MediainfoComponent)
+  	private mediaInfoPopup: MediainfoComponent;
+	
+	currenPoItem : string;
+
 	sketchLst : Array<SketchModel> ;
 	
 	mediaLst : Array<MediaModel> = new Array<MediaModel>();
@@ -28,7 +34,7 @@ export class HomeComponent {
 	sketchContent : string;
 
 	
-	constructor(private playoutService: MediaService, private coreService : CoreService, private popup:Popup){
+	constructor(private playoutService: MediaService, private coreService : CoreService){
 		
 		this.playoutService.init();
 		
@@ -76,6 +82,7 @@ export class HomeComponent {
 		
 			
 	}
+
 	/**
 	 * Remove an item from playout list
 	 */	
@@ -113,14 +120,15 @@ export class HomeComponent {
 	
 		po.currentPos = index;
 		
+		this.currenPoItem = po.media.name;
 		this.coreService.goto(po);
 		
 	}
 
 
-	onClickMediaInfo(media: any){
+	onClickMediaInfo(media: MediaModel){
 		console.log(media);
-		this.popup.show();
+		this.mediaInfoPopup.show(media);
 	}
 
 	/**
@@ -129,8 +137,9 @@ export class HomeComponent {
 	private removeItem(item: any, list: Array<any>) {
 
 		let index = list.map((e) => {
-			return e.name
-		}).indexOf(item.name);
+			return e
+		}).indexOf(item);
+
 		list.splice(index, 1);
 
 	}
