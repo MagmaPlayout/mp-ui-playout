@@ -5,6 +5,7 @@ import { MediaModel } from '../../_core/_models/media.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 import { PlayoutModel } from '../../_core/_models/playout.model';
 import { CommandModel } from '../../_core/_models/command.model';
+import {Popup} from 'ng2-opd-popup';
 
 /**
 *	This class represents the lazy loaded HomeComponent.
@@ -27,7 +28,7 @@ export class HomeComponent {
 	sketchContent : string;
 
 	
-	constructor(private playoutService: MediaService, private coreService : CoreService){
+	constructor(private playoutService: MediaService, private coreService : CoreService, private popup:Popup){
 		
 		this.playoutService.init();
 		
@@ -68,9 +69,10 @@ export class HomeComponent {
 		
 		let pl = new PlayoutModel();
 		pl.media = $event.dragData;
-		this.coreService.apndMedia(pl);
 		this.playoutLst.push(pl);
-		this.playoutLst.indexOf(pl); 
+		pl.currentPos = this.playoutLst.indexOf(pl); 
+		this.coreService.apndMedia(pl);
+		
 		
 			
 	}
@@ -113,6 +115,12 @@ export class HomeComponent {
 		
 		this.coreService.goto(po);
 		
+	}
+
+
+	onClickMediaInfo(media: any){
+		console.log(media);
+		this.popup.show();
 	}
 
 	/**
