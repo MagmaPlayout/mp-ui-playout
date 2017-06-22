@@ -52,7 +52,7 @@
 
 
     <div class="panel panel-default mp-list-box"    
-        dnd-sortable-container [sortableData]="mediaLst" [dropZones]="['playoutItem']">
+        dnd-sortable-container [sortableData]="pieceLst" [dropZones]="['playoutItem']">
         <div class="panel-heading">Medias</div>
         <div class="panel-body">
             <div class="input-group stylish-input-group">
@@ -64,9 +64,9 @@
                 </span>
             </div>
             <ul class="list-group">
-                <li *ngFor="let media of mediaLst; let x = index" class="list-group-item mp-item-media"
+                <li *ngFor="let piece of pieceLst; let x = index" class="list-group-item mp-item-media"
                     dnd-sortable [sortableIndex]="x" [dragEnabled]="true"
-                    [dragData]="media">
+                    [dragData]="piece">
 
                     <div class="row">
                         <div class="col-xs-12 col-md-5">
@@ -76,13 +76,13 @@
                            
                         </div>
                          <div class="col-xs-6 col-md-7">
-                            <div class="row"> <b>{{media.name}}</b></div>
+                            <div class="row"> <b>{{piece.name}}</b></div>
                    
-                            <div class="row"><b><span class="label label-default">{{media.duration}}</span></b></div>                                      
+                            <div class="row"><b><span class="label label-default">{{piece.duration}}</span></b></div>                                      
                             <div class="row">
                                 <div class="col-xs-6 col-md-6"> </div>
                                 <div class="col-xs-6 col-md-6">
-                                    <a (click)="onClickMediaInfo(media)"><span class="glyphicon glyphicon-info-sign"></span></a>
+                                    <a (click)="onClickMediaInfo(piece)"><span class="glyphicon glyphicon-info-sign"></span></a>
                                     <a><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </div>
                                                             
@@ -122,9 +122,9 @@
                            
                         </div>
                          <div class="col-xs-6 col-md-7">
-                            <div class="row"> <b>{{item.media.name}}</b></div>
+                            <div class="row"> <b>{{item.piece.name}}</b></div>
                    
-                            <div class="row"><b><span class="label label-default">{{item.media.duration}}</span></b></div>                                      
+                            <div class="row"><b><span class="label label-default">{{item.piece.duration}}</span></b></div>                                      
                             <div class="row">
                                 <div class="col-xs-6 col-md-6"> </div>
                                 <div class="col-xs-6 col-md-6">

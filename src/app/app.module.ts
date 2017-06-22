@@ -29,7 +29,7 @@ import { CoreModule } from './_core/core.module';
     AppRoutingModule
   ],
   declarations: [
-    AppComponent
+    AppComponent   
   ],
  
   bootstrap: [AppComponent]

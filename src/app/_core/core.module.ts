@@ -5,7 +5,7 @@ import { AlertComponent } from './_directives/alert.component';
 import { SanitizeHtmlPipe} from './_pipes/sanitizeHtml.pipe';
 import { AlertService } from './_services/alert.service';
 import { UserService } from './_services/user.service';
-import { MediaService } from './_services/media.service';
+import { PlayoutService } from './_services/playout.service';
 import { CoreService } from './_services/core.service';
 import { HttpClient} from './_helpers/httpClient';
 import { AuthGuard } from './_guards/index';
@@ -19,7 +19,7 @@ import { AuthGuard } from './_guards/index';
   providers:[
     AlertService,
     UserService,
-    MediaService,
+    PlayoutService,
     CoreService,
     AuthGuard,
     HttpClient

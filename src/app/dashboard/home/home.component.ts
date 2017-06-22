@@ -1,9 +1,9 @@
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { MediainfoComponent } from './mediainfo/mediainfo.component';
-import { MediaService } from '../../_core/_services/media.service';
+import { PlayoutService } from '../../_core/_services/playout.service';
 import { CoreService } from '../../_core/_services/core.service';
-import { MediaModel } from '../../_core/_models/media.model';
+import { PieceModel } from '../../_core/_models/piece.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 import { PlayoutModel } from '../../_core/_models/playout.model';
 
@@ -27,20 +27,20 @@ export class HomeComponent {
 
 	sketchLst : Array<SketchModel> ;
 	
-	mediaLst : Array<MediaModel> = new Array<MediaModel>();
+	pieceLst : Array<PieceModel> = new Array<PieceModel>();
  
     playoutLst : Array<PlayoutModel> = new Array<PlayoutModel>(); 
 
 	sketchContent : string;
 
 	
-	constructor(private playoutService: MediaService, private coreService : CoreService){
+	constructor(private playoutService: PlayoutService, private coreService : CoreService){
 		
 		this.playoutService.init();
 		
-		this.playoutService.getMediaList().subscribe( resp  => {
-			
-			this.mediaLst = resp;
+		this.playoutService.getPieceList().subscribe( resp  => {
+			console.log(resp);
+			this.pieceLst = resp;
             
         })
 
@@ -69,15 +69,15 @@ export class HomeComponent {
 	}
 	
 	/**
-	 * Add a media/pl to playout list
+	 * Add a piece/pl to playout list
 	 */
 	onPlayoutDrop($event: any) {
 		
 		let pl = new PlayoutModel();
-		pl.media = $event.dragData;
+		pl.piece = $event.dragData;
 		this.playoutLst.push(pl);
 		pl.currentPos = this.playoutLst.indexOf(pl); 
-		this.coreService.apndMedia(pl);
+		this.coreService.apndPiece(pl);
 		
 		
 			
@@ -114,21 +114,21 @@ export class HomeComponent {
 	}
 
 	/**
-	 * Play media/pl
+	 * Play piece/pl
 	 */
 	onPlayPlItem(po: PlayoutModel, index: number) {
 	
 		po.currentPos = index;
 		
-		this.currenPoItem = po.media.name;
+		this.currenPoItem = po.piece.name;
 		this.coreService.goto(po);
 		
 	}
 
 
-	onClickMediaInfo(media: MediaModel){
-		console.log(media);
-		this.mediaInfoPopup.show(media);
+	onClickMediaInfo(piece: PieceModel){
+		console.log(piece);
+		this.mediaInfoPopup.show(piece.media);
 	}
 
 	/**

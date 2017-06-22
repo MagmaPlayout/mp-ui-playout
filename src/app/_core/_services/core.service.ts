@@ -2,9 +2,7 @@ import {Injectable} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
-import { MediaModel } from '../../_core/_models/media.model';
 import { PlayoutModel } from '../../_core/_models/playout.model';
-import { SketchModel } from '../../_core/_models/sketch.model';
 var config = require("../../app.config");
 
 
@@ -22,24 +20,11 @@ export class CoreService {
       
     }
 
-    /**
-    * Send a PLAYNOW command to command-manager of the core-api
-    */
-    playMedia(media:MediaModel) {
-       
-        this.socket = io(this.url);
-        this.socket.emit('core_playMedia', media); 
-
-        return () => {
-            this.socket.disconnect();
-        };
-
-    } 
 
     /**
     * Send a PLAYNOW command to command-manager of the core-api
     */
-    apndMedia(poItem:PlayoutModel) {
+    apndPiece(poItem:PlayoutModel) {
        
         this.socket = io(this.url);
         this.socket.emit('core_apnd', poItem); 

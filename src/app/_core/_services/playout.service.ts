@@ -5,13 +5,13 @@ import * as io from 'socket.io-client';
 import 'rxjs/add/operator/map'
 import { HttpClient } from '../_helpers/httpClient';
 import {URLSearchParams} from '@angular/http';
-import { MediaModel } from '../../_core/_models/media.model';
+import { PieceModel } from '../../_core/_models/piece.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 var config = require("../../app.config");
 
-/** TO-DO Media service pasaria a ser Playout.service si se usa ws */
+
 @Injectable()
-export class MediaService {
+export class PlayoutService {
 
   constructor(private http: HttpClient) { 
 
@@ -39,13 +39,13 @@ export class MediaService {
   
   
   /**
-   * get media list broadcasting from server
+   * get piece list broadcasting from server
    */
-  getMediaList() : Observable<Array<MediaModel>>{
+  getPieceList() : Observable<Array<PieceModel>>{
     let observable = new Observable(observer => {
         
       this.socket = io(this.url);
-      this.socket.on('mediaList', (data) => {
+      this.socket.on('pieceList', (data) => {
         observer.next(data);    
       });
       return () => {
