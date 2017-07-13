@@ -1,0 +1,44 @@
+<div class="panel panel-default mp-list-box"    
+        dnd-sortable-container [sortableData]="pieceLst" [dropZones]="['playoutItem']">
+        <div class="panel-heading">Pieces</div>
+        <div class="panel-body">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control"  placeholder="Search" >
+                <span class="input-group-addon">
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>  
+                </span>
+            </div>
+            <ul class="list-group">
+                <li *ngFor="let piece of pieceLst; let x = index" class="mp-item-media list-group-item draggable"
+                    dnd-sortable [sortableIndex]="x" [dragEnabled]="true"
+                    [dragData]="piece">
+                    
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                            <a href="#" class="thumbnail">
+                                <img src="../../../assets/img/icons/mediaIcon_default.png"class="mp-thumbnail" > 
+                            </a>
+                           
+                        </div>
+                         <div class="col-xs-6 col-md-7">
+                            <div class="row"> <b>{{piece.name}}</b></div>
+                   
+                            <div class="row"><b><span class="label label-default">{{piece.duration}}</span></b></div>                                      
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6"> </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <a (click)="onClickMediaInfo(piece)"><span class="glyphicon glyphicon-info-sign"></span></a>
+                                    <a><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                </div>
+                                                            
+                            </div>
+                        </div>
+                      
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+    </div>

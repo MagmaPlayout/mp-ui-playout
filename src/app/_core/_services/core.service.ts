@@ -5,7 +5,9 @@ import * as io from 'socket.io-client';
 import { PlayoutModel } from '../../_core/_models/playout.model';
 var config = require("../../app.config");
 
-
+/**
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
 @Injectable()
 export class CoreService {
     private url = config.APIs.core;  

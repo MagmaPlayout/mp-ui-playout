@@ -7,6 +7,9 @@ import {CoreModule} from '../../_core/core.module'
 import {PopupModule} from 'ng2-opd-popup';
 import { MediainfoComponent } from './mediainfo/mediainfo.component';
 
+/**
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
 @NgModule({
     imports: [
         CommonModule, 

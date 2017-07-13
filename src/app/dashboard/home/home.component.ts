@@ -9,9 +9,8 @@ import { PlayoutModel } from '../../_core/_models/playout.model';
 
 
 /**
-*	This class represents the lazy loaded HomeComponent.
-*/
-
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
 @Component({
 	moduleId: module.id,
 	selector: 'livemode',

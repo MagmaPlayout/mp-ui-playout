@@ -4,4 +4,5 @@
 export * from './topnav/index';
 export * from './sidebar/index';
 
+export * from './piece-list/index';
 export * from './name-list/index';

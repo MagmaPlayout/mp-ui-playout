@@ -10,20 +10,23 @@ import { SchedulerModule } from './scheduler/scheduler.module';
 import {TopNavComponent} from './shared/index';
 import {SidebarComponent} from './shared/index';
 
+
 @NgModule({
     imports: [
         CommonModule,
     	RouterModule,
     	BsDropdownModule.forRoot(),
         ModalModule,
-    	HomeModule,
+    	HomeModule,        
     	BlankPageModule,
-        SchedulerModule
+        SchedulerModule,
+        
+        
     ],
     declarations: [
         DashboardComponent, 
         TopNavComponent, 
-        SidebarComponent       
+        SidebarComponent    
         ],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
 })

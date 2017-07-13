@@ -7,6 +7,7 @@ import { AlertService } from './_services/alert.service';
 import { UserService } from './_services/user.service';
 import { PlayoutService } from './_services/playout.service';
 import { CoreService } from './_services/core.service';
+import { OccurrenceService } from './_services/occurrence.service';
 import { HttpClient} from './_helpers/httpClient';
 import { AuthGuard } from './_guards/index';
 
@@ -21,6 +22,7 @@ import { AuthGuard } from './_guards/index';
     UserService,
     PlayoutService,
     CoreService,
+    OccurrenceService,
     AuthGuard,
     HttpClient
   ],

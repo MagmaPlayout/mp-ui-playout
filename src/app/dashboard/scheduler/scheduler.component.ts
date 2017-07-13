@@ -1,62 +1,154 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {CalendarComponent} from "ap-angular2-fullcalendar";
+import { Component, OnInit, AfterViewInit, ElementRef,} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import { OccurrenceService } from '../../_core/_services/occurrence.service';
+import { OccurrenceModel } from '../../_core/_models/occurrence.model';
+declare var jQuery: any;
+import 'fullcalendar';
+import {Options} from "fullcalendar";
+import {NotificationsService } from 'angular2-notifications-lite';
 
+/**
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
 @Component({
   selector: 'app-scheduler',
   templateUrl: './scheduler.component.html',
   styleUrls: ['./scheduler.component.css']
 })
-export class SchedulerComponent implements OnInit {
+export class SchedulerComponent implements AfterViewInit{
   
-  calendarOptions:Object = {
-        //height: 'parent',
-        defaultView: 'agendaDay',
-        fixedWeekCount : false,
-        defaultDate: '2017-06-25',
-        editable: true,
-        eventLimit: true, // allow "more" link when too many events
-        events: [
-          {
-            title: 'All Day Event',
-            start: '2017-06-25'
-          },
-          {
-            title: 'Long Event',
-            start: '2017-06-25',
-            end: '2017-06-26'
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2017-06-25T16:00:00'
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2017-06-25T16:00:00'
-          },
-          {
-            title: 'Conference',
-            start: '2017-06-25',
-            end: '2017-06-27'
-          },
-          {
-            title: 'Meeting',
-            start: '2017-06-25T10:30:00',
-            end: '2017-06-25T12:30:00'
-          }
+  private occurenceList : Array<OccurrenceModel>;
+  private calendarElementId : string = "#calendar";
+  
+  /**Provisorio -> Las notificaciones pasan al "alert.service.ts" */
+  public options = {
+    position: ["button", "right"],
+    timeOut: 5000,
+    lastOnBottom: false
+    
+  }
+
+  calendarOptions : Options = {
+       header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			editable: true,
+      dropAccept:".mp-item-media",
+			droppable: true, // this allows things to be dropped onto the calendar
+			drop: this.dropEvent.bind(this)
+			
+      
+  };
+
+  constructor(private element:ElementRef,  private occurrenceService: OccurrenceService,  private _notification: NotificationsService) {
+
+    this.occurrenceService.getAll().subscribe( resp  => {
+			
+			this.occurenceList = resp;
+
+      this.occurenceList.forEach(occ => {
+        
+        jQuery(this.calendarElementId).fullCalendar( "renderEvent", {
+            title: occ.piece.name,
+            start: occ.startDateTime,
+            end: occ.startDateTime,
+            occurrence: occ
+          });
+      });
+  
+    });
+
+  }
+ 
+
+  ngAfterViewInit(){
+      
+    jQuery(this.calendarElementId).fullCalendar( this.calendarOptions);
+    
+  }
+
+  /**
+   * click btnSave event
+   */
+  private onClickBtnSave(){
+    this.saveChanges().subscribe(
+          value => this._notification.info(
+                  'Info',
+                  value.toString()
+          ),
+          error =>  this._notification.error(
+                  'Error',
+                  'Error'
+          ),
+          () => this._notification.success(
+                  'Success',
+                  'Changes have been saved successfully'
+          )
+      );
+
+  }
+
+  /**
+   * Drop external event
+   */
+  private dropEvent(date, jsEvent, ui, resourceId){
+
+    var piece = jQuery(ui.helper).data("pieceData").piece;
+    
+    var occurrence = {
+      playlistId: null,
+      pieceId: piece.id,
+      startDateTime: date._d,
+      filterId: null  
+
+    };
+
+   jQuery(this.calendarElementId).fullCalendar( 'renderEvent', {
+      title: piece.name,
+      start: date,
+      end: date,
+      occurrence: occurrence
+    }); 
+  }
+
+  /**
+   * Save events/occurrences
+   */
+   private saveChanges(){
+
+      return new Observable(observer => {
+          let cant : number = 0;
           
-        ]
-      };
+          let events = jQuery(this.calendarElementId).fullCalendar('clientEvents');
+       
+          let newEvents = events.filter((item) =>{if(item.occurrence.id == null) return item})
+          
+          console.log(jQuery(this.calendarElementId).fullCalendar('clientEvents'));
 
-  constructor() { }
+          if(newEvents.length > 0 ){
 
-  ngOnInit() {
-   
-  }
+            newEvents.forEach(event => {
+              this.occurrenceService.insert(event.occurrence).subscribe( newOccurrence  => { 
+                cant++;
+                event.occurrence.id = newOccurrence.id;
 
-    changeCalendarView(view) {
-   
-  }
+                if(newEvents.length == cant ){
+                   jQuery(this.calendarElementId).fullCalendar('rerenderEvents'); 
+                   observer.complete();
+                }
+                  
+              });
+            });
+          }
+          else{
+            observer.next("Nothing for save");
+          }
 
+          
+        
+      });      
+     
+   }
 }

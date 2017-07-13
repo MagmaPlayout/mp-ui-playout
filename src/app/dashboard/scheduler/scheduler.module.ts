@@ -1,15 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SchedulerComponent } from './scheduler.component';
-import {CalendarComponent} from "ap-angular2-fullcalendar/src/calendar/calendar";
+import {PieceListModule} from '../shared/piece-list/piece-list.module';
+import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications-lite';
 
+/**
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
 @NgModule({
   imports: [
-    CommonModule   
+    CommonModule,
+    PieceListModule,
+    SimpleNotificationsModule.forRoot()
   ],
   declarations: [
-    SchedulerComponent,
-    CalendarComponent
+    SchedulerComponent
+  
+  ],
+  providers:[
+    NotificationsService
   ]
 })
 export class SchedulerModule { }
