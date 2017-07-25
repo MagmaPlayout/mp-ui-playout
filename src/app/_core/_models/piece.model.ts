@@ -6,6 +6,7 @@ export interface PieceModel{
     name: string;
     path : string;
     resolution : string;
+    duration : string,
     media : MediaModel;
     sketch : SketchModel;
      

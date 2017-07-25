@@ -4,9 +4,11 @@ import { OccurrenceService } from '../../_core/_services/occurrence.service';
 import { CoreService } from '../../_core/_services/core.service';
 import { OccurrenceModel } from '../../_core/_models/occurrence.model';
 declare var jQuery: any;
+declare var moment: any;
 import 'fullcalendar';
 import {Options} from "fullcalendar";
 import {NotificationsService } from 'angular2-notifications-lite';
+var config = require("../../app.config");
 
 /**
  * @author Luis Muñoz <luismunoz.dh@gmail.com>
@@ -30,11 +32,13 @@ export class SchedulerComponent implements AfterViewInit{
   }
 
   calendarOptions : Options = {
-       header: {
+      header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
+				right: 'agendaWeek,agendaDay'
 			},
+      defaultView: 'agendaWeek',
+      slotDuration : config.scheduler.slotDuration,
 			editable: true,
       dropAccept:".mp-item-media",
 			droppable: true, // this allows things to be dropped onto the calendar
@@ -53,11 +57,10 @@ export class SchedulerComponent implements AfterViewInit{
 			this.occurenceList = resp;
 
       this.occurenceList.forEach(occ => {
-        
         jQuery(this.calendarElementId).fullCalendar( "renderEvent", {
             title: occ.piece.name,
             start: occ.startDateTime,
-            end: occ.startDateTime,
+            end: this.getEndTime(occ.startDateTime, occ.piece.duration),
             occurrence: occ
           });
       });
@@ -101,10 +104,11 @@ export class SchedulerComponent implements AfterViewInit{
 
     var piece = jQuery(ui.helper).data("pieceData").piece;
     
-    var occurrence = {
+    let occurrence = <OccurrenceModel>{
       playlistId: null,
-      pieceId: piece.id,
       startDateTime: date._d,
+      pieceId: piece.id,
+      piece : piece,
       filterId: null  
 
     };
@@ -112,9 +116,20 @@ export class SchedulerComponent implements AfterViewInit{
    jQuery(this.calendarElementId).fullCalendar( 'renderEvent', {
       title: piece.name,
       start: date,
-      end: date,
+      end: this.getEndTime(date._d,piece.duration),
       occurrence: occurrence
     }); 
+  }
+
+  /**
+   * resolve end time
+   */
+  private getEndTime(startDateTime : Date, duration : string){
+    
+    let end = new Date(startDateTime);
+    end.setMilliseconds(moment.duration(duration, moment.ISO_8601))
+
+    return end.toISOString();
   }
 
   /**
@@ -128,9 +143,7 @@ export class SchedulerComponent implements AfterViewInit{
           let events = jQuery(this.calendarElementId).fullCalendar('clientEvents');
        
           let newEvents = events.filter((item) =>{if(item.occurrence.id == null) return item})
-          
-          console.log(jQuery(this.calendarElementId).fullCalendar('clientEvents'));
-
+        
           if(newEvents.length > 0 ){
 
             newEvents.forEach(event => {
