@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef,} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { OccurrenceService } from '../../_core/_services/occurrence.service';
+import { CoreService } from '../../_core/_services/core.service';
 import { OccurrenceModel } from '../../_core/_models/occurrence.model';
 declare var jQuery: any;
 import 'fullcalendar';
@@ -42,7 +43,10 @@ export class SchedulerComponent implements AfterViewInit{
       
   };
 
-  constructor(private element:ElementRef,  private occurrenceService: OccurrenceService,  private _notification: NotificationsService) {
+  constructor(private element:ElementRef,  
+              private occurrenceService: OccurrenceService, 
+              private _notification: NotificationsService,
+              private coreService : CoreService) {
 
     this.occurrenceService.getAll().subscribe( resp  => {
 			
@@ -136,6 +140,7 @@ export class SchedulerComponent implements AfterViewInit{
 
                 if(newEvents.length == cant ){
                    jQuery(this.calendarElementId).fullCalendar('rerenderEvents'); 
+                   this.coreService.calChange(); // aviso al core-api que hubo cambios en las occurrences
                    observer.complete();
                 }
                   
@@ -145,9 +150,7 @@ export class SchedulerComponent implements AfterViewInit{
           else{
             observer.next("Nothing for save");
           }
-
-          
-        
+               
       });      
      
    }

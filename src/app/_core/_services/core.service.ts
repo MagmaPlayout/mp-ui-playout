@@ -24,12 +24,26 @@ export class CoreService {
 
 
     /**
-    * Send a PLAYNOW command to command-manager of the core-api
+    * Send a APND command to command-manager of the core-api
     */
     apndPiece(poItem:PlayoutModel) {
        
         this.socket = io(this.url);
         this.socket.emit('core_apnd', poItem); 
+
+        return () => {
+            this.socket.disconnect();
+        };
+
+    }
+
+     /**
+    * Send a CALCHANGE command to command-manager of the core-api
+    */
+    calChange() {
+       
+        this.socket = io(this.url);
+        this.socket.emit('core_calchange'); 
 
         return () => {
             this.socket.disconnect();
