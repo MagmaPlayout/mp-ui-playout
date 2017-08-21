@@ -27,7 +27,7 @@ export class EventModalComponent {
   @ViewChild('content') content: ElementRef; 
   private occ : OccurrenceModel = <OccurrenceModel>{};
   private occOp : OccurrenceOperationModel;
-  private eventId : string;
+  private eventId : number;
   @Output() onOccurrenceOp = new EventEmitter<OccurrenceOperationModel>();
  
 
@@ -37,7 +37,7 @@ export class EventModalComponent {
    * Open modal with occurrence data
    * 
    * */
-  public open(occ : OccurrenceModel, eventId : string) {
+  public open(occ : OccurrenceModel, eventId : number) {
     console.log(eventId)
     this.occ = occ;
     this.eventId = eventId;
