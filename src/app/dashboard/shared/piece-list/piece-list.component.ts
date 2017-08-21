@@ -2,6 +2,7 @@ import { Component, ElementRef, AfterViewChecked } from '@angular/core';
 import { PlayoutService } from '../../../_core/_services/playout.service'
 import { PieceModel } from '../../../_core/_models/piece.model';
 declare var jQuery: any;
+declare var moment : any;
 
 /**
  * @author Luis Muñoz <luismunoz.dh@gmail.com>
@@ -20,6 +21,11 @@ export class PieceListComponent implements AfterViewChecked {
     this.elementRef = element;
     this.playoutService.init();
 		this.playoutService.getPieceList().subscribe( resp  => {
+      /*
+      resp.forEach(element  => {
+        element.duration = moment.duration(element.duration, moment.ISO_8601);
+      });
+      */
 			this.pieceLst = resp;  
 
     });

@@ -41,9 +41,6 @@ export class HttpClient {
 
   }
   
-  /**
-   * Por ahora el token de validación es enviado como parte del body.( no esta tan mal)
-   */
   post(url, body, headers) {
     
     if(headers == null)
@@ -58,4 +55,29 @@ export class HttpClient {
     return this.http.post(url, body, options);
 
   }
+ 
+  put(url, body, headers) {
+    
+    if(body == null)
+        body = new URLSearchParams();
+    body.set('token', localStorage.getItem('currentUser'));
+  
+    return this.http.put(url, body);
+  }
+ 
+  delete(url, body, headers) {
+    if(headers == null)
+       headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' });
+    
+    if(body == null)
+        body = new URLSearchParams();
+    body.set('token', localStorage.getItem('currentUser'));
+
+    let options = new RequestOptions( {method: RequestMethod.Delete, headers: headers,body });
+    
+    
+  
+    return this.http.delete(url, options);
+  }
+
 }

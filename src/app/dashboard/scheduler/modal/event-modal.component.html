@@ -1,0 +1,24 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{occ.piece.name}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+				<div class="row">
+          <div class="col-md-2">Start</div>
+          <div class="col-md-10 ml-auto">
+            <input class="form-control" type="text" value="{{occ.startDateTime}}"/>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-light" (click)="delete(); c('Close click');">Delete</button>
+        <button type="button" class="btn btn-outline-light" (click)="save(); c('Close click');">Save</button>
+        <button #btnClose type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>     
+      </div>
+    </div>
+</ng-template>

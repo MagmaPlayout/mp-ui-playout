@@ -46,7 +46,7 @@ export class OccurrenceService {
 
     /**
      * create a new occurrence
-     * @param {number} id
+     * @param {OccurrenceModel} occurrence
      */
     public insert(occurrence : OccurrenceModel) {
         let params = new URLSearchParams();
@@ -58,6 +58,45 @@ export class OccurrenceService {
 		//params.set('filerId', occurrence.filterId.toString());   
        
         return  this.http.post(config.APIs.playout_rest + 'occurrences/', params, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );
+
+          
+    }
+
+    /**
+     * update an occurrence
+     * @param {OccurrenceModel} occurrence
+     */
+    public update(occurrence : OccurrenceModel) {
+        let params = new URLSearchParams();
+       
+		//params.set('playlistId', occurrence.playlistId.toString());
+        params.set('id', occurrence.id.toString() );
+		params.set('pieceId', occurrence.pieceId.toString());
+        params.set('startDateTime', occurrence.startDateTime.toISOString());
+		//params.set('filerId', occurrence.filterId.toString());   
+       
+        return  this.http.put(config.APIs.playout_rest + 'occurrences/', params, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );
+
+          
+    }
+
+    /**
+     * delete an occurrence
+     * @param {OccurrenceModel} occurrence
+     */
+    public delete(occurrence : OccurrenceModel) {
+        let params = new URLSearchParams();
+
+        params.set('id', occurrence.id.toString() );
+		
+       
+        return  this.http.delete(config.APIs.playout_rest + 'occurrences/', params, null)
                .map(response => response.json(),
                 err => console.log("error")               
             );
