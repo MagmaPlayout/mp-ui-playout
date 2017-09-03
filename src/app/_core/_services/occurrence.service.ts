@@ -104,5 +104,16 @@ export class OccurrenceService {
           
     }
 
+    public deleteById(id : number) {
+        let params = new URLSearchParams();
+        params.set('id', ''+id );
+       
+        return  this.http.delete(config.APIs.playout_rest + 'occurrences/', params, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );
+
+          
+    }
     
 }

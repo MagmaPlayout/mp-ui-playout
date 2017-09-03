@@ -12,8 +12,8 @@ module.exports = {
         "core" : "http://localhost:8003"    
     },
     "scheduler" : {
-        slotDuration : '00:05:00',
-        snapDuration : '00:05:00',
-        slotLabelInterval : '00:05:00'
+        slotDuration : '00:01:00',
+        snapDuration : '00:01:00',
+        slotLabelInterval : '00:01:00'
     }
 }
