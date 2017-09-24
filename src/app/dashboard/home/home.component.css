@@ -1,6 +1,6 @@
 .mp-list-box {
     display: inline-table;
-    width: 22%;
+    width: 18%;
     height: 100%;
     margin: 10px;
     bottom:0px;
@@ -23,10 +23,10 @@
     word-break: break-all
 }
 .mp-video-box {
-    display: inline-table;
-    width: 21%;
-    height: 100%;
-    margin: 10px;
+    display: inline-flex;
+    width: 20%;
+    /*height: 100%;
+    margin: 10px;*/
     padding-right: 0px;
     margin-right: 0px;
    

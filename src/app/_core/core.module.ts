@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './_services/authentication.service';
-import { AlertComponent } from './_directives/alert.component';
+import { NotificationComponent } from './_directives/notification.component';
 import { SanitizeHtmlPipe} from './_pipes/sanitizeHtml.pipe';
-import { AlertService } from './_services/alert.service';
+import {SimpleNotificationsModule, NotificationsService } from 'angular2-notifications-lite';
+import { NotificationService } from './_services/notification.service';
 import { UserService } from './_services/user.service';
 import { PlayoutService } from './_services/playout.service';
 import { CoreService } from './_services/core.service';
@@ -13,12 +14,15 @@ import { AuthGuard } from './_guards/index';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    SimpleNotificationsModule.forRoot()
   ],
-  exports: [AlertComponent,SanitizeHtmlPipe],
-  declarations: [AlertComponent,SanitizeHtmlPipe],
+  exports: [NotificationComponent,SanitizeHtmlPipe],
+  declarations: [
+    NotificationComponent,
+    SanitizeHtmlPipe],
   providers:[
-    AlertService,
+    NotificationService,
     UserService,
     PlayoutService,
     CoreService,

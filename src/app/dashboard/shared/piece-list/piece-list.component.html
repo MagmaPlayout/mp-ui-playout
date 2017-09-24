@@ -10,35 +10,39 @@
                     </button>  
                 </span>
             </div>
-            <ul class="list-group">
-                <li *ngFor="let piece of pieceLst; let x = index" class="mp-item-media list-group-item draggable"
+           
+                <div class="events-list events-page">
+
+                <section *ngFor="let piece of pieceLst; let x = index" class="event mp-item-media list-group-item draggable"
                     dnd-sortable [sortableIndex]="x" [dragEnabled]="true"
                     [dragData]="piece">
-                    
-                    <div class="row">
-                        <div class="col-xs-12 col-md-5">
-                            <a href="#" class="thumbnail">
-                                <img src="../../../assets/img/icons/mediaIcon_default.png"class="mp-thumbnail" > 
-                            </a>
-                           
+                                     
+                        <div class="date">
+                                    <strong>Thumb</strong>
+                                    <span class="month">Oct</span>
+                                    <span class="details"></span>
                         </div>
-                         <div class="col-xs-6 col-md-7">
-                            <div class="row"> <b>{{piece.name}}</b></div>
-                   
-                            <div class="row"><b><span class="label label-default">{{piece.duration}}</span></b></div>                                      
-                            <div class="row">
-                                <div class="col-xs-6 col-md-6"> </div>
-                                <div class="col-xs-6 col-md-6">
-                                    <a (click)="onClickMediaInfo(piece)"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                    <a><span class="glyphicon glyphicon-plus-sign"></span></a>
-                                </div>
-                                                            
-                            </div>
+                         <div class="details">
+                                    <h1><a href="#">{{piece.name}}</a></h1>
+                                    <span><i class="icon-map-marker"></i>{{piece.duration}} <i class="icon-time"></i>-</span>
+                                    
+                                    <ul class="rating">
+                                        <li class="fill"></li>
+                                        <li class="fill"></li>
+                                       
+                                        <li></li>
+                                    </ul>
+                                   
+                                    <div class="more-link"> 
+                                  
+                                        <a (click)="onClickMediaInfo(piece)"> <i class="fa fa-fw fa-info"></i></a>
+                                        <a> <i class="fa fa-fw fa-plus"></i></a>
+                                    </div>
+
                         </div>
-                      
-                    </div>
-                    
-                </li>
-            </ul>
+                         
+
+                </section>
+
         </div>
     </div>

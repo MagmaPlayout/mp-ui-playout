@@ -53,6 +53,7 @@ export class OccurrenceService {
 
         //params.set('id', occurrence.id.toString() );
 		//params.set('playlistId', occurrence.playlistId.toString());
+        occurrence.startDateTime.toISOString()
 		params.set('pieceId', occurrence.pieceId.toString());
         params.set('startDateTime', occurrence.startDateTime.toISOString());
 		//params.set('filerId', occurrence.filterId.toString());   

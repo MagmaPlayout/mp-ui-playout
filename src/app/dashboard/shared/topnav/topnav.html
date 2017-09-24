@@ -1,14 +1,55 @@
-<nav class="navbar navbar-dark bg-inverse navbar-fixed-top topnav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-inverse topnav">
+  <a class="navbar-brand" [routerLink]="['/dashboard','/home']">
+            <i><img src="../../../assets/img/icons/flame_11.png" width="25px" /></i>
+             Magma-playout
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      
+    </ul>
+    
+    <div ngbDropdown class="my-2 my-lg-0">
+            <button class="btn btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle>
+                <i class="fa fa-user"></i> {{userLogged}} <b class="caret"></b>  
+            </button>
+            
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item"><i class="fa fa-fw fa-gear"></i>Settings</button>
+                <button class="dropdown-item" [routerLink]="['/']"><i class="fa fa-fw fa-power-off"></i>Log Out</button>
+
+            </div>
+    </div>
+  </div>
+</nav>
+<!--
+<nav class="navbar navbar-dark bg-inverse navbar-expand-lg topnav">
     <div class="collapse navbar-toggleable-xs clearfix text-center">
         
         <a class="navbar-brand" [routerLink]="['/dashboard','/home']">
             <i><img src="../../../assets/img/icons/flame_11.png" width="25px" /></i>
              Magma-playout
         </a>
-        
-        <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">                 
+        <div ngbDropdown class="my-2 my-lg-0">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item">Settings</button>
+                <button class="dropdown-item" [routerLink]="['/']">Log Out</button>
+
+            </div>
+        </div>
+       
+    </div>
+</nav>
+-->
+
+<!--
+     <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">                 
             <li class="dropdown nav-item" dropdown>
-                <a href="javascript:;" id="single-button" class="nav-link dropdown-toggle" dropdownToggle >
+                <a  id="single-button" class="nav-link dropdown-toggle" dropdownToggle >
                     <i class="fa fa-user"></i> {{userLogged}} <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="single-button">   
@@ -23,6 +64,6 @@
                     </li>
                 </ul>
             </li>
+      
         </ul>
-    </div>
-</nav>
+        -->
