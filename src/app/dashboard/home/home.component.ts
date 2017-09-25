@@ -6,6 +6,7 @@ import { CoreService } from '../../_core/_services/core.service';
 import { PieceModel } from '../../_core/_models/piece.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 import { PlayoutModel } from '../../_core/_models/playout.model';
+import { CmdModel } from '../../_core/_models/cmd.model';
 
 
 /**
@@ -77,9 +78,7 @@ export class HomeComponent {
 		this.playoutLst.push(pl);
 		pl.currentPos = this.playoutLst.indexOf(pl); 
 		this.coreService.apndPiece(pl);
-		
-		
-			
+
 	}
 
 	/**
@@ -141,6 +140,19 @@ export class HomeComponent {
 
 		list.splice(index, 1);
 
+	}
+
+	/**
+	 * On click switch mode
+	 */
+	onClickBtnSwitchmode(){
+		let cmd : CmdModel = new CmdModel();
+		cmd.mode = 1; // 1 = live mode
+		cmd.pieceList = this.playoutLst.map(item => {
+			return item.piece;
+		});
+		
+		this.coreService.switchMode(cmd);
 	}
 	
  }

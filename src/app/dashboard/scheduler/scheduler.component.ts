@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import { OccurrenceService } from '../../_core/_services/occurrence.service';
 import { CoreService } from '../../_core/_services/core.service';
 import { OccurrenceModel } from '../../_core/_models/occurrence.model';
+import { CmdModel } from '../../_core/_models/cmd.model';
 import { EventModalComponent} from './modal/event-modal.component';
 import { OccurrenceOperationModel, ChangeTypeEnum } from '../../_core/_models/occurrence.operation.model';
 import { SchedulerManager } from './scheduler.manager'
@@ -182,5 +183,15 @@ export class SchedulerComponent implements AfterViewInit{
 
     this.schedulerManager.addChanges(occOp.eventId, occOp.occurrence, occOp.changeType);
   }
+
+  /**
+	 * On click switch mode
+	 */
+	onClickBtnSwitchmode(){
+		let cmd : CmdModel = new CmdModel();
+		cmd.mode = 0; // 0 = calendar mode
+		
+		this.coreService.switchMode(cmd);
+	}
 
 }

@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 import { PlayoutModel } from '../../_core/_models/playout.model';
+import { CmdModel } from '../../_core/_models/cmd.model';//to-do -> dejar solo este modelo (PlayoutModel no va mas)
 var config = require("../../app.config");
 
 /**
@@ -140,6 +141,18 @@ export class CoreService {
         return () => {
             this.socket.disconnect();
         };
-    }  
- 
+    }
+
+    /**
+     * si la lista es muy grande??
+     * aca nose si conviene mandar todo el objeto porque tiene un array de medias
+     */
+    switchMode(cmd : CmdModel) {
+        
+        this.socket = io(this.url);
+        this.socket.emit('core_switchmode', cmd); 
+        return () => {
+            this.socket.disconnect();
+        };
+    }    
 }
