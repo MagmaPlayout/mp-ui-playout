@@ -1,6 +1,5 @@
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
-import { MediainfoComponent } from './mediainfo/mediainfo.component';
 import { PlayoutService } from '../../_core/_services/playout.service';
 import { CoreService } from '../../_core/_services/core.service';
 import { PieceModel } from '../../_core/_models/piece.model';
@@ -20,8 +19,7 @@ import { CmdModel } from '../../_core/_models/cmd.model';
 })
 export class HomeComponent {
 
-	@ViewChild(MediainfoComponent)
-  	private mediaInfoPopup: MediainfoComponent;
+	
 	
 	currenPoItem : string;
 
@@ -121,12 +119,6 @@ export class HomeComponent {
 		this.currenPoItem = po.piece.name;
 		this.coreService.goto(po);
 		
-	}
-
-
-	onClickMediaInfo(piece: PieceModel){
-		console.log(piece);
-		this.mediaInfoPopup.show(piece.media);
 	}
 
 	/**

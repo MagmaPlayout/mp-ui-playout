@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import {Popup} from 'ng2-opd-popup';
-import { MediaModel } from '../../../_core/_models/media.model';
+import { MediaModel } from '../../../../_core/_models/media.model';
 
 @Component({
   selector: 'app-mediainfo',

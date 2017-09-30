@@ -1,6 +1,7 @@
-import { Component, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, ElementRef, AfterViewChecked, ViewChild } from '@angular/core';
 import { PlayoutService } from '../../../_core/_services/playout.service'
 import { PieceModel } from '../../../_core/_models/piece.model';
+import { MediainfoComponent } from './mediainfo/mediainfo.component';
 declare var jQuery: any;
 declare var moment : any;
 
@@ -13,7 +14,9 @@ declare var moment : any;
   styleUrls: ['./piece-list.component.css']
 })
 export class PieceListComponent implements AfterViewChecked {
-
+  
+  @ViewChild(MediainfoComponent)
+  private mediaInfoPopup: MediainfoComponent;
   elementRef: ElementRef;
   pieceLst : Array<PieceModel> = new Array<PieceModel>();
 
@@ -53,5 +56,10 @@ export class PieceListComponent implements AfterViewChecked {
     }
 
   }
+
+  onClickMediaInfo(piece: PieceModel){
+		console.log(piece);
+		this.mediaInfoPopup.show(piece.media);
+	}
 
 }

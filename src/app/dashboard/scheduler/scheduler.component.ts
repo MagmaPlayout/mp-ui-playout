@@ -73,21 +73,23 @@ export class SchedulerComponent implements AfterViewInit{
     lastOnBottom: false
     
   }
-  
+  private currentTime = new Date().getHours() + ':' + new Date().getMinutes();
 
-  calendarOptions : Options = {
+  calendarOptions = {
       header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'agendaWeek,agendaDay'
+				right: 'agendaWeek,agendaDay',
+      
 			},
-      defaultView: 'agendaWeek',
+      defaultView: 'agendaDay',
       slotDuration : config.scheduler.slotDuration,
 			editable: true,
       dropAccept:".mp-item-media",
 			droppable: true, 
 			drop: this.dropEvent.bind(this),
       timezone:'local',
+      scrollTime : this.currentTime,   
       eventClick: (calEvent, jsEvent, view) => {      
         this.eventModal.open(calEvent.occurrence, calEvent.eventId);
       },

@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard.component';
 import { SchedulerModule } from './scheduler/scheduler.module';
 import {TopNavComponent} from './shared/index';
 import {SidebarComponent} from './shared/index';
+import { ReportsModule} from './reports/reports.module';
 
 
 @NgModule({
@@ -18,13 +19,14 @@ import {SidebarComponent} from './shared/index';
         NgbModule.forRoot(),       
     	BlankPageModule,
         SchedulerModule,
+        ReportsModule
         
         
     ],
     declarations: [
         DashboardComponent, 
         TopNavComponent, 
-        SidebarComponent    
+        SidebarComponent  
         ],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
 })
