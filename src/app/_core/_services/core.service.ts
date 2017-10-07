@@ -112,7 +112,7 @@ export class CoreService {
     /**
     * Wait for media list from core-api
     */
-    getPlResp() : Observable<Array<any>>{
+    getPlResp() : Observable<any>{
 
         this.getPl(); // is ok? ...
 

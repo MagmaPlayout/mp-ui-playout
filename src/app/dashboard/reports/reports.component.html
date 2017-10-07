@@ -1,3 +1,41 @@
-<p>
-  reports works!
-</p>
+
+
+<div class="card">
+  <div class="card-block">
+     <form class="form-inline">
+    <div class="form-group mx-sm-3">
+      <label for="inputPassword2" class="sr-only">Media</label>
+      <input type="password" class="form-control" id="inputPassword2" placeholder="Media...">
+    </div>
+    <div class="form-group mx-sm-3">
+      <label for="inputPassword2" class="sr-only">Start</label>
+      <input type="password" class="form-control" id="inputPassword2" placeholder="Start">
+    </div>
+    <div class="form-group mx-sm-3">
+      <label for="inputPassword2" class="sr-only">End</label>
+      <input type="password" class="form-control" id="inputPassword2" placeholder="End">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  </div>
+</div>
+<div>
+     
+      <input
+        type='text'
+        style='padding:8px;margin:15px auto;width:30%;'
+        placeholder='Type to filter the media column...'
+        (keyup)='updateFilter($event)'
+      />
+      <ngx-datatable
+        #table
+        class='material'
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [rows]='rows'>
+      </ngx-datatable>
+    </div>

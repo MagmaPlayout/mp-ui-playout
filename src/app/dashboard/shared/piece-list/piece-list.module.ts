@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {PieceListComponent} from './piece-list.component';
 import {DndModule} from 'ng2-dnd';
-import {PopupModule} from 'ng2-opd-popup';
+//import {PopupModule} from 'ng2-opd-popup';
 import { MediainfoComponent } from './mediainfo/mediainfo.component';
 
 /**
@@ -13,7 +13,7 @@ import { MediainfoComponent } from './mediainfo/mediainfo.component';
     imports: [
         CommonModule, 
         DndModule.forRoot(),
-        PopupModule.forRoot(),
+        //PopupModule.forRoot(),
     ],
     declarations: [PieceListComponent, MediainfoComponent],
     exports: [PieceListComponent]
