@@ -22,12 +22,12 @@ export class ReportsComponent {
     rows = [];
     
     columns = [
-        { prop: 'mediaName', name : 'media' },
-        { prop: 'mediaDuration', name : 'duration' },
-        { prop: 'mediaFrameRate', name : 'frameRate' },
-        { prop: 'mediaFrameCount', name : 'frameCount' },
-        { prop: 'starttime', name : 'start' },
-        { prop: 'endtime', name : 'end' },
+        { prop: 'mediaName', name : 'Media' },
+        { prop: 'mediaDuration', name : 'Duration' },
+        { prop: 'mediaFrameRate', name : 'Frame rate' },
+        { prop: 'mediaFrameCount', name : 'Frame count' },
+        { prop: 'starttime', name : 'Start' },
+        { prop: 'endtime', name : 'End' },
         { prop: 'supplierName', name : 'Supp. Name' },
         { prop: 'supplierPhone', name : 'Supp. Phone'  },
         { prop: 'supplierEmail', name : 'Supp Email' }
