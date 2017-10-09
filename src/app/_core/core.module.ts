@@ -9,6 +9,7 @@ import { UserService } from './_services/user.service';
 import { PlayoutService } from './_services/playout.service';
 import { CoreService } from './_services/core.service';
 import { OccurrenceService } from './_services/occurrence.service';
+import { ReportService } from './_services/report.service';
 import { HttpClient} from './_helpers/httpClient';
 import { AuthGuard } from './_guards/index';
 
@@ -28,7 +29,8 @@ import { AuthGuard } from './_guards/index';
     CoreService,
     OccurrenceService,
     AuthGuard,
-    HttpClient
+    HttpClient,
+    ReportService
   ],
 })
 export class CoreModule { }

@@ -2,20 +2,31 @@
 
 <div class="card">
   <div class="card-block">
-     <form class="form-inline">
-    <div class="form-group mx-sm-3">
-      <label for="inputPassword2" class="sr-only">Media</label>
-      <input type="password" class="form-control" id="inputPassword2" placeholder="Media...">
-    </div>
-    <div class="form-group mx-sm-3">
-      <label for="inputPassword2" class="sr-only">Start</label>
-      <input type="password" class="form-control" id="inputPassword2" placeholder="Start">
-    </div>
-    <div class="form-group mx-sm-3">
-      <label for="inputPassword2" class="sr-only">End</label>
-      <input type="password" class="form-control" id="inputPassword2" placeholder="End">
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
+     <form class="form-inline" (ngSubmit)="onSubmit()" #filterForm="ngForm">
+        <div class="form-group mx-sm-3">
+            <input type="text" class="form-control" placeholder="Media..."
+          
+            [(ngModel)]="model.mediaName" 
+            name="name"
+            >    
+        </div>
+        <div class="form-group mx-sm-3" >
+            <input type="date" class="form-control" placeholder="Start..."
+            required
+            [(ngModel)]="model.starttime"
+            name="starttime" 
+           
+            >  
+        </div>
+        <div class="form-group mx-sm-3">
+            <input type="date" class="form-control" id="name" placeholder="End..."
+            required
+            [(ngModel)]="model.endtime"
+            name="endtime"
+            
+            >  
+        </div>
+        <button type="submit"  class="btn btn-primary">Search</button>
   </form>
   </div>
 </div>
@@ -35,7 +46,7 @@
         [headerHeight]="50"
         [footerHeight]="50"
         [rowHeight]="'auto'"
-        [limit]="10"
+        [limit]="8"
         [rows]='rows'>
       </ngx-datatable>
     </div>

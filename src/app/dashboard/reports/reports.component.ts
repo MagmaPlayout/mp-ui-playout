@@ -1,58 +1,70 @@
 import { Component, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ReportService } from '../../_core/_services/report.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-reports',
-  templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.css']
+    selector: 'app-reports',
+    templateUrl: './reports.component.html',
+    styleUrls: ['./reports.component.css'],
+    providers : [FormBuilder]
 })
-export class ReportsComponent{
-  
-  temp = [];
-  rows = [
-    { media: 'clip1.avi', duration: '0', resolution: '1080x720', name : 'Gato supp', phone: '1111111', email: 'info@mgial.com' },
-    { media: 'clip2.avi', duration: '0', resolution: '1080x720', name : 'Gato supp', phone: '1111111', email: 'info@mgial.com' },
-    { media: 'clip3.avi', duration: '0', resolution: '1080x720', name : 'Gato supp', phone: '1111111', email: 'info@mgial.com' },
-  ];
-  
-  columns = [
-    { prop: 'media' },
-    { name: 'Duration' },
-    { name: 'Resolution' },
-    { name: 'Name' },
-    { name: 'Phone' },
-    { name: 'Email' }
-  ];
-  @ViewChild(DatatableComponent) table: DatatableComponent;
+export class ReportsComponent {
+    complexForm;
 
-  constructor() {
+    model = {
+        mediaName : "",
+        starttime :null,
+        endtime: null
+    };
+
+    temp = [];
+    rows = [];
     
-    this.fetch((data) => {
-      // cache our list
-      this.temp = [...data];
+    columns = [
+        { prop: 'mediaName', name : 'media' },
+        { prop: 'mediaDuration', name : 'duration' },
+        { prop: 'mediaFrameRate', name : 'frameRate' },
+        { prop: 'mediaFrameCount', name : 'frameCount' },
+        { prop: 'starttime', name : 'start' },
+        { prop: 'endtime', name : 'end' },
+        { prop: 'supplierName', name : 'Supp. Name' },
+        { prop: 'supplierPhone', name : 'Supp. Phone'  },
+        { prop: 'supplierEmail', name : 'Supp Email' }
+    ];
+    @ViewChild(DatatableComponent) table: DatatableComponent;
 
-      // push our inital complete list
-      this.rows = data;
-    });
-    
-  }
+    constructor(private reportService: ReportService,fb: FormBuilder) {
+        this.complexForm = fb.group({
+           
+            'startime' : [null, Validators.required],
+            'endtime' : [null, Validators.required]
+           
+        })
+    }
 
-  fetch(cb) {
-    cb(this.rows);
-  }
+   
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
+    updateFilter(event) {
+        const val = event.target.value.toLowerCase();
+        // filter our data
+        const temp = this.temp.filter(function (d) {
+            return d.mediaName.toLowerCase().indexOf(val) !== -1 || !val;
+        });
 
-    // filter our data
-    const temp = this.temp.filter(function(d) {
-      return d.media.toLowerCase().indexOf(val) !== -1 || !val;
-    });
+       
+        this.rows = temp;
+        
+        this.table.offset = 0;
+    }
 
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
-  }
+    onSubmit() { 
+        this.reportService.getByFilters(this.model).subscribe(resp => {
+            this.rows = resp;
+            this.temp = resp;
+            
+        });    
+    }
+ 
 
 }
