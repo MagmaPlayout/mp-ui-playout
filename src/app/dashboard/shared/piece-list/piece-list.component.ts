@@ -1,6 +1,7 @@
-import { Component, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, ElementRef, AfterViewChecked, ViewChild, Input } from '@angular/core';
 import { PlayoutService } from '../../../_core/_services/playout.service'
 import { PieceModel } from '../../../_core/_models/piece.model';
+import { MediainfoComponent } from './mediainfo/mediainfo.component';
 declare var jQuery: any;
 declare var moment : any;
 
@@ -13,7 +14,11 @@ declare var moment : any;
   styleUrls: ['./piece-list.component.css']
 })
 export class PieceListComponent implements AfterViewChecked {
-
+  
+  @ViewChild(MediainfoComponent)
+  private mediaInfoPopup: MediainfoComponent;
+  @Input('isJuiDraggable')isJuiDraggable : boolean = false;
+  
   elementRef: ElementRef;
   pieceLst : Array<PieceModel> = new Array<PieceModel>();
 
@@ -34,24 +39,30 @@ export class PieceListComponent implements AfterViewChecked {
 
   
   ngAfterViewChecked(){ // se ejecuta por cada evento/cambio en el dom.
+    if(this.isJuiDraggable){
+      let piecesLiDraggables = jQuery(".mp-item-media.list-group-item.draggable.ui-draggable.ui-draggable-handle");
+      let piecesLiElements = jQuery(".mp-item-media");
 
-    let piecesLiDraggables = jQuery(".mp-item-media.list-group-item.draggable.ui-draggable.ui-draggable-handle");
-    let piecesLiElements = jQuery(".mp-item-media");
+      if(piecesLiElements .length != piecesLiDraggables.length){
+          
+          for(var i = 0; i <= piecesLiElements .length -1; i++){
+            jQuery(piecesLiElements[i]).draggable({revert:true,zIndex:999,revertDuration:100});
 
-    if(piecesLiElements .length != piecesLiDraggables.length){
-        
-         for(var i = 0; i <= piecesLiElements .length -1; i++){
-           jQuery(piecesLiElements[i]).draggable({revert:true,zIndex:999,revertDuration:100});
-
-           jQuery(piecesLiElements[i]).data('pieceData', {
-              title: this.pieceLst[i].name, // use the element's text as the event title
-              stick: true, // maintain when user navigates (see docs on the renderEvent method)
-              piece : this.pieceLst[i]
-            });
-         }
-     
+            jQuery(piecesLiElements[i]).data('pieceData', {
+                title: this.pieceLst[i].name, // use the element's text as the event title
+                stick: true, // maintain when user navigates (see docs on the renderEvent method)
+                piece : this.pieceLst[i]
+              });
+          }
+      }
     }
+    
 
   }
+
+  onClickMediaInfo(piece: PieceModel){
+		console.log(piece);
+		this.mediaInfoPopup.show(piece.media);
+	}
 
 }

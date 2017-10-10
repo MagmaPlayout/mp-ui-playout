@@ -1,38 +1,22 @@
 <div class="container-fluid">
+    
      <div class="card">
         <div class="card-header">
-            <h4 class="text-muted">Live Mode</h4>
+            <div class="row">
+                <div class="col-sm-10">
+                    <h4 class="text-muted">Live Mode</h4>
+                </div>
+                 <div class="col-sm-2">
+                    <button class="btn btn-success" (click)="onClickBtnSwitchmode()">Switch mode</button>                    
+                </div>
+            </div>
         </div>  
     </div>
     <div class="card mp-list-box" dnd-sortable-container [dropZones]="['sketch-zone']" [sortableData]="sketches">
 
         <div class="card-header">Sketches</div>
         <div class="card-block">
-            <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
             <div class="input-group stylish-input-group">
                     <input type="text" class="form-control"  placeholder="Search" >
                     <span class="input-group-addon">
@@ -41,7 +25,7 @@
                         </button>  
                     </span>
             </div>
-
+       
             <ul class="list-group"> 
                 <li *ngFor="let item of sketchLst; let i = index" class="list-group-item mp-item-sketch" [dropEnabled]="false" [dragData]="item" dnd-sortable [sortableIndex]="i">
                    
@@ -71,8 +55,8 @@
             </ul>
         </div>
     </div>
-
-
+    <mp-piece-list></mp-piece-list>
+    <!--
     <div class="card mp-list-box"    
         dnd-sortable-container [sortableData]="pieceLst" [dropZones]="['playoutItem']">
         <div class="card-header">Medias</div>
@@ -117,7 +101,7 @@
             </ul>
         </div>
     </div>
-
+    -->
     <div class="card mp-list-box" dnd-sortable-container  [sortableData]="playoutLst">
         <div class="card-header">Playout list</div>
         <div class="card-block" dnd-droppable (onDropSuccess)="onPlayoutDrop($event)" [dropZones]="['playoutItem']">
@@ -185,10 +169,5 @@
 
 
         </div>
-
-       
-        
-        
     </div>
-<app-mediainfo></app-mediainfo>
 </div>

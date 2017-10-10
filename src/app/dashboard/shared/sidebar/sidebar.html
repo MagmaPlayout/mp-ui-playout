@@ -4,29 +4,14 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <ul class="list-group">
         <a routerLink="/dashboard/home" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-dashboard"></i> Live mode
+            <i class="fa fa-fw fa-television"></i> Live mode
         </a>
         <a [routerLink]="['scheduler']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-dashboard"></i> Scheduler
-        </a>          
-        <div class="nested-menu">
-            <a class="list-group-item" (click)="addExpandClass('pages')">
-                <span><i class="fa fa-plus"></i> &nbsp; Menu</span>
-            </a>
-            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages' }">
-                <ul class="submenu">
-                    <li>
-                        <a href><span>Submenu</span></a>
-                    </li>
-                    <li>
-                        <a href><span>Submenu</span></a>
-                    </li>
-                </ul>
-            </li>
-        </div>
-        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-file-o"></i> &nbsp;BlankPage
+            <i class="fa fa-fw fa-calendar"></i> Scheduler
         </a>
-       
+         <a [routerLink]="['reports']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-bar-chart "></i> Reports
+        </a>          
+        
     </ul>
 </nav>

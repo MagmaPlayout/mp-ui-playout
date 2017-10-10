@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import {Popup} from 'ng2-opd-popup';
-import { MediaModel } from '../../../_core/_models/media.model';
+//import {Popup} from 'ng2-opd-popup';
+import { MediaModel } from '../../../../_core/_models/media.model';
 
 @Component({
   selector: 'app-mediainfo',
@@ -10,7 +10,8 @@ import { MediaModel } from '../../../_core/_models/media.model';
 export class MediainfoComponent implements OnInit {
   
   private media : MediaModel = <MediaModel>{};
-  constructor(private popup:Popup) { }
+  private popup:any
+  constructor() { }
 
   ngOnInit() {
     this.popup.options = {

@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import {DndModule} from 'ng2-dnd';
 import {CoreModule} from '../../_core/core.module'
-import {PopupModule} from 'ng2-opd-popup';
-import { MediainfoComponent } from './mediainfo/mediainfo.component';
+import {PieceListModule} from '../shared/piece-list/piece-list.module';
 import {EventModalModule} from '../scheduler/modal/event-modal.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 /**
@@ -14,12 +13,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     imports: [
         CommonModule, 
         CoreModule, 
-        EventModalModule, 
+        EventModalModule,
+        PieceListModule, 
         DndModule.forRoot(),
-        PopupModule.forRoot(),
         NgbModule.forRoot()
     ],
-    declarations: [HomeComponent, MediainfoComponent],
+    declarations: [HomeComponent],
     exports: [HomeComponent]
 })
 

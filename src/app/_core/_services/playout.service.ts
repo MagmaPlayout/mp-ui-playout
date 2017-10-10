@@ -41,7 +41,7 @@ export class PlayoutService {
   /**
    * get piece list broadcasting from server
    */
-  getPieceList() : Observable<Array<PieceModel>>{
+  getPieceList() : Observable<any> {
     let observable = new Observable(observer => {
         
       this.socket = io(this.url);
@@ -55,7 +55,7 @@ export class PlayoutService {
     return observable;
   } 
 
-  getSketchList() : Observable<Array<SketchModel>>{
+  getSketchList() : Observable<any>{
     let observable = new Observable(observer => {
         
       this.socket = io(this.url);
