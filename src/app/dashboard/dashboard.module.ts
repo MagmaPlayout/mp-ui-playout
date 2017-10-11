@@ -9,6 +9,7 @@ import { SchedulerModule } from './scheduler/scheduler.module';
 import {TopNavComponent} from './shared/index';
 import {SidebarComponent} from './shared/index';
 import { ReportsModule} from './reports/reports.module';
+import { FiltersModule} from './filters/filters.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReportsModule} from './reports/reports.module';
         NgbModule.forRoot(),       
     	BlankPageModule,
         SchedulerModule,
-        ReportsModule
+        ReportsModule,
+        FiltersModule
         
         
     ],
