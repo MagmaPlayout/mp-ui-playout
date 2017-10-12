@@ -22,8 +22,6 @@ import { FiltersModule} from './filters/filters.module';
         SchedulerModule,
         ReportsModule,
         FiltersModule
-        
-        
     ],
     declarations: [
         DashboardComponent, 
