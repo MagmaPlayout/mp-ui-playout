@@ -68,16 +68,19 @@ export class MediasComponent {
         for(var i = 0 ; i < this.selected.length; i++){
            var pieceName = this.selected[i].name;
            var length = this.selected.length;
-            this.pieceService.delete(this.selected[i]).subscribe(resp => {
-                console.log(name)
-                if(resp)
-                    this._notification.success( pieceName + ' media have been deleted successfully');
-                else
-                    this._notification.error( pieceName+ 'media could not be deleted');
-                if(i == length){
-                    this.getMedias();
-                }
-            }); 
+            this.pieceService.delete(this.selected[i]).subscribe(
+                resp => {
+                    console.log(name)
+                    if(resp)
+                        this._notification.success( pieceName + ' media have been deleted successfully');
+                    else
+                        this._notification.error( pieceName + 'media could not be deleted');
+                    if(i == length){
+                        this.getMedias();
+                    }
+                },
+                err => this._notification.error(err._body)
+            ); 
          
         }
         
