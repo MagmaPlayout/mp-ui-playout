@@ -10,6 +10,7 @@ import { PlayoutService } from './_services/playout.service';
 import { CoreService } from './_services/core.service';
 import { OccurrenceService } from './_services/occurrence.service';
 import { ReportService } from './_services/report.service';
+import { PieceService } from './_services/piece.service';
 import { HttpClient} from './_helpers/httpClient';
 import { AuthGuard } from './_guards/index';
 
@@ -30,7 +31,8 @@ import { AuthGuard } from './_guards/index';
     OccurrenceService,
     AuthGuard,
     HttpClient,
-    ReportService
+    ReportService,
+    PieceService
   ],
 })
 export class CoreModule { }
