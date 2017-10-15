@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ReportService } from '../../_core/_services/report.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+declare var moment: any;
 
 @Component({
     selector: 'app-reports',
@@ -14,20 +15,24 @@ export class ReportsComponent {
 
     model = {
         mediaName : "",
-        starttime :null,
-        endtime: null
+        starttime : moment().format("YYYY-MM-DD"),
+        endtime:  moment().format("YYYY-MM-DD")
     };
 
     temp = [];
     rows = [];
     
     columns = [
-        { prop: 'mediaName', name : 'Media' },
-        { prop: 'mediaDuration', name : 'Duration' },
-        { prop: 'mediaFrameRate', name : 'Frame rate' },
-        { prop: 'mediaFrameCount', name : 'Frame count' },
+        { prop: 'pieceName', name : 'Media' },
+        { prop: 'duration', name : 'Duration' },
+        { prop: 'resolution', name : 'Resolution' },
+        { prop: 'frameRate', name : 'Frame rate' },
+        { prop: 'frameCount', name : 'Frame count' },
         { prop: 'starttime', name : 'Start' },
         { prop: 'endtime', name : 'End' },
+        { prop: 'filter', name : 'Filter' },
+        { prop: 'sketch', name : 'Sketch' },
+        { prop: 'piecePath', name : 'Path' },
         { prop: 'supplierName', name : 'Supp. Name' },
         { prop: 'supplierPhone', name : 'Supp. Phone'  },
         { prop: 'supplierEmail', name : 'Supp Email' }
@@ -43,13 +48,11 @@ export class ReportsComponent {
         })
     }
 
-   
-
     updateFilter(event) {
         const val = event.target.value.toLowerCase();
         // filter our data
         const temp = this.temp.filter(function (d) {
-            return d.mediaName.toLowerCase().indexOf(val) !== -1 || !val;
+            return d.pieceName.toLowerCase().indexOf(val) !== -1 || !val;
         });
 
        
@@ -58,7 +61,8 @@ export class ReportsComponent {
         this.table.offset = 0;
     }
 
-    onSubmit() { 
+    onSubmit() {
+        
         this.reportService.getByFilters(this.model).subscribe(resp => {
             this.rows = resp;
             this.temp = resp;
