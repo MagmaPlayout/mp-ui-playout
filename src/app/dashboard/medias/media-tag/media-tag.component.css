@@ -1,0 +1,21 @@
+.selected{
+	border:solid #ff0034 1px;
+    border-radius: 5px;
+	float:left; 
+	margin:2px;
+	padding:2px 12px;
+    font-size: 0.8em;
+}
+ 
+.selected a{
+	cursor: pointer;
+	font-weight:bold;
+}
+.tagList{
+    margin-top: 2px;
+    cursor: pointer;
+	font-weight:bold;
+    border:solid #ff0034 1px;
+    border-radius: 2px;
+
+}

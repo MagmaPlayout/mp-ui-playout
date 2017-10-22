@@ -11,6 +11,7 @@ import { CoreService } from './_services/core.service';
 import { OccurrenceService } from './_services/occurrence.service';
 import { ReportService } from './_services/report.service';
 import { PieceService } from './_services/piece.service';
+import { TagService } from './_services/tag.service';
 import { HttpClient} from './_helpers/httpClient';
 import { AuthGuard } from './_guards/index';
 
@@ -32,7 +33,8 @@ import { AuthGuard } from './_guards/index';
     AuthGuard,
     HttpClient,
     ReportService,
-    PieceService
+    PieceService,
+    TagService
   ],
 })
 export class CoreModule { }
