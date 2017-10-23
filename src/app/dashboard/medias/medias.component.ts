@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import {Observable} from 'rxjs/Observable';
 import { PieceService } from '../../_core/_services/piece.service';
@@ -10,12 +10,15 @@ import { NotificationService } from '../../_core/_services/notification.service'
   styleUrls: ['./medias.component.css']
 })
 export class MediasComponent {
-    private enabledBtnRemove : boolean = true;
+    private enabledOptions : boolean = true;
     private temp = [];
     private rows = [];
     private selected = [];
-    
-    columns = [
+
+    @ViewChild('btnAdd') btnAdd: ElementRef;
+
+    @ViewChild(DatatableComponent) table: DatatableComponent;
+     columns = [
         { prop: 'name', name : 'Media' },
         { prop: 'duration', name : 'Duration' },
         { prop: 'resolution', name : 'Resolution' },
@@ -23,42 +26,19 @@ export class MediasComponent {
         { prop: 'frameCount', name : 'Frame count' }
        
     ];
-    @ViewChild(DatatableComponent) table: DatatableComponent;
 
     constructor(private pieceService : PieceService, private _notification: NotificationService) {
          this.getMedias();
     }
 
-   getMedias(){
-       this.pieceService.getAll().subscribe(resp => {
+    getMedias(){
+        this.pieceService.getAll().subscribe(resp => {
             this.rows = resp;
-            this.temp = resp;         
+            this.temp = resp; 
+            this.selected = [];
+            
         });
-   }
-
-    updateFilter(event) {
-        const val = event.target.value.toLowerCase();
-        // filter our data
-        const temp = this.temp.filter(function (d) {
-            return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-        });
-   
-        this.rows = temp;        
-        this.table.offset = 0;
     }
-
-    onSelect({ selected }) {    
-        this.selected.splice(0, this.selected.length);
-        this.selected.push(...selected);
-       
-        this.enabledBtnRemove = (this.selected.length == 0);
-      
-    }
-
-    onBtnRemoveClick(){
-        this.delSelectedMedias();
-    }
-
 
     /**
      * Delete selected medias
@@ -70,9 +50,8 @@ export class MediasComponent {
            var length = this.selected.length;
             this.pieceService.delete(this.selected[i]).subscribe(
                 resp => {
-                    console.log(name)
                     if(resp)
-                        this._notification.success( pieceName + ' media have been deleted successfully');
+                        this._notification.success( pieceName + ' media has been deleted successfully');
                     else
                         this._notification.error( pieceName + 'media could not be deleted');
                     if(i == length){
@@ -86,4 +65,41 @@ export class MediasComponent {
         
     }
 
+   /*
+   ---------------------------------------------
+   -------------- Events -----------------------
+   ---------------------------------------------
+   */
+    private updateFilter(event) {
+        const val = event.target.value.toLowerCase();
+        // filter our data
+        const temp = this.temp.filter(function (d) {
+            return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+        });
+   
+        this.rows = temp;        
+        this.table.offset = 0;
+    }
+
+    private onSelect({ selected }) {    
+        this.selected.splice(0, this.selected.length);
+        this.selected.push(...selected);
+       
+        this.enabledOptions = (this.selected.length == 0);
+      
+    }
+
+    private onBtnRemoveClick(){
+        this.delSelectedMedias();
+    }
+
+    private onPieceSave(){
+        let el: HTMLElement = this.btnAdd.nativeElement as HTMLElement;
+        el.click();
+        this.enabledOptions = true;        
+        this.getMedias();
+    }
+
+
+   
 }

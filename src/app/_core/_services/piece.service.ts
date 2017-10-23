@@ -59,6 +59,31 @@ export class PieceService {
     }
 
     /**
+     * create a new piece
+     * @param {PieceModel} piece
+     */
+    public insert(piece : PieceModel) {
+        let params = new URLSearchParams();
+
+        params.set('name', piece.name);
+        params.set('duration', piece.duration);
+        params.set('frameCount', piece.frameCount.toString());
+        params.set('frameRate', piece.frameRate.toString());
+        params.set('path', piece.path);
+        params.set('resolution', piece.resolution);
+        params.set('mediaId', piece.media.id.toString());     
+        params.set('tagList', JSON.stringify(piece.tagList));
+        params.set('filterList', JSON.stringify(piece.filterList));
+       
+        return  this.http.post(config.APIs.playout_rest + 'pieces/', params, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );
+
+          
+    }
+
+    /**
      * delete an piece
      * @param {PieceModel} piece
      */

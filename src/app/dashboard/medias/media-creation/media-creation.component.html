@@ -1,51 +1,95 @@
+ <form 
+    autocomplete="off"
+    (ngSubmit)="pieceForm.form.valid && onSubmit()" 
+    #pieceForm="ngForm" 
+    novalidate>
 <div class="row">
     <div class="col-6">
-        <div class="form-group row">
-            <label for="example-text-input" class="col-2 col-form-label">Name</label>
-            <div class="col-10">
-                <input class="form-control" type="text" value="Gato" id="example-text-input">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="example-text-input" class="col-2 col-form-label">Filter</label>
-            <div class="col-10">
-                <select class="form-control">
-                    <option selected>Choose...</option>
-                    <option value="1">Filter1</option>
-                    <option value="2">Filter2</option>
-                    <option value="3">Filter3</option>
-                </select>
-            </div>
-        </div>
+       
+            <div [ngClass]="pieceForm.submitted && !name.valid ? 'form-group row has-danger': 'form-group row'">
+                <label for="mediaName" class ="col-2 col-form-label" >Name</label>
 
-        <div class="form-group row">
-            <label for="example-search-input" class="col-2 col-form-label">Duration</label>
-            <div class="col-10">
-                <input class="form-control" type="search" value="00:02:00" id="example-search-input" disabled>
+                <div class="col-10">
+                    <input [ngClass]="pieceForm.submitted && !name.valid ? 'form-control form-control-danger': 'form-control'" type="text" id="mediaName"
+                    required
+                    [ngModel]="_piece.name" 
+                    (ngModelChange)="_piece.name = $event"
+                    #name= "ngModel" 
+                    name="name" 
+                    >
+                    <div *ngIf="pieceForm.submitted && !name.valid" class="form-control-feedback">name is required</div>
+                </div>
+                
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="example-email-input" class="col-2 col-form-label">Resolution</label>
-            <div class="col-10">
-                <input class="form-control" type="email" value="800X600" id="example-email-input" disabled>
+            <div class="form-group row">
+                <label for="example-text-input" class="col-2 col-form-label">Filter</label>
+                <div class="col-10">
+                    <select class="form-control" #filterSelect (change)='_filterSelected = filterSelect.value'>
+                        <option  *ngFor="let item of filterList; let i = index;" [selected]="i == 0 ? true : false" value="{{item.id}}">{{item.name}}</option>  
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="example-url-input" class="col-2 col-form-label">Frame rate</label>
-            <div class="col-10">
-                <input class="form-control" type="url" value="60" id="example-url-input" disabled>
+
+            <div class="form-group row">
+                <label for="example-search-input" class="col-2 col-form-label">Duration</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" id="example-search-input" 
+                    disabled
+                    [ngModel]="_piece.duration" 
+                    (ngModelChange)="_piece.duration = $event"
+                    #duration= "ngModel" 
+                    name ="duration" 
+                    >
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="example-tel-input" class="col-2 col-form-label">Frame count</label>
-            <div class="col-10">
-                <input class="form-control" type="tel" value="60" id="example-tel-input" disabled>
+            <div class="form-group row">
+                <label  class="col-2 col-form-label">Resolution</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" 
+                    disabled
+                    [ngModel]="_piece.resolution" 
+                    (ngModelChange)="_piece.resolution = $event"
+                    #resolution= "ngModel" 
+                    name="resolution" 
+                    >
+
+                </div>
             </div>
-        </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Frame count</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" 
+                    disabled
+                    [ngModel]="_piece.frameCount" 
+                    (ngModelChange)="_piece.frameCount = $event"
+                    #frameCount= "ngModel" 
+                    name="frameCount" 
+                    >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-2 col-form-label">Frame rate</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" 
+                    disabled
+                    [ngModel]="_piece.frameRate" 
+                    (ngModelChange)="_piece.frameRate = $event"
+                    #frameRate= "ngModel" 
+                    name= "frameRate" 
+                    >
+                </div>
+            </div>
+       
     </div>
     <div class="col-6">
         <app-media-tag></app-media-tag>
+        <div class="form-group row">
+            <div class="col-4">
+                <button type="submit"  class="btn btn-success" ><i class="fa fa-fw fa-floppy-o"></i> Save</button>   
+            </div>
+            
+        </div>
     </div>
   </div>
-
+ </form>
 

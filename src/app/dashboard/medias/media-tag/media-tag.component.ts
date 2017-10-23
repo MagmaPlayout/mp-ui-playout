@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TagService } from '../../../_core/_services/tag.service';
-import { NotificationService } from '../../../_core/_services/notification.service';
 import { TagModel } from '../../../_core/_models/tag.model';
 
 @Component({
@@ -8,23 +7,26 @@ import { TagModel } from '../../../_core/_models/tag.model';
   templateUrl: './media-tag.component.html',
   styleUrls: ['./media-tag.component.css']
 })
-export class MediaTagComponent{
-    public query = '';
-    public tagList : Array<TagModel> = [];
-    public tagFilteredList : Array<TagModel> = [];
-    public tagSelectedList : Array<TagModel> = [];
+export class MediaTagComponent {
+    private query = '';
+    private tagList : Array<TagModel> = [];
+    private tagFilteredList : Array<TagModel> = [];
+    private tagSelectedList : Array<TagModel> = [];
  
-    constructor(private _notification: NotificationService, private tagService : TagService ) {
+    constructor(private tagService : TagService ) {
+
        this.getTags();
     }
 
-    getTags(){
+    private getTags(){
+
         this.tagService.getAll().subscribe(resp => {
             this.tagList = resp;  
         });
     }
 
-    onFilter() {
+    private onFilter() {
+
         if (this.query !== ""){
             this.tagFilteredList = this.tagList.filter(function(tag){
                 return tag.tag.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
@@ -34,29 +36,50 @@ export class MediaTagComponent{
         }
     }
 
-    onClickSelect(item){
+    private onClickSelect(item){
+
         this.tagSelectedList.push(item);
         this.query = '';
         this.tagFilteredList = [];
     }
 
-    onClickRemove(item){
+    private onClickRemove(item){
+
         this.tagSelectedList.splice(this.tagSelectedList.indexOf(item),1);
     }
 
-    onNew(event){
-        if(event.charCode == 13){
-            let tag : TagModel = <TagModel> {tag : this.query};
-          
-            //if the tag not exist 
-            if(this.tagList.find(item => item.tag == this.query) == undefined ){
-                this.tagService.insert(tag).subscribe(resp => true );  
-                this.tagList.push(tag);          
-            }
-                
-            this.tagSelectedList.push(tag);
-            this.query = "";
+    private onNew($event){    
+
+        let tag : TagModel = <TagModel> {tag : this.query};
+        
+        //if the tag not exist 
+        if(this.tagList.find(item => item.tag == this.query) == undefined ){
+            this.tagService.insert(tag).subscribe(resp => true );  
+            this.tagList.push(tag);          
         }
+
+        this.tagSelectedList.push(tag);
+        this.query = "";
+
+        //is necessary for not trigger submit event.
+        $event.preventDefault();
+    
+    }
+
+    /**
+     * returns selected tags
+     */
+    public getSelectedTags() : Array<TagModel>{
+        
+        return this.tagSelectedList;
+    }
+
+    /**
+     * clear selected tags
+     */
+    public clearSelectedTags() : void {
+        
+        this.tagSelectedList = [];
     }
 
 
