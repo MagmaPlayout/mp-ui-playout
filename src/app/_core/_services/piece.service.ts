@@ -84,7 +84,7 @@ export class PieceService {
     }
 
     /**
-     * delete an piece
+     * delete a piece
      * @param {PieceModel} piece
      */
     public delete(piece : PieceModel) {      

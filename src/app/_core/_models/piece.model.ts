@@ -11,6 +11,7 @@ export interface PieceModel{
     frameRate: number;
     frameCount : number;
     duration : string,
+    durationHuman : string,
     mediaId : number;
     media : MediaModel;
     sketch : SketchModel;
