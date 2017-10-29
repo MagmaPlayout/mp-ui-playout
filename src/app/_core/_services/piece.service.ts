@@ -49,10 +49,12 @@ export class PieceService {
      */
     public update(piece : PieceModel) {
         let params = new URLSearchParams();
-       
+        params.set('id', piece.id.toString());
 		params.set('name', piece.name);
+        params.set('tagList', JSON.stringify(piece.tagList));
+        params.set('filterConfigList', JSON.stringify(piece.filterConfigList));
        
-        return  this.http.put(config.APIs.playout_rest + 'pieces/', params, null)
+        return  this.http.put(config.APIs.playout_rest + 'pieces', params, null)
                .map(response => response.json(),
                 err => console.log("error")               
             );       
@@ -73,7 +75,7 @@ export class PieceService {
         params.set('resolution', piece.resolution);
         params.set('mediaId', piece.media.id.toString());     
         params.set('tagList', JSON.stringify(piece.tagList));
-        params.set('filterList', JSON.stringify(piece.filterList));
+        params.set('filterConfigList', JSON.stringify(piece.filterConfigList));
        
         return  this.http.post(config.APIs.playout_rest + 'pieces/', params, null)
                .map(response => response.json(),

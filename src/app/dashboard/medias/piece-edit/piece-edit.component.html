@@ -24,8 +24,8 @@
             <div class="form-group row">
                 <label for="example-text-input" class="col-2 col-form-label">Filter</label>
                 <div class="col-10">
-                    <select class="form-control" #filterSelect (change)='_filterSelected = filterSelect.value'>
-                        <option  *ngFor="let item of filterList; let i = index;" [selected]="i == 0 ? true : false" value="{{item.id}}">{{item.name}}</option>  
+                    <select class="form-control" #filterSelect (change)='onChangeFilter(filterSelect.value)'>
+                        <option  *ngFor="let item of filterList; let i = index;" [selected]="item.id == _filterSelected ? true : false" value="{{item.id}}">{{item.name}}</option>  
                     </select>
                 </div>
             </div>

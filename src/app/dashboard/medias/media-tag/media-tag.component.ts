@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TagService } from '../../../_core/_services/tag.service';
 import { TagModel } from '../../../_core/_models/tag.model';
 
@@ -12,6 +12,12 @@ export class MediaTagComponent {
     private tagList : Array<TagModel> = [];
     private tagFilteredList : Array<TagModel> = [];
     private tagSelectedList : Array<TagModel> = [];
+
+    @Input()
+    set tagImportedList(tagList : Array<TagModel>){
+        this.tagSelectedList = tagList;
+
+    }
  
     constructor(private tagService : TagService ) {
 

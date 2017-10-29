@@ -1,8 +1,8 @@
-import {FilterArgsModel} from './filterArgs.model';
+import {FilterArgModel} from './filterArg.model';
 
 export interface FilterModel{
     id : number;
     name : string;
     description : string;
-    filterArgsList : Array<FilterArgsModel>;
+    filterArgsList : Array<FilterArgModel>;
 }

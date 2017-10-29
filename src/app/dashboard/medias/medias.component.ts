@@ -15,7 +15,8 @@ export class MediasComponent {
     private rows = [];
     private selected = [];
 
-    @ViewChild('btnAdd') btnAdd: ElementRef;
+    @ViewChild('btnNew') btnNew: ElementRef;
+    @ViewChild('btnEdit') btnEdit: ElementRef;
 
     @ViewChild(DatatableComponent) table: DatatableComponent;
      columns = [
@@ -32,7 +33,7 @@ export class MediasComponent {
     }
 
     getMedias(){
-        this.pieceService.getAll().subscribe(resp => {
+        this.pieceService.getAll().subscribe(resp => {   
             this.rows = resp;
             this.temp = resp; 
             this.selected = [];
@@ -53,7 +54,7 @@ export class MediasComponent {
                     if(resp)
                         this._notification.success( pieceName + ' media has been deleted successfully');
                     else
-                        this._notification.error( pieceName + 'media could not be deleted');
+                        this._notification.error( pieceName + ' media could not be deleted');
                     if(i == length){
                         this.getMedias();
                     }
@@ -93,13 +94,27 @@ export class MediasComponent {
         this.delSelectedMedias();
     }
 
-    private onPieceSave(){
-        let el: HTMLElement = this.btnAdd.nativeElement as HTMLElement;
-        el.click();
-        this.enabledOptions = true;        
-        this.getMedias();
+    
+    /**
+     * After submit, trigger collapse event and update the piece list.
+     */
+    private onPieceNew(result){
+        
+        this.afterSubmit(this.btnNew.nativeElement as HTMLElement);
     }
 
+    private onPieceEdit(result){
+        
+        this.afterSubmit(this.btnEdit.nativeElement as HTMLElement);
+        
+    }
+
+    private afterSubmit(btn : HTMLElement){
+        btn.click();
+        this.enabledOptions = true;
+        this.getMedias();
+       
+    }
 
    
 }
