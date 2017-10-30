@@ -74,8 +74,7 @@ export class HomeComponent {
 		let pl = new PlayoutModel();
 		pl.piece = $event.dragData;
 		this.playoutLst.push(pl);
-		pl.currentPos = this.playoutLst.indexOf(pl); 
-		this.coreService.apndPiece(pl);
+		pl.currentPos = this.playoutLst.indexOf(pl);
 
 	}
 
@@ -85,7 +84,6 @@ export class HomeComponent {
 	onDelPlItem(po : PlayoutModel, index : number ) {
 		
 		po.currentPos = index;
-		this.coreService.remove(po);
 		this.removeItem(po, this.playoutLst);
 
 	}
@@ -103,7 +101,6 @@ export class HomeComponent {
 	onDragEndPo(po: PlayoutModel) {
 		
 		po.currentPos = po.newPos = this.playoutLst.indexOf(po);	// newPos no tiene sentido
-		this.coreService.move(po);
 
 		console.log("onDragEnd-> currentPos=" + po.currentPos);
 	
