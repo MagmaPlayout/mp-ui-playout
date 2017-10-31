@@ -74,20 +74,19 @@ export class PieceEditComponent implements OnInit{
     private updatePiece(){
         if(!this._isOriginalPiece){
             this._piece.tagList = this._mediaTag.getSelectedTags();
+            let oldPath = this._piece.path;     
+            this._piece.path = this.pieceService.generatePath(oldPath, this._piece.name);//new path
         
             this.pieceService.update(this._piece).subscribe(
-                    resp => {
-                       
+                    resp => {                     
                         if(resp){
-                            this.coreService.applyFilter(<CmdApplyFilterModel>{from : this._piece.path, piece : this._piece});
+                            this.coreService.applyFilter(<CmdApplyFilterModel>{from : oldPath, piece : this._piece});
                             this._notification.success( 'The piece has been update successfully');
                         }        
                         else
                             this._notification.error('The piece could not be updated');
-                        
-                        
-                        this.onPieceSave.emit(true);
-                        
+                                             
+                        this.onPieceSave.emit(true);                      
                     },
                     err => {
                         this._notification.error(err._body);
@@ -123,8 +122,5 @@ export class PieceEditComponent implements OnInit{
             filterArg : filterObjectSelected.filterArgsList[0]
         });
     }
-
-
 }
-
 

@@ -51,6 +51,7 @@ export class PieceService {
         let params = new URLSearchParams();
         params.set('id', piece.id.toString());
 		params.set('name', piece.name);
+        params.set('path', piece.path);
         params.set('tagList', JSON.stringify(piece.tagList));
         params.set('filterConfigList', JSON.stringify(piece.filterConfigList));
        
@@ -95,6 +96,18 @@ export class PieceService {
                 err => console.log("error")               
             );        
     }
+
+
+    /**
+     * Generate a new path with unique name
+     */
+    public generatePath(path : string, pieceName : string) : string{
+        let newFileName = (new Date().getTime() + Math.random()).toString().replace(".","");
+        //get old mlt file name
+        let mltFileName = (path.split("/").pop()).split(".").shift();
+        return path.replace(mltFileName, pieceName + newFileName);
+    }
+    
 
     
 }

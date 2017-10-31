@@ -82,15 +82,14 @@ export class MediaCreationComponent implements OnInit{
         };
 
         this._piece.tagList = this._mediaTag.getSelectedTags();
-        
+        let oldPath = this._piece.path;     
+        this._piece.path = this.pieceService.generatePath(oldPath, this._piece.name);//new path
         this._piece.filterConfigList.push(filterConfig);
 
         this.pieceService.insert(this._piece).subscribe(
             resp => {
-                    //to-do -> aca llamar al coreService para el comando APPLYFILTER
                     if(resp){
-                        //this._piece.filterConfigList[0].piec
-                        this.coreService.applyFilter(<CmdApplyFilterModel>{from : this._piece.path, piece : resp});
+                        this.coreService.applyFilter(<CmdApplyFilterModel>{from : oldPath, piece : resp});
                         this._notification.success( 'The media has been created successfully');
                     }      
                     else
@@ -98,16 +97,12 @@ export class MediaCreationComponent implements OnInit{
                     
                     this._mediaTag.clearSelectedTags();
                     this.onPieceSave.emit(true);
-                    
-                    
                 },
                 err => {
                     this._notification.error(err._body);
                     this.onPieceSave.emit(false);
                 }   
-        );
-       
-        
+        );     
     }
 }
 
