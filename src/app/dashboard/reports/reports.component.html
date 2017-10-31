@@ -52,7 +52,75 @@
         [headerHeight]="50"
         [footerHeight]="50"
         [rowHeight]="'auto'"
-        [limit]="8"
-        [rows]='rows'>
+        [limit]="6"
+        [rows]='rows'
+        [scrollbarH]='true'
+        >
+
+        <ngx-datatable-column name="Media" prop="pieceName" [width]="100">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        
+        <ngx-datatable-column name="Duration" prop="duration" [width]="100">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        
+        <ngx-datatable-column name="Resolution" prop="resolution" [width]="100">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Frame rate" prop="frameRate" [width]="100">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Start" prop="starttime" [width]="150">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="End" prop="endtime" [width]="150">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Filter" prop="filter" [width]="100">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Path" prop="piecePath" [width]="650">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Supp. Name" prop="supplierName" [width]="150">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Supp. Phone" prop="supplierPhone" [width]="150">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Supp Email" prop="supplierEmail" [width]="150">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+
       </ngx-datatable>
     </div>

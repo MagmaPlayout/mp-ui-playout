@@ -26,15 +26,14 @@ export class PieceListComponent implements AfterViewChecked {
     this.elementRef = element;
     this.playoutService.init();
 		this.playoutService.getPieceList().subscribe( resp  => {
-      /*
+      // Converts the duration to a printable format
       resp.forEach(element  => {
-        element.duration = moment.duration(element.duration, moment.ISO_8601);
+        var mDur = moment.duration(element.duration, moment.ISO_8601);
+        element.durationHuman = moment.utc(mDur.asMilliseconds()).format("HH:mm:ss");
       });
-      */
+
 			this.pieceLst = resp;  
-
     });
-
 	}
 
   
