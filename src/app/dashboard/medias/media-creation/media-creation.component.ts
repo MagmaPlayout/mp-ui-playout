@@ -22,7 +22,8 @@ export class MediaCreationComponent implements OnInit{
     @ViewChild(MediaTagComponent) 
     private _mediaTag : MediaTagComponent;
     private _filterSelected : number;
-    
+    private _filterList : Array<FilterModel> = [];
+
     @Output() onPieceSave = new EventEmitter<boolean>();
     
     @Input()
@@ -41,7 +42,7 @@ export class MediaCreationComponent implements OnInit{
         this.getFilters();
         
     }
-    filterList : Array<FilterModel> = [];
+   
 
     constructor(private _notification: NotificationService, 
                 private pieceService : PieceService,
@@ -57,7 +58,8 @@ export class MediaCreationComponent implements OnInit{
     private getFilters(){
         this.filterService.getAll().subscribe(resp => {
             if(resp.length > 0 ){
-                this.filterList = resp;
+                
+                this._filterList = resp;
                 this._filterSelected = resp[0].id;  
             }
         });
@@ -69,14 +71,18 @@ export class MediaCreationComponent implements OnInit{
     }
 
     private newPiece(){
+        var filterObjectSelected = <FilterModel>this._filterList.find( item => item.id == this._filterSelected);
+        var filterConfig = <FilterConfigModel>{
+            filterId : filterObjectSelected.id,
+            filterArgId : filterObjectSelected.filterArgsList[0].id,
+            value : filterObjectSelected.name,
+            filterIndex : 1,
+            filter: filterObjectSelected,
+            filterArg : filterObjectSelected.filterArgsList[0]
+        };
 
         this._piece.tagList = this._mediaTag.getSelectedTags();
-        var filterConfig = <FilterConfigModel>{
-            filterId : this._filterSelected,
-            filterArgId : 1,
-            value : "Filter Arg hardcodeado",
-            filterIndex : 1
-        };
+        
         this._piece.filterConfigList.push(filterConfig);
 
         this.pieceService.insert(this._piece).subscribe(

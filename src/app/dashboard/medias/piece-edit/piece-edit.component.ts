@@ -64,9 +64,9 @@ export class PieceEditComponent implements OnInit{
     private getFilters(){
      
         this.filterService.getAll().subscribe(resp => {
-            if(resp.length > 0 ){
+            if(resp.length > 0 ){              
                 this.filterList = resp;
-                this.filterList.unshift(<FilterModel>{id : -1, name : "Choose one"});
+                //this.filterList.unshift(<FilterModel>{id : -1, name : "Choose one"});
             }
         });
     }
@@ -113,15 +113,14 @@ export class PieceEditComponent implements OnInit{
     onChangeFilter(filterId){
         this._filterSelected = filterId;
         var filterObjectSelected = <FilterModel>this.filterList.find( item => item.id == filterId);
-
         this._piece.filterConfigList = [];
         this._piece.filterConfigList.push(<FilterConfigModel>{
-            filterId : this._filterSelected,
-            pieceId : this._piece.id,
-            filterArgId : 1,
-            value : "Filter Arg hardcodeado",
+            filterId : filterObjectSelected.id,
+            filterArgId : filterObjectSelected.filterArgsList[0].id,
+            value : filterObjectSelected.name,
             filterIndex : 1,
-            filter : filterObjectSelected
+            filter : filterObjectSelected,
+            filterArg : filterObjectSelected.filterArgsList[0]
         });
     }
 

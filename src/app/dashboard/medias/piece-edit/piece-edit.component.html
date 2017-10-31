@@ -24,8 +24,17 @@
             <div class="form-group row">
                 <label for="example-text-input" class="col-2 col-form-label">Filter</label>
                 <div class="col-10">
-                    <select class="form-control" #filterSelect (change)='onChangeFilter(filterSelect.value)'>
-                        <option  *ngFor="let item of filterList; let i = index;" [selected]="item.id == _filterSelected ? true : false" value="{{item.id}}">{{item.name}}</option>  
+                    <select  
+                        [disabled]="_isOriginalPiece" 
+                        class="form-control" 
+                        #filterSelect 
+                        (change)='onChangeFilter(filterSelect.value)'
+                    >
+                        <option  *ngIf="_isOriginalPiece" [selected]="true" value="-1">Choose one</option>           
+                        <ng-container *ngIf="!_isOriginalPiece" >
+                             <option    *ngFor="let item of filterList; let i = index;" [selected]="item.id == _filterSelected ? true : false" value="{{item.id}}">{{item.name}}</option>  
+                        </ng-container>
+                       
                     </select>
                 </div>
             </div>
