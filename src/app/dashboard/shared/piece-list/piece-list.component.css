@@ -68,3 +68,19 @@ div.scroll-list {
 .drag-handle {
     cursor: move;
 }
+
+
+[override] .bulkResults pagination-controls /deep/ .ng2-pagination li {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  font-size: 0.875rem;
+  margin-right: 0.0625rem;
+  border-radius: 0;
+  color: #ffffff;
+}
+
+.bulkResults pagination-controls a:hover,
+.bulkResults pagination-controls button:hover {
+  background: #ffa500;
+}
