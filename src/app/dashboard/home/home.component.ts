@@ -19,12 +19,8 @@ import { CmdModel } from '../../_core/_models/cmd.model';
 })
 export class HomeComponent {
 
-	
-	
 	currenPoItem : string;
 
-	sketchLst : Array<SketchModel> ;
-	
 	pieceLst : Array<PieceModel> = new Array<PieceModel>();
  
     playoutLst : Array<PlayoutModel> = new Array<PlayoutModel>(); 
@@ -42,12 +38,6 @@ export class HomeComponent {
             
         })
 
-		this.playoutService.getSketchList().subscribe( resp  => {	
-		
-			this.sketchLst = resp;         
-        })
-
-		
 		this.coreService.getPlResp().subscribe( resp => {
 			
 			this.playoutLst = resp;
@@ -56,15 +46,7 @@ export class HomeComponent {
 
 	}
 
-	/**
-	 * Draw a sketch content inside sketchPreview box
-	 */
-	onSketchDrop($event: any) {
-
-		let sketch : SketchModel;
-		sketch = $event.dragData;
-		this.sketchContent = sketch.htmlContent;	
-	}
+	
 	
 	/**
 	 * Add a piece/pl to playout list
@@ -73,6 +55,7 @@ export class HomeComponent {
 		
 		let pl = new PlayoutModel();
 		pl.piece = $event.dragData;
+        console.log(pl);
 		this.playoutLst.push(pl);
 		pl.currentPos = this.playoutLst.indexOf(pl);
 
@@ -107,16 +90,19 @@ export class HomeComponent {
 	}
 
 	/**
+     * TO-DO -> redefinir
 	 * Play piece/pl
 	 */
 	onPlayPlItem(po: PlayoutModel, index: number) {
-	
+        /*
 		po.currentPos = index;
 		
 		this.currenPoItem = po.piece.name;
 		this.coreService.goto(po);
+        */
 		
 	}
+
 
 	/**
 	 * Remove anything element of a list

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {PieceListComponent} from './piece-list.component';
+import {PieceItemModule} from './piece-item/piece-item.module';
 import {DndModule} from 'ng2-dnd';
 //import {PopupModule} from 'ng2-opd-popup';
 import { MediainfoComponent } from './mediainfo/mediainfo.component';
@@ -14,7 +15,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     imports: [
         CommonModule, 
         DndModule.forRoot(),
-        NgxPaginationModule
+        NgxPaginationModule,
+        PieceItemModule
 
         //PopupModule.forRoot(),
     ],

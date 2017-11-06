@@ -40,6 +40,7 @@ export class PieceListComponent implements AfterViewChecked {
 
 
     ngAfterViewChecked() { // se ejecuta por cada evento/cambio en el dom.
+        
         if (this.isJuiDraggable) {
             let piecesLiDraggables = jQuery(".mp-item-media.list-group-item.draggable.ui-draggable.ui-draggable-handle");
             let piecesLiElements = jQuery(".mp-item-media");
@@ -58,11 +59,17 @@ export class PieceListComponent implements AfterViewChecked {
             }
         }
 
-
     }
 
-    onClickMediaInfo(piece: PieceModel) {
+    onInfo(piece: PieceModel) {
         this.mediaInfoPopup.show(piece.media);
+    }
+    onAdd(piece: PieceModel) {
+        //this.mediaInfoPopup.show(piece.media);
+    }
+
+    onDrag(){
+        console.log(this.pieceLst)
     }
 
     onSearch(event) {

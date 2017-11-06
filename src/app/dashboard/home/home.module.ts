@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import {DndModule} from 'ng2-dnd';
 import {CoreModule} from '../../_core/core.module'
 import {PieceListModule} from '../shared/piece-list/piece-list.module';
+import {PieceItemModule} from '../shared/piece-list/piece-item/piece-item.module';
 import {EventModalModule} from '../scheduler/modal/event-modal.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 /**
@@ -14,7 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         CommonModule, 
         CoreModule, 
         EventModalModule,
-        PieceListModule, 
+        PieceListModule,
+        PieceItemModule, 
         DndModule.forRoot(),
         NgbModule.forRoot()
     ],

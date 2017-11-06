@@ -1,6 +1,6 @@
 <div class="card mp-list-box"    
-        dnd-sortable-container [sortableData]="pieceLst" [dropZones]="['playoutItem']">
-        <div class="card-header">Pieces</div>
+        dnd-sortable-container [sortableData]="pieceFilteredList" [dropZones]="['playoutItem']">
+        <div class="card-header">Medias</div>
         <div class="card-block">
             <div class="input-group stylish-input-group">
                 <input type="text" 
@@ -15,38 +15,24 @@
             </div>
            
                 <div class="events-list events-page">
+                    <div *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: 2, currentPage: p}; let i=index"
+                        class="draggable"
+                        dnd-draggable 
+                        dnd-sortable 
+                        [sortableIndex]="i" 
+                        [dragEnabled]="true"
+                        [dragData]="piece">
 
-                <section *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: 2, currentPage: p}" class="event mp-item-media list-group-item draggable"
-                    dnd-sortable [sortableIndex]="x" [dragEnabled]="true"
-                    [dragData]="piece">
-                                     
-                        <div class="date">
-                                    <strong>Thumb</strong>
-                                    <span class="month">Oct</span>
-                                    <span class="details"></span>
-                        </div>
-                         <div class="details">
-                                    <h1><a href="#">{{piece.name}}</a></h1>
-                                    <span><i class="icon-map-marker"></i>{{piece.durationHuman}} <i class="icon-time"></i>-</span>
-                                    
-                                    <ul class="rating">
-                                        <li class="fill"></li>
-                                        <li class="fill"></li>
-                                       
-                                        <li></li>
-                                    </ul>
-                                   
-                                    <div class="more-link"> 
-                                  
-                                        <a (click)="onClickMediaInfo(piece)"> <i class="fa fa-fw fa-info"></i></a>
-                                        <a> <i class="fa fa-fw fa-plus"></i></a>
-                                    </div>
+                        <mp-piece-item 
+                            [piece] = "piece"
+                            [infoBtn] = "true"
+                            [addBtn] = "true"
+                            (onAdd) = "onAdd($event)"
+                            (onInfo) = "onInfo($event)" >
+                        </mp-piece-item>
+                    </div>
+                    
 
-                        </div>
-                         
-
-                </section>
-              
                 <pagination-controls (pageChange)="p = $event" 
                                         maxSize="3"
                                         directionLinks="true"
@@ -59,3 +45,17 @@
         </div>
     </div>
     <!--app-mediainfo></app-mediainfo>-->
+    <!--
+        <mp-piece-item *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: 2, currentPage: p}"
+                        
+                        dnd-sortable 
+                        [sortableIndex]="x" 
+                        [dragEnabled]="true"
+                        [dragData]="piece"
+                        [piece] = "piece"
+                        [infoBtn] = "true"
+                        [addBtn] = "true"
+                        (onAdd) = "onAdd($event)"
+                        (onInfo) = "onInfo($event)" >
+                    </mp-piece-item>
+    -->

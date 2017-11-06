@@ -1,0 +1,30 @@
+
+<section  class="event mp-item-media list-group-item ">
+                        
+        <div class="date">
+                    <strong>Thumb</strong>
+                    <span class="month"></span>
+                    <span class="details"></span>
+        </div>
+            <div class="details">
+                    <h1><a href="#">{{_piece.name}}</a></h1>
+                    <span><i class="icon-map-marker"></i>{{_piece.durationHuman}} <i class="icon-time"></i>-</span>
+                    
+                    <ul class="rating">
+                        <li class="fill"></li>
+                        <li class="fill"></li>
+                        
+                        <li></li>
+                    </ul>
+                    
+                    <div class="more-link"> 
+                    
+                        <a *ngIf = "infoBtn" (click)="onInfoClick(_piece)"> <i class="fa fa-fw fa-info"></i></a>                                
+                        <a *ngIf = "addBtn" (click)="onAddClick(_piece)"> <i class="fa fa-fw fa-plus"></i></a>
+                        <a *ngIf = "removeBtn" (click)="onRemoveClick(_piece)"> <i class="fa fa-fw fa-trash"></i></a>
+                        <a *ngIf = "playBtn" (click)="onPlayClick(_piece)"> <i class="fa fa-fw fa-play"></i></a>
+                        
+                    </div>
+        </div>
+</section>
+              
