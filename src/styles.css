@@ -71,9 +71,14 @@
   bottom: 0;
   left: 0;
   width: 60px;
-  text-align: center;
+  height: 100%;
+  /*text-align: center;*/
   background-color: #e74c3c;
   color: white;
+}
+.events-list .event .date .mp-thumb{
+    
+    height: 135px;
 }
 .events-list .event .date strong {
   font-size: 24px;

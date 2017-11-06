@@ -33,7 +33,6 @@ export class HomeComponent {
 		this.playoutService.init();
 		
 		this.playoutService.getPieceList().subscribe( resp  => {
-			console.log(resp);
 			this.pieceLst = resp;
             
         })
@@ -55,7 +54,6 @@ export class HomeComponent {
 		
 		let pl = new PlayoutModel();
 		pl.piece = $event.dragData;
-        console.log(pl);
 		this.playoutLst.push(pl);
 		pl.currentPos = this.playoutLst.indexOf(pl);
 
@@ -94,12 +92,9 @@ export class HomeComponent {
 	 * Play piece/pl
 	 */
 	onPlayPlItem(po: PlayoutModel, index: number) {
-        /*
-		po.currentPos = index;
-		
+       
 		this.currenPoItem = po.piece.name;
-		this.coreService.goto(po);
-        */
+		this.switchLiveMode(index);
 		
 	}
 
@@ -121,13 +116,34 @@ export class HomeComponent {
 	 * On click switch mode
 	 */
 	onClickBtnSwitchmode(){
-		let cmd : CmdModel = new CmdModel();
-		cmd.mode = 1; // 1 = live mode
-		cmd.pieceList = this.playoutLst.map(item => {
-			return item.piece;
-		});
-		
-		this.coreService.switchMode(cmd);
+		this.switchLiveMode();
 	}
+
+    /**
+     * Switch to Live mode
+     * @param {number} index => the pieces less than the index will be eliminated
+     */
+    switchLiveMode(index: number = 0): void {
+        let cmd: CmdModel = new CmdModel();
+        cmd.mode = 1; // 1 => live mode
+
+        //get the pieces greater than the index
+        var filteredList = this.playoutLst.filter( (item,i) => {
+            if(i >=index)
+                return true;
+            else         
+                return false;
+ 
+        });
+
+        //get piece list
+        cmd.pieceList = filteredList.map(item => item.piece);    
+        this.coreService.switchMode(cmd);
+
+        //remove the pieces less than the index
+        this.playoutLst = filteredList;
+
+        console.log(cmd)
+    }
 	
  }

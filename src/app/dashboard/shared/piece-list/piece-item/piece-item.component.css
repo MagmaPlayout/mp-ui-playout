@@ -6,10 +6,10 @@
 }
 
 .mp-item-media{
-    border-left: medium solid #0040FF;
+   
 }
 .mp-item-pl{
-    border-left: medium solid #81DAF5;
+   
 }
 
 .mp-item-playout,.mp-item-media,.mp-item-sketch,.mp-item-playout{
@@ -84,3 +84,4 @@ div.scroll-list {
 .bulkResults pagination-controls button:hover {
   background: #ffa500;
 }
+
