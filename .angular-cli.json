@@ -19,8 +19,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-	"../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "styles.css"
+	      "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "styles.css",
+        "../node_modules/fullcalendar/dist/fullcalendar.min.css",
+        "../node_modules/@swimlane/ngx-datatable/release/index.css",
+        "../node_modules/@swimlane/ngx-datatable/release/themes/material.css",
+        "../node_modules/@swimlane/ngx-datatable/release/assets/icons.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

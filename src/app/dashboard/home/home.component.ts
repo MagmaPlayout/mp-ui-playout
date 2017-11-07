@@ -1,17 +1,16 @@
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
-import { MediainfoComponent } from './mediainfo/mediainfo.component';
-import { MediaService } from '../../_core/_services/media.service';
+import { PlayoutService } from '../../_core/_services/playout.service';
 import { CoreService } from '../../_core/_services/core.service';
-import { MediaModel } from '../../_core/_models/media.model';
+import { PieceModel } from '../../_core/_models/piece.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 import { PlayoutModel } from '../../_core/_models/playout.model';
+import { CmdModel } from '../../_core/_models/cmd.model';
 
 
 /**
-*	This class represents the lazy loaded HomeComponent.
-*/
-
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
 @Component({
 	moduleId: module.id,
 	selector: 'livemode',
@@ -20,36 +19,24 @@ import { PlayoutModel } from '../../_core/_models/playout.model';
 })
 export class HomeComponent {
 
-	@ViewChild(MediainfoComponent)
-  	private mediaInfoPopup: MediainfoComponent;
-	
 	currenPoItem : string;
 
-	sketchLst : Array<SketchModel> ;
-	
-	mediaLst : Array<MediaModel> = new Array<MediaModel>();
+	pieceLst : Array<PieceModel> = new Array<PieceModel>();
  
     playoutLst : Array<PlayoutModel> = new Array<PlayoutModel>(); 
 
 	sketchContent : string;
 
 	
-	constructor(private playoutService: MediaService, private coreService : CoreService){
+	constructor(private playoutService: PlayoutService, private coreService : CoreService){
 		
 		this.playoutService.init();
 		
-		this.playoutService.getMediaList().subscribe( resp  => {
-			
-			this.mediaLst = resp;
+		this.playoutService.getPieceList().subscribe( resp  => {
+			this.pieceLst = resp;
             
         })
 
-		this.playoutService.getSketchList().subscribe( resp  => {	
-		
-			this.sketchLst = resp;         
-        })
-
-		
 		this.coreService.getPlResp().subscribe( resp => {
 			
 			this.playoutLst = resp;
@@ -58,29 +45,18 @@ export class HomeComponent {
 
 	}
 
-	/**
-	 * Draw a sketch content inside sketchPreview box
-	 */
-	onSketchDrop($event: any) {
-
-		let sketch : SketchModel;
-		sketch = $event.dragData;
-		this.sketchContent = sketch.htmlContent;	
-	}
+	
 	
 	/**
-	 * Add a media/pl to playout list
+	 * Add a piece/pl to playout list
 	 */
 	onPlayoutDrop($event: any) {
 		
 		let pl = new PlayoutModel();
-		pl.media = $event.dragData;
+		pl.piece = $event.dragData;
 		this.playoutLst.push(pl);
-		pl.currentPos = this.playoutLst.indexOf(pl); 
-		this.coreService.apndMedia(pl);
-		
-		
-			
+		pl.currentPos = this.playoutLst.indexOf(pl);
+
 	}
 
 	/**
@@ -89,7 +65,6 @@ export class HomeComponent {
 	onDelPlItem(po : PlayoutModel, index : number ) {
 		
 		po.currentPos = index;
-		this.coreService.remove(po);
 		this.removeItem(po, this.playoutLst);
 
 	}
@@ -107,29 +82,22 @@ export class HomeComponent {
 	onDragEndPo(po: PlayoutModel) {
 		
 		po.currentPos = po.newPos = this.playoutLst.indexOf(po);	// newPos no tiene sentido
-		this.coreService.move(po);
 
 		console.log("onDragEnd-> currentPos=" + po.currentPos);
 	
 	}
 
 	/**
-	 * Play media/pl
+     * TO-DO -> redefinir
+	 * Play piece/pl
 	 */
 	onPlayPlItem(po: PlayoutModel, index: number) {
-	
-		po.currentPos = index;
-		
-		this.currenPoItem = po.media.name;
-		this.coreService.goto(po);
+       
+		this.currenPoItem = po.piece.name;
+		this.switchLiveMode(index);
 		
 	}
 
-
-	onClickMediaInfo(media: MediaModel){
-		console.log(media);
-		this.mediaInfoPopup.show(media);
-	}
 
 	/**
 	 * Remove anything element of a list
@@ -143,5 +111,39 @@ export class HomeComponent {
 		list.splice(index, 1);
 
 	}
+
+	/**
+	 * On click switch mode
+	 */
+	onClickBtnSwitchmode(){
+		this.switchLiveMode();
+	}
+
+    /**
+     * Switch to Live mode
+     * @param {number} index => the pieces less than the index will be eliminated
+     */
+    switchLiveMode(index: number = 0): void {
+        let cmd: CmdModel = new CmdModel();
+        cmd.mode = 1; // 1 => live mode
+
+        //get the pieces greater than the index
+        var filteredList = this.playoutLst.filter( (item,i) => {
+            if(i >=index)
+                return true;
+            else         
+                return false;
+ 
+        });
+
+        //get piece list
+        cmd.pieceList = filteredList.map(item => item.piece);    
+        this.coreService.switchMode(cmd);
+
+        //remove the pieces less than the index
+        this.playoutLst = filteredList;
+
+        console.log(cmd)
+    }
 	
  }

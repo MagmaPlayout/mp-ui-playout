@@ -1,29 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { BsDropdownModule } from 'ng2-bootstrap';
-import { ModalModule } from 'ng2-bootstrap';
-
 import { HomeModule } from './home/home.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BlankPageModule } from './blank-page/blankPage.module';
-
-
 import { DashboardComponent } from './dashboard.component';
-
+import { SchedulerModule } from './scheduler/scheduler.module';
 import {TopNavComponent} from './shared/index';
 import {SidebarComponent} from './shared/index';
+import { ReportsModule} from './reports/reports.module';
+import { MediasModule} from './medias/medias.module';
 
 
 @NgModule({
     imports: [
         CommonModule,
     	RouterModule,
-    	BsDropdownModule.forRoot(),
-        ModalModule,
-    	HomeModule,
-    	BlankPageModule
+    	HomeModule, 
+        NgbModule.forRoot(),       
+    	BlankPageModule,
+        SchedulerModule,
+        ReportsModule,
+        MediasModule
+        
+        
     ],
-    declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
+    declarations: [
+        DashboardComponent, 
+        TopNavComponent, 
+        SidebarComponent  
+        ],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
 })
 

@@ -1,0 +1,61 @@
+<div class="card mp-list-box"    
+        dnd-sortable-container [sortableData]="pieceFilteredList" [dropZones]="['playoutItem']">
+        <div class="card-header">Medias</div>
+        <div class="card-block">
+            <div class="input-group stylish-input-group">
+                <input type="text" 
+                        class="form-control" 
+                        (keyup)=onSearch($event)
+                        placeholder="Search" >
+                <span class="input-group-addon">
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>  
+                </span>
+            </div>
+           
+                <div class="events-list events-page">
+                    <div *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: 2, currentPage: p}; let i=index"
+                        class="draggable"
+                        dnd-draggable 
+                        dnd-sortable 
+                        [sortableIndex]="i" 
+                        [dragEnabled]="true"
+                        [dragData]="piece">
+
+                        <mp-piece-item 
+                            [piece] = "piece"
+                            [infoBtn] = "true"
+                            [addBtn] = "true"
+                            (onAdd) = "onAdd($event)"
+                            (onInfo) = "onInfo($event)" >
+                        </mp-piece-item>
+                    </div>
+                    
+
+                <pagination-controls (pageChange)="p = $event" 
+                                        maxSize="3"
+                                        directionLinks="true"
+                                        autoHide="true"
+                                        previousLabel=""
+                                        nextLabel=""
+                                    >
+                </pagination-controls>
+
+        </div>
+    </div>
+    <!--app-mediainfo></app-mediainfo>-->
+    <!--
+        <mp-piece-item *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: 2, currentPage: p}"
+                        
+                        dnd-sortable 
+                        [sortableIndex]="x" 
+                        [dragEnabled]="true"
+                        [dragData]="piece"
+                        [piece] = "piece"
+                        [infoBtn] = "true"
+                        [addBtn] = "true"
+                        (onAdd) = "onAdd($event)"
+                        (onInfo) = "onInfo($event)" >
+                    </mp-piece-item>
+    -->

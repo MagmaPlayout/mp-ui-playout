@@ -1,0 +1,23 @@
+<div class="form-group row">          
+    <label  class="col-2 col-form-label" for="tag"><i class="fa fa-fw fa-tags"></i> Tags</label>
+    <div class="col-10">
+        <input id="tag" type="text" class="form-control filter-input" 
+            [(ngModel)]=query 
+            (keyup)=onFilter()
+            (keydown.enter)= "onNew($event)"
+            >
+        <div class="tagList" *ngIf="tagFilteredList.length > 0">
+            <ul class="list-group" *ngFor="let item of tagFilteredList; let i=index" >
+                <li *ngIf="i<3" class="dropdown-item" (click)="onClickSelect(item)">
+                    <a>{{item.tag}}</a>
+                </li>
+            </ul>
+        </div>
+        <div *ngFor="let item of tagSelectedList">
+            <div class="selected" >
+                <span>{{item.tag}}</span>
+                <a (click)="onClickRemove(item)"><i class="fa fa-fw fa-times"></i></a>
+            </div>
+        </div> 
+    </div>
+</div>

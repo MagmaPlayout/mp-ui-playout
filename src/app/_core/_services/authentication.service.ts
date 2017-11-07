@@ -4,6 +4,9 @@ import { Http, Headers, Response, RequestOptions, RequestMethod, URLSearchParams
 import 'rxjs/add/operator/map'
 var config = require("../../app.config");
 
+/**
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
 @Injectable()
 export class AuthenticationService {
     private url = config.APIs.admin;  

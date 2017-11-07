@@ -1,6 +1,6 @@
-import {MediaModel} from './media.model'
+import {PieceModel} from './piece.model';
 export class PlayoutModel{
-    media : MediaModel;
+    piece : PieceModel; 
     currentPos : number;
     oldPos : number;
     newPos : number; // TO-DO elimnar newPos desde el mp-core

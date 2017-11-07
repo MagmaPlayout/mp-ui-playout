@@ -1,0 +1,113 @@
+import { Injectable } from '@angular/core';
+import {  Response} from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
+import { PieceModel } from '../../_core/_models/piece.model';
+import { HttpClient} from '../_helpers/httpClient';
+import {URLSearchParams, Headers, RequestOptions} from '@angular/http';
+var config = require("../../app.config");
+
+/**
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
+@Injectable()
+export class PieceService {
+
+    constructor(private http: HttpClient) { 
+
+        this.http = http;    
+        
+    }
+
+    /**
+     * find by piece id
+     * @param {number} id
+     */
+    public getById(id : number) {
+       
+        return this.http.get(config.APIs.playout_rest + 'piece/' + id, null,null)
+            .map(response => response.json(),
+                err => console.log("error")               
+            );         
+    }
+
+    /**
+     * get all
+     */
+    public getAll():Observable<Array<PieceModel>> {
+      
+        return this.http.get(config.APIs.playout_rest + 'pieces', null,null)
+            .map(response => response.json(),
+                err => console.log("error")               
+            );        
+    }
+
+
+    /**
+     * update an piece
+     * @param {PieceModel} piece
+     */
+    public update(piece : PieceModel) {
+        let params = new URLSearchParams();
+        params.set('id', piece.id.toString());
+		params.set('name', piece.name);
+        params.set('path', piece.path);
+        params.set('tagList', JSON.stringify(piece.tagList));
+        params.set('filterConfigList', JSON.stringify(piece.filterConfigList));
+       
+        return  this.http.put(config.APIs.playout_rest + 'pieces', params, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );       
+    }
+
+    /**
+     * create a new piece
+     * @param {PieceModel} piece
+     */
+    public insert(piece : PieceModel) {
+        let params = new URLSearchParams();
+
+        params.set('name', piece.name);
+        params.set('duration', piece.duration);
+        params.set('frameCount', piece.frameCount.toString());
+        params.set('frameRate', piece.frameRate.toString());
+        params.set('path', piece.path);
+        params.set('resolution', piece.resolution);
+        params.set('mediaId', piece.media.id.toString());     
+        params.set('tagList', JSON.stringify(piece.tagList));
+        params.set('filterConfigList', JSON.stringify(piece.filterConfigList));
+       
+        return  this.http.post(config.APIs.playout_rest + 'pieces/', params, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );
+
+          
+    }
+
+    /**
+     * delete a piece
+     * @param {PieceModel} piece
+     */
+    public delete(piece : PieceModel) {      
+        return  this.http.delete(config.APIs.playout_rest + 'pieces/' + piece.id, null, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );        
+    }
+
+
+    /**
+     * Generate a new path with unique name
+     */
+    public generatePath(path : string, pieceName : string) : string{
+        let newFileName = (new Date().getTime() + Math.random()).toString().replace(".","");
+        //get old mlt file name
+        let mltFileName = (path.split("/").pop()).split(".").shift();
+        return path.replace(mltFileName, pieceName + newFileName);
+    }
+    
+
+    
+}

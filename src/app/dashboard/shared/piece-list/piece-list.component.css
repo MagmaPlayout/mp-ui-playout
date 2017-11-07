@@ -1,0 +1,88 @@
+.mp-list-box {
+    display: inline-table;
+    height: 100%;
+    margin: 10px;
+    bottom:0px;
+}
+
+.mp-item-media{
+    border-left: medium solid #0040FF;
+}
+.mp-item-pl{
+    border-left: medium solid #81DAF5;
+}
+
+.mp-item-playout,.mp-item-media,.mp-item-sketch,.mp-item-playout{
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    word-break: break-all
+}
+
+.thumbnail{  
+    width: 72px;
+    height: 72px;
+}
+
+
+.input-group.stylish-input-group{
+    margin-bottom: 20px;
+}
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.thumbnail{
+    margin-bottom: 0px;
+}
+
+
+li.list-group-item{
+    padding: 0px;
+}
+div.scroll-list {
+      overflow: auto;
+      max-height: 70vh;
+    }
+    
+.drag-over-border {
+    border: #ff525b dashed 2px;
+}
+
+.drag-target-border {
+    border: #00bfff dashed 2px;
+}
+
+.drag-target-border-green {
+    border: #3c763d dashed 2px;
+}
+
+.drag-handle {
+    cursor: move;
+}
+
+
+[override] .bulkResults pagination-controls /deep/ .ng2-pagination li {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  font-size: 0.875rem;
+  margin-right: 0.0625rem;
+  border-radius: 0;
+  color: #ffffff;
+}
+
+.bulkResults pagination-controls a:hover,
+.bulkResults pagination-controls button:hover {
+  background: #ffa500;
+}
+
+

@@ -1,0 +1,104 @@
+ <form 
+    autocomplete="off"
+    (ngSubmit)="pieceForm.form.valid && onSubmit()" 
+    #pieceForm="ngForm" 
+    novalidate>
+<div class="row">
+    <div class="col-6">
+       
+            <div [ngClass]="pieceForm.submitted && !name.valid ? 'form-group row has-danger': 'form-group row'">
+                <label for="mediaName" class ="col-2 col-form-label" >Name</label>
+
+                <div class="col-10">
+                    <input [ngClass]="pieceForm.submitted && !name.valid ? 'form-control form-control-danger': 'form-control'" type="text" id="mediaName"
+                    required
+                    [ngModel]="_piece.name" 
+                    (ngModelChange)="_piece.name = $event"
+                    #name= "ngModel" 
+                    name="name" 
+                    >
+                    <div *ngIf="pieceForm.submitted && !name.valid" class="form-control-feedback">name is required</div>
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <label for="example-text-input" class="col-2 col-form-label">Filter</label>
+                <div class="col-10">
+                    <select  
+                        [disabled]="_isOriginalPiece" 
+                        class="form-control" 
+                        #filterSelect 
+                        (change)='onChangeFilter(filterSelect.value)'
+                    >
+                        <option  *ngIf="_isOriginalPiece" [selected]="true" value="-1">Choose one</option>           
+                        <ng-container *ngIf="!_isOriginalPiece" >
+                             <option    *ngFor="let item of filterList; let i = index;" [selected]="item.id == _filterSelected ? true : false" value="{{item.id}}">{{item.name}}</option>  
+                        </ng-container>
+                       
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="example-search-input" class="col-2 col-form-label">Duration</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" id="example-search-input" 
+                    disabled
+                    [ngModel]="_piece.duration" 
+                    (ngModelChange)="_piece.duration = $event"
+                    #duration= "ngModel" 
+                    name ="duration" 
+                    >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-2 col-form-label">Resolution</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" 
+                    disabled
+                    [ngModel]="_piece.resolution" 
+                    (ngModelChange)="_piece.resolution = $event"
+                    #resolution= "ngModel" 
+                    name="resolution" 
+                    >
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Frame count</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" 
+                    disabled
+                    [ngModel]="_piece.frameCount" 
+                    (ngModelChange)="_piece.frameCount = $event"
+                    #frameCount= "ngModel" 
+                    name="frameCount" 
+                    >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-2 col-form-label">Frame rate</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" 
+                    disabled
+                    [ngModel]="_piece.frameRate" 
+                    (ngModelChange)="_piece.frameRate = $event"
+                    #frameRate= "ngModel" 
+                    name= "frameRate" 
+                    >
+                </div>
+            </div>
+       
+    </div>
+    <div class="col-6">
+        <app-media-tag [tagImportedList] = "_piece.tagList"></app-media-tag>
+        <div class="form-group row">
+            <div class="col-4">
+                <button type="submit"  class="btn btn-success" ><i class="fa fa-fw fa-floppy-o"></i> Save</button>   
+            </div>
+            
+        </div>
+    </div>
+  </div>
+ </form>
+

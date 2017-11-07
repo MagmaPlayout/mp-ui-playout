@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="card-block">
+
+    <div class="row">
+       <div class="col-sm-9"></div>
+        <div class="col-sm-3">
+            <button type="submit" 
+                (click) = "onBtnRemoveClick()" 
+                [disabled] = "enabledOptions"  
+                class="btn btn-danger"
+                data-placement="top" 
+                title="Delete">
+                    <i class="fa fa-fw fa-trash"></i>
+            </button>
+            <button  #btnNew  class="btn btn-success" 
+                    [disabled] = "enabledOptions" 
+                    data-toggle="collapse" 
+                    data-target="#collapsePieceNew" 
+                    aria-expanded="false" 
+                    aria-controls="collapseExample"
+                    data-placement="top" 
+                    title="New">
+                        <i class="fa fa-fw fa-plus"></i>
+                </button> 
+            <button  #btnEdit  class="btn btn-success" 
+                [disabled] = "enabledOptions" 
+                data-toggle="collapse" 
+                data-target="#collapsePieceEdit" 
+                aria-expanded="false" 
+                aria-controls="collapseExample" 
+                data-placement="top" 
+                title="Edit">
+                    <i class="fa fa-fw fa-pencil-square-o "></i>
+            </button>                                               
+        </div>
+    </div>
+
+       
+       
+  </div>
+</div>
+<div>
+<div class="collapse" id="collapsePieceNew">
+  <div class="card card-block">
+    <app-media-creation [piece] = "selected[0]" (onPieceSave) = "onPieceNew()" ></app-media-creation>
+  </div>
+</div>
+<div class="collapse" id="collapsePieceEdit">
+  <div class="card card-block">
+    <app-piece-edit [piece] = "selected[0]"  (onPieceSave) = "onPieceEdit()" ></app-piece-edit>
+  </div>
+</div>
+
+<div id="media-table">  
+      <input
+        type='text'
+        style='padding:8px;margin:15px auto;width:30%;'
+        placeholder='Type to filter the media column...'
+        (keyup)='updateFilter($event)'
+      />
+      <ngx-datatable
+        #table
+        class='material'
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="8"
+        [selected]="selected"
+        [selectionType]="'multi'"
+        (select)='onSelect($event)'
+        [rows]='rows'>
+      </ngx-datatable>
+    </div>

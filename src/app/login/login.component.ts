@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../_core/_services/authentication.service';
-import { AlertService } from '../_core/_services/alert.service';
+import { NotificationService } from '../_core/_services/notification.service';
+import { NotiOptionModel} from "../_core/_models/noti.option.model";
 /**
 *	This class represents the lazy loaded LoginComponent.
 */
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
+        private notificationService: NotificationService
 		) { }
 
     ngOnInit() {
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
+        this.notificationService.remove();
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
                 data => {
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);					
+                    this.notificationService.error(error, null, <NotiOptionModel>{timeOut : 0, maxStack : 1});					
                     this.loading = false;
                 });
     }

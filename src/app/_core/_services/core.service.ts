@@ -2,12 +2,14 @@ import {Injectable} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
-import { MediaModel } from '../../_core/_models/media.model';
 import { PlayoutModel } from '../../_core/_models/playout.model';
-import { SketchModel } from '../../_core/_models/sketch.model';
+import { CmdModel } from '../../_core/_models/cmd.model';//to-do -> dejar solo este modelo (PlayoutModel no va mas)
+import { CmdApplyFilterModel } from '../../_core/_models/cmd.applyfilter.model';
 var config = require("../../app.config");
 
-
+/**
+ * @author Luis Muñoz <luismunoz.dh@gmail.com>
+ */
 @Injectable()
 export class CoreService {
     private url = config.APIs.core;  
@@ -22,27 +24,28 @@ export class CoreService {
       
     }
 
+
     /**
-    * Send a PLAYNOW command to command-manager of the core-api
+    * Send a APND command to command-manager of the core-api
     */
-    playMedia(media:MediaModel) {
+    apndPiece(poItem:PlayoutModel) {
        
         this.socket = io(this.url);
-        this.socket.emit('core_playMedia', media); 
+        this.socket.emit('core_apnd', poItem); 
 
         return () => {
             this.socket.disconnect();
         };
 
-    } 
+    }
 
-    /**
-    * Send a PLAYNOW command to command-manager of the core-api
+     /**
+    * Send a CALCHANGE command to command-manager of the core-api
     */
-    apndMedia(poItem:PlayoutModel) {
+    calChange() {
        
         this.socket = io(this.url);
-        this.socket.emit('core_apnd', poItem); 
+        this.socket.emit('core_calchange'); 
 
         return () => {
             this.socket.disconnect();
@@ -110,7 +113,7 @@ export class CoreService {
     /**
     * Wait for media list from core-api
     */
-    getPlResp() : Observable<Array<any>>{
+    getPlResp() : Observable<any>{
 
         this.getPl(); // is ok? ...
 
@@ -139,6 +142,29 @@ export class CoreService {
         return () => {
             this.socket.disconnect();
         };
-    }  
- 
+    }
+
+    /**
+     * Send a SWITCHMODE command to command-manager of the core-api
+     */
+    switchMode(cmd : CmdModel) {
+        
+        this.socket = io(this.url);
+        this.socket.emit('core_switchmode', cmd); 
+        return () => {
+            this.socket.disconnect();
+        };
+    } 
+
+    /**
+     * Send a APPLYFILTER command to command-manager of the core-api
+     */
+    applyFilter(cmd : CmdApplyFilterModel) {
+        
+        this.socket = io(this.url);
+        this.socket.emit('core_applyFilters', cmd); 
+        return () => {
+            this.socket.disconnect();
+        };
+    }    
 }
