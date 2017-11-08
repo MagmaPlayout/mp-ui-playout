@@ -33,6 +33,7 @@
             <div *ngIf="!endtime.valid" class="help-block" style="color: red;">end is required</div>
         </div>
         <button type="submit"  class="btn btn-primary">Search</button>
+        <button class="btn btn-primary" (click)="exportCsv()" >Export</button>
   </form>
   </div>
 </div>

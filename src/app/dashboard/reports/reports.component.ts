@@ -70,5 +70,51 @@ export class ReportsComponent {
         });    
     }
  
+    exportCsv() {
+        let filename = "mp-report"+this.model.starttime+"_"+this.model.endtime+".csv";
+        var sep = ", "; // Change csv separator here
+        var newLine = "\n";
+        var log = this.rows;
+        var csvLines = new Array();
 
+        // Creates csv header
+        var header = "Media"+sep+"Duration"+sep+"Resolution"+sep+"Frame rate"+sep+
+            "Start"+sep+"End"+sep+"Filter"+sep+"Path"+sep+"Supp Name"+sep+
+            "Supp. Phone"+sep+"Supp Email"+newLine;
+        csvLines.push(header);
+
+        // Create each csv line parsing row data
+        for (let line of log){
+            let filter = (line.filter!=null)?line.filter:"";
+            let supPhone = (line.supplierPhone!=null)?line.supplierPhone:"";
+            let supEmail = (line.supplierEmail!=null)?line.supplierEmail:"";
+
+            csvLines.push(line.pieceName+sep+
+                line.duration+sep+
+                line.resolution+sep+
+                line.frameRate+sep+
+                line.starttime+sep+
+                line.endtime+sep+
+                filter+sep+
+                line.piecePath+sep+
+                line.supplierName+sep+
+                supPhone+sep+
+                supEmail+sep+
+                newLine);
+        }
+
+        // Generate the file and make the client download it
+        let blob = new Blob(csvLines, {type: "csv"});
+        if(window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, filename);
+        }
+        else{
+            let elem = window.document.createElement('a');
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = filename;
+            document.body.appendChild(elem);
+            elem.click();
+            document.body.removeChild(elem);
+        }
+    }
 }
