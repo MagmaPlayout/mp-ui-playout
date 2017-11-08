@@ -56,14 +56,18 @@
 /**************************************************************************************************/
 
 /* BEGIN events */
-.events-list .event {
-  display: block;
-  position: relative;
-  min-height: 90px;
-  margin-bottom: 1px;
+.event {
+    display: block;
+    position: relative;
+    min-height: 90px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e74c3c;
+    box-shadow: 3px 3px 3px #B7B6B6;
+    border-radius: 3px;
 }
 .events-list .event:last-child {
-  margin: 0;
+  margin-bottom: 5px;
 }
 .events-list .event .date {
   position: absolute;
@@ -71,14 +75,12 @@
   bottom: 0;
   left: 0;
   width: 60px;
-  height: 100%;
   /*text-align: center;*/
   background-color: #e74c3c;
   color: white;
 }
 .events-list .event .date .mp-thumb{
-    
-    height: 135px;
+  
 }
 .events-list .event .date strong {
   font-size: 24px;

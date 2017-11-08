@@ -1,9 +1,9 @@
 
-<section  class="event mp-item-media list-group-item ">
+<section  class="event mp-item-media">
                         
-        <div class="date">
+        <div class="date" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
             
-            <!--<img class="mp-thumb" class="img-thumbnail" alt="Cinque Terre" src="../../../assets/img/media-thumbnails/thumb1.jpg" > -->
+            <img class="mp-thumb"  width="100%" height="100%" src="{{currentThumb}}" >
             <span class="month"></span>
             <span class="details"></span>
                    
