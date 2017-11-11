@@ -3,16 +3,16 @@
 </button>
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <ul class="list-group">
-        <a routerLink="/dashboard/home" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf ="viewLivemode" routerLink="/dashboard/livemode" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-television"></i> Live mode
         </a>
-        <a [routerLink]="['scheduler']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf ="viewScheduler" [routerLink]="['scheduler']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-calendar"></i> Scheduler
         </a>
-         <a [routerLink]="['reports']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+         <a *ngIf ="viewReports" [routerLink]="['reports']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-bar-chart "></i> Reports
         </a>  
-         <a [routerLink]="['medias']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+         <a *ngIf ="viewMedias" [routerLink]="['medias']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-film "></i> Medias
         </a>          
         

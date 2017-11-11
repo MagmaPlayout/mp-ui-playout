@@ -37,7 +37,7 @@ export class PieceItemComponent {
     
     @Input()
     set piece(piece: PieceModel) {
-        console.log(piece);
+    
         if(piece){
             this._piece = piece;
             var mDur = moment.duration(piece.duration, moment.ISO_8601);

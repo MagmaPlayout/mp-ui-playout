@@ -13,6 +13,7 @@ import { ReportService } from './_services/report.service';
 import { PieceService } from './_services/piece.service';
 import { TagService } from './_services/tag.service';
 import { FilterService } from './_services/filter.service';
+import { PermissionService } from './_services/permission.service'
 import { HttpClient} from './_helpers/httpClient';
 import { AuthGuard } from './_guards/index';
 
@@ -36,7 +37,8 @@ import { AuthGuard } from './_guards/index';
     ReportService,
     PieceService,
     TagService,
-    FilterService
+    FilterService,
+    PermissionService
   ],
 })
 export class CoreModule { }
