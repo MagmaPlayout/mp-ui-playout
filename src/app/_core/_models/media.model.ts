@@ -1,3 +1,4 @@
+import {ThumbnailModel} from './thumbnail.model'
 export interface MediaModel{
     id : number;
     name: string;
@@ -6,5 +7,6 @@ export interface MediaModel{
     pathText : string;
     frameCount : number;
     description : string;
-    resolution : string;   
+    resolution : string;  
+    thumbnails : Array<ThumbnailModel>
 }

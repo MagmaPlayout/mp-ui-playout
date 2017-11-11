@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PermissionService } from '../../../_core/_services/permission.service';
 
 @Component({
 	moduleId: module.id,
@@ -6,9 +7,31 @@ import { Component } from '@angular/core';
 	templateUrl: 'sidebar.html'
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
 	isActive = false;
 	showMenu: string = '';
+    private viewLivemode : boolean = false;
+    private viewScheduler : boolean = false;
+    private viewReports : boolean = false;
+    private viewMedias : boolean = false;
+    constructor(private permissionService : PermissionService){}
+    
+    ngOnInit() {
+        this.permissionService.getMyActions().subscribe(lstActions => {
+            lstActions.forEach(action => {
+                if(action.id == 1)
+                    this.viewScheduler = true;
+                if(action.id == 2)
+                    this.viewLivemode = true;
+               
+                if(action.id == 3)
+                    this.viewReports = true;
+                if(action.id == 4)
+                    this.viewMedias = true;
+            });
+        });
+    }
+
 	eventCalled() {
 		this.isActive = !this.isActive;
 	}
@@ -19,4 +42,5 @@ export class SidebarComponent {
 			this.showMenu = element;
 		}
 	}
+    
 }

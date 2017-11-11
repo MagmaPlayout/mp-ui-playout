@@ -13,11 +13,11 @@ export const DashboardRoutes: Route[] = [
     	component: DashboardComponent,
 		canActivate: [AuthGuard],
     	children: [
-	    	...HomeRoutes,	        
-	    	...BlankPageRoutes,
+	    	...HomeRoutes,	           	
 			...SchedulerRoutes,
 			...ReportsRoutes,
-            ...MediasRoutes
+            ...MediasRoutes,
+            ...BlankPageRoutes,
     	]
   	}
 ];
