@@ -10,7 +10,7 @@ import { NameListService } from './name-list/index';
 @NgModule({
     imports: [
         CommonModule, 
-        RouterModule
+        RouterModule,
     ],
     declarations: [],
     exports: [CommonModule, FormsModule, RouterModule]

@@ -14,7 +14,11 @@
         </a>  
          <a *ngIf ="viewMedias" [routerLink]="['medias']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-film "></i> Medias
-        </a>          
+        </a>
+         <a *ngIf ="viewUsersManager" [routerLink]="['usersmanager']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-film "></i> Admin
+        </a>
+                  
         
     </ul>
 </nav>

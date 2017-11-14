@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
         return Observable.create((observer: Subject<boolean>) => {
-
+            console.log(state.url);
             this.permissionService.checkAllowedRoute(state.url).subscribe(resp => {
 
                 if (resp) {

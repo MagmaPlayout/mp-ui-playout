@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit{
     private viewScheduler : boolean = false;
     private viewReports : boolean = false;
     private viewMedias : boolean = false;
+    private viewUsersManager : boolean = false;
     constructor(private permissionService : PermissionService){}
     
     ngOnInit() {
@@ -28,6 +29,9 @@ export class SidebarComponent implements OnInit{
                     this.viewReports = true;
                 if(action.id == 4)
                     this.viewMedias = true;
+                if(action.id == 5)
+                    this.viewUsersManager = true;
+
             });
         });
     }

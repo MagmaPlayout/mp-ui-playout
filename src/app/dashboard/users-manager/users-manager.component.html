@@ -12,8 +12,7 @@
                 title="Delete">
                     <i class="fa fa-fw fa-trash"></i>
             </button>
-            <button  #btnNew  class="btn btn-success" 
-                    [disabled] = "enabledOptions" 
+            <button  #btnNewUser  class="btn btn-success" 
                     data-toggle="collapse" 
                     data-target="#collapsePieceNew" 
                     aria-expanded="false" 
@@ -22,16 +21,7 @@
                     title="New">
                         <i class="fa fa-fw fa-plus"></i>
                 </button> 
-            <button  #btnEdit  class="btn btn-success" 
-                [disabled] = "enabledOptions" 
-                data-toggle="collapse" 
-                data-target="#collapsePieceEdit" 
-                aria-expanded="false" 
-                aria-controls="collapseExample" 
-                data-placement="top" 
-                title="Edit">
-                    <i class="fa fa-fw fa-pencil-square-o "></i>
-            </button>                                               
+                                  
         </div>
     </div>
 
@@ -42,16 +32,11 @@
 <div>
 <div class="collapse" id="collapsePieceNew">
   <div class="card card-block">
-    <app-media-creation [piece] = "selected[0]" (onPieceSave) = "onPieceNew()" ></app-media-creation>
-  </div>
-</div>
-<div class="collapse" id="collapsePieceEdit">
-  <div class="card card-block">
-    <app-piece-edit [piece] = "selected[0]"  (onPieceSave) = "onPieceEdit()" ></app-piece-edit>
+        <mp-user-create></mp-user-create>
   </div>
 </div>
 
-<div id="media-table">  
+<div id="user-table">  
       <input
         type='text'
         style='padding:8px;margin:15px auto;width:30%;'
@@ -67,16 +52,19 @@
         [footerHeight]="50"
         [rowHeight]="'auto'"
         [limit]="8"
-        [selected]="selected"
+        [selected]="usersSelected"
         [selectionType]="'multi'"
-        (select)='onSelect($event)'
+      
         [rows]='rows'>
-        <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
-              <ng-template #searchTpl let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-        <span class="datatable-header-cell-wrapper">
-          <span class="datatable-header-cell-label draggable" (click)="sort()">{{column.name}}</span>
-        </span>
-    </ng-template>
-          </ngx-datatable-column>
       </ngx-datatable>
+            <ng-template #hdrTpl let-column="column" >
+            {{column.name}}
+      </ng-template>
+      <ng-template #editTmpl let-row="row" let-value="value" let-i="index">
+        <select #roleSelect class="form-control" (change)="onSelectedRole(row,roleSelect.value)">
+             <option    *ngFor="let item of _roleList; let i = index;" [selected]="item.id == value.id ? true : false" value="{{item.id}}">{{item.name}}</option>  
+        </select>
+
+      
+      </ng-template>
     </div>

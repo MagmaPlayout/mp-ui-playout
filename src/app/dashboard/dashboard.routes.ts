@@ -4,6 +4,7 @@ import { BlankPageRoutes } from './blank-page/index';
 import { SchedulerRoutes } from './scheduler/index';
 import { ReportsRoutes } from './reports/index';
 import { MediasRoutes } from './medias/index';
+import { UsersManagerRoutes } from './users-manager/users-manager.routes';
 import { DashboardComponent } from './index';
 import { AuthGuard } from '../_core/_guards/index';
 
@@ -17,6 +18,7 @@ export const DashboardRoutes: Route[] = [
 			...SchedulerRoutes,
 			...ReportsRoutes,
             ...MediasRoutes,
+            ...UsersManagerRoutes,
             ...BlankPageRoutes,
     	]
   	}

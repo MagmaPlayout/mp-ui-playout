@@ -15,9 +15,24 @@ export class UserService {
         
     }
 
+    /**
+     * Deprecated
+     */
     public check() {
         
         return this.http.get(config.APIs.admin + 'check', null, null)
+            .map(response => response.json(),
+                err => console.log("error")               
+            );
+          
+    }
+
+    /**
+     * 
+     */
+    public getAll() {
+        
+        return this.http.get(config.APIs.admin + 'users', null, null)
             .map(response => response.json(),
                 err => console.log("error")               
             );

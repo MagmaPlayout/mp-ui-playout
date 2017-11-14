@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../_core/_services/user.service';
 
 @Component({
@@ -38,4 +38,5 @@ export class TopNavComponent {
 		sidebar.toggleClass('sidebar-left-zero');
 		mainContainer.toggleClass('main-container-ml-zero');
 	}
+
 }

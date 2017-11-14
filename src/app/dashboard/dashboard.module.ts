@@ -6,10 +6,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BlankPageModule } from './blank-page/blankPage.module';
 import { DashboardComponent } from './dashboard.component';
 import { SchedulerModule } from './scheduler/scheduler.module';
-import {TopNavComponent} from './shared/index';
-import {SidebarComponent} from './shared/index';
+//import { TopNavComponent } from './shared/index';
+import { TopnavModule } from './shared/topnav/topnav.module';
+import { SidebarComponent } from './shared/index';
 import { ReportsModule} from './reports/reports.module';
 import { MediasModule} from './medias/medias.module';
+import { UsersManagerModule} from './users-manager/users-manager.module';
 
 
 @NgModule({
@@ -17,20 +19,21 @@ import { MediasModule} from './medias/medias.module';
         CommonModule,
     	RouterModule,
     	HomeModule, 
-        NgbModule.forRoot(),       
+        NgbModule.forRoot(), 
+        TopnavModule,      
     	BlankPageModule,
         SchedulerModule,
         ReportsModule,
-        MediasModule
-        
-        
+        MediasModule,  
+        UsersManagerModule
+
     ],
     declarations: [
         DashboardComponent, 
-        TopNavComponent, 
+        //TopNavComponent, 
         SidebarComponent  
         ],
-    exports: [DashboardComponent, TopNavComponent, SidebarComponent],
+    exports: [DashboardComponent, /*TopNavComponent,*/ SidebarComponent],
 })
 
 export class DashboardModule { }
