@@ -91,7 +91,7 @@ export class PermissionService {
         params.set('idUser', idUser.toString());
         params.set('idRole', idRole.toString());
         
-        return this.http.put(config.APIs.admin + 'permissions/userRole', params, null)
+        return this.http.post(config.APIs.admin + 'permissions/userRole', params, null)
             .map(response => response.json(),
                 err => console.log("error")               
             );  

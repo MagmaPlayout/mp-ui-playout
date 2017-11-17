@@ -1,48 +1,38 @@
-<div class="card">
-  <div class="card-block">
 
-    <div class="row">
-       <div class="col-sm-9"></div>
-        <div class="col-sm-3">
-            <button type="submit" 
-                (click) = "onBtnRemoveClick()" 
-                [disabled] = "enabledOptions"  
-                class="btn btn-danger"
-                data-placement="top" 
-                title="Delete">
-                    <i class="fa fa-fw fa-trash"></i>
-            </button>
-            <button  #btnNewUser  class="btn btn-success" 
-                    data-toggle="collapse" 
-                    data-target="#collapsePieceNew" 
-                    aria-expanded="false" 
-                    aria-controls="collapseExample"
-                    data-placement="top" 
-                    title="New">
-                        <i class="fa fa-fw fa-plus"></i>
-                </button> 
-                                  
-        </div>
-    </div>
-
-       
-       
-  </div>
-</div>
-<div>
-<div class="collapse" id="collapsePieceNew">
-  <div class="card card-block">
-        <mp-user-create></mp-user-create>
-  </div>
-</div>
 
 <div id="user-table">  
-      <input
-        type='text'
-        style='padding:8px;margin:15px auto;width:30%;'
-        placeholder='Type to filter the media column...'
-        (keyup)='updateFilter($event)'
-      />
+    <div class="row">
+        <div class="col-lg-4 col-xs-11">
+            <div class="form-group">
+                <input
+                    type='text'
+                    class='form-control'
+                    placeholder='Type to filter user clummn...'
+                    (keyup)='updateFilter($event)'
+                />
+            </div>
+        </div>
+        <div class="col-lg-1 col-xs-12">
+            <div class="form-group">
+                <button  #btnNewUser  class="btn btn-success" 
+                data-toggle="collapse" 
+                data-target="#collapsePieceNew" 
+                aria-expanded="false" 
+                aria-controls="collapseExample"
+                data-placement="top" 
+                title="New">
+                <i class="fa fa-fw fa-plus"></i>
+                </button> 
+            </div>
+        </div>
+        <div class="col-lg-7 col-xs-12"></div>
+    </div>
+
+      <div class="collapse" id="collapsePieceNew">
+        <div class="card card-block">
+            <mp-user-create (onUserSave)="onUserSave()"></mp-user-create>
+        </div>
+    </div>
       <ngx-datatable
         #table
         class='material'
@@ -52,19 +42,17 @@
         [footerHeight]="50"
         [rowHeight]="'auto'"
         [limit]="8"
-        [selected]="usersSelected"
-        [selectionType]="'multi'"
-      
         [rows]='rows'>
       </ngx-datatable>
-            <ng-template #hdrTpl let-column="column" >
-            {{column.name}}
-      </ng-template>
+           
       <ng-template #editTmpl let-row="row" let-value="value" let-i="index">
         <select #roleSelect class="form-control" (change)="onSelectedRole(row,roleSelect.value)">
              <option    *ngFor="let item of _roleList; let i = index;" [selected]="item.id == value.id ? true : false" value="{{item.id}}">{{item.name}}</option>  
-        </select>
-
-      
+        </select>    
+      </ng-template>
+       <ng-template #hdrTpl let-column="column" >         
+      </ng-template>
+      <ng-template  #trashTmpl let-row="row"  let-value="value" let-i="index">
+        <i class="btnTrash fa fa-trash" (click)="onClickDelete(row)" aria-hidden="true"></i>
       </ng-template>
     </div>

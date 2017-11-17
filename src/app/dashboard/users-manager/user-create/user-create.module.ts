@@ -11,6 +11,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     imports: [
         CommonModule, 
         DndModule.forRoot(),
+        FormsModule,
         NgxPaginationModule,
         NgxDatatableModule,
     ],

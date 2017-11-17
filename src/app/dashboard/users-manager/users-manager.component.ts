@@ -5,7 +5,8 @@ import { PermissionService } from '../../_core/_services/permission.service'
 import { UserActionModel } from '../../_core/_models/userAction.model';
 import { RoleModel } from '../../_core/_models/role.model';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-
+import { NotificationService } from '../../_core/_services/notification.service';
+import {NgForm} from '@angular/forms';
 
 /**
  * @author Luis Muñoz <luismunoz.dh@gmail.com>
@@ -25,11 +26,14 @@ export class UsersManagerComponent implements OnInit{
     @ViewChild(DatatableComponent) table: DatatableComponent;
     @ViewChild('editTmpl') editTmpl: TemplateRef<any>;
     @ViewChild('hdrTpl') hdrTpl: TemplateRef<any>;
+    @ViewChild('trashTmpl') trashTmpl: TemplateRef<any>;
+    
 
     columns = [];
 
 
     constructor(
+        private notificationService: NotificationService,
         private userService: UserService,
         private permissionService : PermissionService) {
             this.getUsersWithRoles();
@@ -43,18 +47,25 @@ export class UsersManagerComponent implements OnInit{
             { prop: 'username', name : 'Username' },
             {
                 cellTemplate: this.editTmpl,
-                headerTemplate: this.hdrTpl,
-                name: 'role'
+                prop:'role',
+                name: 'Role'
+            },
+            {
+                
+                cellTemplate: this.trashTmpl,
+                name: '',
+                width:20
             },
         ];
     }
 
-     getUsersWithRoles(){
+    private getUsersWithRoles(){
         this.userService.getAll().subscribe(userList => {
             console.log(userList)
             this.permissionService.getAllRoles() .subscribe(roleList =>{
                 this._roleList = roleList;
                 this.rows = userList.map( user=>{
+                    user.name = user.name + ', ' + user.surname;
                     user.role = roleList.find(rol =>{
                         if(rol.id == user.idRole)
                             return true;
@@ -69,11 +80,51 @@ export class UsersManagerComponent implements OnInit{
         });
     }
 
-
+    /**
+     * On selected role.
+     * Update user idRole
+     */
     onSelectedRole(user, idRole ){
-        this.permissionService.setUserRole(user.id, idRole).subscribe(resp =>{
-            console.log(resp);  
-        })
+        this.permissionService.setUserRole(user.id, idRole).subscribe(
+            resp => {
+                console.log(resp)
+                if(resp)
+                    this.notificationService.success("the user role has been updated successfully");
+                else
+                    this.notificationService.error("the user role could not be updated")
+            },
+            error => this.notificationService.error(error._body)
+        );
+    }
+
+    /**
+     * On click trash
+     * Delete user
+     */
+    onClickDelete(user ){
+        this.userService.delete(user).subscribe(
+            resp => {
+                console.log(resp);
+                if(resp)
+                    this.notificationService.success("the user has been deleted successfully");
+                else
+                    this.notificationService.error("the user could not be deleted");
+
+                this.getUsersWithRoles();
+            },
+            error => this.notificationService.error(error._body)
+        );
+    }
+
+     /**
+     * After submit, trigger collapse event and update the user list.
+     */
+    private onUserSave(result){
+        let btn = this.btnNew.nativeElement as HTMLElement;
+        btn.click();
+        this.enabledOptions = true;
+        this.getUsersWithRoles();
+        
     }
 
 

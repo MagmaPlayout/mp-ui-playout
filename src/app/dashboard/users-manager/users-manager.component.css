@@ -1,7 +1,9 @@
-.dark-modal .modal-content {
-      background-color: #292b2c;
-      color: white;
-    }
-.dark-modal .close {
-    color: white;   
+.btnTrash{
+    cursor: pointer; 
+    font-size: 1.5em;
 }
+.btnTrash:hover{
+    color:#DF0101; 
+    font-size: 1.8em;
+}
+

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {  Response} from '@angular/http';
-//import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import { Response } from '@angular/http';
+import { UserModel } from '../_models/user.model'
+import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '../_helpers/httpClient';
+import {URLSearchParams, Headers, RequestOptions} from '@angular/http';
 
 var config = require("../../app.config");
 
@@ -28,9 +29,9 @@ export class UserService {
     }
 
     /**
-     * 
+     * Get all users
      */
-    public getAll() {
+    public getAll() : Observable<Array<UserModel>> {
         
         return this.http.get(config.APIs.admin + 'users', null, null)
             .map(response => response.json(),
@@ -38,6 +39,41 @@ export class UserService {
             );
           
     }
+
+     /**
+     * delete a piece
+     * @param {PieceModel} piece
+     */
+    public delete(user: UserModel) : Observable<boolean> {  
+        
+        return  this.http.delete(config.APIs.admin + 'users/' + user.id, null, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );        
+    }
+
+    /**
+     * create an user
+     * @param {PieceModel} piece
+     */
+    public insert(user : UserModel) {
+        let params = new URLSearchParams();
+
+        params.set('name', user.name);
+        params.set('surname', user.surname);
+        params.set('username', user.username);
+        params.set('password', user.password);
+        params.set('idRole', user.idRole.toString());
+       
+       
+        return  this.http.post(config.APIs.admin + 'users', params, null)
+               .map(response => response.json(),
+                err => console.log("error")               
+            );
+
+          
+    }
+
 
     
 }
