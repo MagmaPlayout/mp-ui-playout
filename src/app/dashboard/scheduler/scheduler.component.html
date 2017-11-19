@@ -4,12 +4,13 @@
             <div class="row">
                 <div class="col-sm-8">
                     <h4 class="text-muted">Scheduler</h4>
-                </div>
-                 <div class="col-sm-2">
-                    <button class="btn btn-success" (click)="onClickBtnSwitchmode()">Switch mode</button>                    
-                </div>
-                <div class="col-sm-2">
-                    <button class="btn btn-success" (click)="onClickBtnSave()">Save</button>                    
+                </div>             
+                <div class="col-sm-4">
+                    <div class="form-group pull-right">
+                         <button class="btn btn-success" (click)="onClickBtnSwitchmode()" placement="bottom" ngbTooltip="Switch programmer mode"><i class="fa fa-exchange"></i></button>  
+                          <button class="btn btn-success" (click)="onClickBtnSave()" placement="bottom" ngbTooltip="Save changes"><i class="fa fa-fw fa-floppy-o"></i></button>
+                    </div>
+                                      
                 </div>
                 
             </div>

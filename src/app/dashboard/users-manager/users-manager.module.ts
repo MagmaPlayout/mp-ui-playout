@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPaginationModule } from 'ngx-pagination'; 
 import { UserCreateModule } from './user-create/user-create.module'; 
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -14,7 +14,8 @@ import { UserCreateModule } from './user-create/user-create.module';
         DndModule.forRoot(),
         NgxPaginationModule,
         NgxDatatableModule,
-        UserCreateModule
+        UserCreateModule,
+        NgbModule.forRoot()
     ],
     declarations: [UsersManagerComponent],
     exports: [UsersManagerComponent]

@@ -1,6 +1,6 @@
 .mp-playout-list{
     max-height: 633px;  
-    overflow-y: scroll; 
+    overflow-y: auto; 
 }
 .input-group.stylish-input-group{
     margin-bottom: 20px;

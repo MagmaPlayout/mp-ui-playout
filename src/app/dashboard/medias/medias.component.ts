@@ -10,6 +10,9 @@ import { NotificationService } from '../../_core/_services/notification.service'
   styleUrls: ['./medias.component.css']
 })
 export class MediasComponent {
+    private isCollapsedFormNew = true;
+    private isCollapsedFormEdit = true;
+
     private enabledOptions : boolean = true;
     private temp = [];
     private rows = [];
@@ -34,6 +37,7 @@ export class MediasComponent {
 
     getMedias(){
         this.pieceService.getAll().subscribe(resp => {   
+            console.log(resp);
             this.rows = resp;
             this.temp = resp; 
             this.selected = [];

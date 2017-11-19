@@ -17,6 +17,7 @@ import {NgForm} from '@angular/forms';
     styleUrls: ['./users-manager.component.css']
 })
 export class UsersManagerComponent implements OnInit{
+    public isCollapsed = true;
     private enabledOptions : boolean = true;
     private temp = [];
     private rows = [];

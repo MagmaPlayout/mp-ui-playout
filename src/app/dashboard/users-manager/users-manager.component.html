@@ -7,7 +7,7 @@
                 <input
                     type='text'
                     class='form-control'
-                    placeholder='Type to filter user clummn...'
+                    placeholder='Type to filter user colummn...'
                     (keyup)='updateFilter($event)'
                 />
             </div>
@@ -15,12 +15,10 @@
         <div class="col-lg-1 col-xs-12">
             <div class="form-group">
                 <button  #btnNewUser  class="btn btn-success" 
-                data-toggle="collapse" 
-                data-target="#collapsePieceNew" 
-                aria-expanded="false" 
-                aria-controls="collapseExample"
-                data-placement="top" 
-                title="New">
+                (click)="isCollapsed = !isCollapsed"
+                placement="bottom" ngbTooltip="New user"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"
+                >
                 <i class="fa fa-fw fa-plus"></i>
                 </button> 
             </div>
@@ -28,7 +26,7 @@
         <div class="col-lg-7 col-xs-12"></div>
     </div>
 
-      <div class="collapse" id="collapsePieceNew">
+      <div id="collapseExample" [ngbCollapse]="isCollapsed" id="collapsePieceNew">
         <div class="card card-block">
             <mp-user-create (onUserSave)="onUserSave()"></mp-user-create>
         </div>
@@ -53,6 +51,6 @@
        <ng-template #hdrTpl let-column="column" >         
       </ng-template>
       <ng-template  #trashTmpl let-row="row"  let-value="value" let-i="index">
-        <i class="btnTrash fa fa-trash" (click)="onClickDelete(row)" aria-hidden="true"></i>
+        <i class="btnTrash fa fa-trash" (click)="onClickDelete(row)" aria-hidden="true"  placement="bottom" ngbTooltip="Remove"></i>
       </ng-template>
     </div>

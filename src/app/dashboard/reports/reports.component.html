@@ -32,8 +32,11 @@
             >  
             <div *ngIf="!endtime.valid" class="help-block" style="color: red;">end is required</div>
         </div>
-        <button type="submit"  class="btn btn-primary">Search</button>
-        <button class="btn btn-primary" (click)="exportCsv()" >Export</button>
+        <div class="form-group mx-sm-3" >
+            <button type="submit"  class="btn btn-primary" placement="bottom" ngbTooltip="Search"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <button class="btn btn-primary" (click)="exportCsv()" placement="bottom" ngbTooltip="Export" ><i class="fa fa-download" aria-hidden="true"></i></button>
+        </div>
+        
   </form>
   </div>
 </div>

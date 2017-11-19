@@ -1,63 +1,58 @@
-<div class="card">
-  <div class="card-block">
-
+<div id="media-table">  
     <div class="row">
-       <div class="col-sm-9"></div>
-        <div class="col-sm-3">
+    <div class="col-lg-4 col-xs-11">
+        <div class="form-group">
+              <input
+                class="form-control"
+                type='text'
+                placeholder='Type to filter the media column...'
+                (keyup)='updateFilter($event)'
+            />
+        </div>    
+          
+    </div>
+    <div class="col-lg-8 col-xs-12">
+        <div class="form-group">
             <button type="submit" 
                 (click) = "onBtnRemoveClick()" 
                 [disabled] = "enabledOptions"  
                 class="btn btn-danger"
-                data-placement="top" 
-                title="Delete">
+                placement="bottom" ngbTooltip="Remove"
+                >
                     <i class="fa fa-fw fa-trash"></i>
             </button>
             <button  #btnNew  class="btn btn-success" 
-                    [disabled] = "enabledOptions" 
-                    data-toggle="collapse" 
-                    data-target="#collapsePieceNew" 
-                    aria-expanded="false" 
-                    aria-controls="collapseExample"
-                    data-placement="top" 
-                    title="New">
+                    [disabled] = "enabledOptions"
+                    placement="bottom" ngbTooltip="New" 
+                    (click)="isCollapsedFormNew = !isCollapsedFormNew"
+                    [attr.aria-expanded]="!isCollapsedFormNew" aria-controls="collapseFormNew"
+                    >
                         <i class="fa fa-fw fa-plus"></i>
                 </button> 
             <button  #btnEdit  class="btn btn-success" 
                 [disabled] = "enabledOptions" 
-                data-toggle="collapse" 
-                data-target="#collapsePieceEdit" 
-                aria-expanded="false" 
-                aria-controls="collapseExample" 
-                data-placement="top" 
-                title="Edit">
+                placement="bottom" ngbTooltip="Edit"
+                    (click)="isCollapsedFormEdit = !isCollapsedFormEdit"
+                [attr.aria-expanded]="!isCollapsedFormEdit" aria-controls="collapseFormEdit"
+                >
                     <i class="fa fa-fw fa-pencil-square-o "></i>
-            </button>                                               
-        </div>
+            </button>
+        </div>                                               
     </div>
-
-       
-       
-  </div>
 </div>
+       
 <div>
-<div class="collapse" id="collapsePieceNew">
+<div id="collapseFormNew" [ngbCollapse]="isCollapsedFormNew">
   <div class="card card-block">
     <app-media-creation [piece] = "selected[0]" (onPieceSave) = "onPieceNew()" ></app-media-creation>
   </div>
 </div>
-<div class="collapse" id="collapsePieceEdit">
+<div id="collapseFormEdit" [ngbCollapse]="isCollapsedFormEdit">
   <div class="card card-block">
     <app-piece-edit [piece] = "selected[0]"  (onPieceSave) = "onPieceEdit()" ></app-piece-edit>
   </div>
 </div>
 
-<div id="media-table">  
-      <input
-        type='text'
-        style='padding:8px;margin:15px auto;width:30%;'
-        placeholder='Type to filter the media column...'
-        (keyup)='updateFilter($event)'
-      />
       <ngx-datatable
         #table
         class='material'
@@ -71,12 +66,5 @@
         [selectionType]="'multi'"
         (select)='onSelect($event)'
         [rows]='rows'>
-        <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
-              <ng-template #searchTpl let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-        <span class="datatable-header-cell-wrapper">
-          <span class="datatable-header-cell-label draggable" (click)="sort()">{{column.name}}</span>
-        </span>
-    </ng-template>
-          </ngx-datatable-column>
       </ngx-datatable>
     </div>

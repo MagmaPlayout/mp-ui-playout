@@ -4,13 +4,15 @@ import { MediasComponent } from './medias.component';
 import {MediaCreationModule} from './media-creation/media-creation.module'
 import {PieceEditModule} from './piece-edit/piece-edit.module'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     NgxDatatableModule,
     MediaCreationModule,
-    PieceEditModule
+    PieceEditModule,
+    NgbModule.forRoot()
   ],
   declarations: [MediasComponent]
 })
