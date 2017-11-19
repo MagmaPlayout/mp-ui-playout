@@ -6,6 +6,7 @@ import { PieceModel } from '../../_core/_models/piece.model';
 import { SketchModel } from '../../_core/_models/sketch.model';
 import { PlayoutModel } from '../../_core/_models/playout.model';
 import { CmdModel } from '../../_core/_models/cmd.model';
+declare var moment: any;
 
 
 /**
@@ -27,6 +28,8 @@ export class HomeComponent {
 
 	sketchContent : string;
 
+    private _totalDuration : string = "00:00:00";
+
 	
 	constructor(private playoutService: PlayoutService, private coreService : CoreService){
 		
@@ -35,14 +38,15 @@ export class HomeComponent {
 		this.playoutService.getPieceList().subscribe( resp  => {
 			this.pieceLst = resp;
             
+            
         })
 
 		this.coreService.getPlResp().subscribe( resp => {
 			
 			this.playoutLst = resp;
+            this.getTotalDuration();
 
 		});
-
 	}
 
 	
@@ -56,6 +60,7 @@ export class HomeComponent {
 		pl.piece = $event.dragData;
 		this.playoutLst.push(pl);
 		pl.currentPos = this.playoutLst.indexOf(pl);
+        this.getTotalDuration();
 
 	}
 
@@ -66,7 +71,7 @@ export class HomeComponent {
 		
 		po.currentPos = index;
 		this.removeItem(po, this.playoutLst);
-
+        this.getTotalDuration();
 	}
 
 	/**
@@ -95,6 +100,7 @@ export class HomeComponent {
        
 		this.currenPoItem = po.piece.name;
 		this.switchLiveMode(index);
+        this.getTotalDuration();
 		
 	}
 
@@ -144,6 +150,20 @@ export class HomeComponent {
         this.playoutLst = filteredList;
 
         console.log(cmd)
+    }
+
+    private getTotalDuration(){
+        var totalDuration = moment.duration("PT0.000000S", moment.ISO_8601);
+         //calculate total duration
+        this.playoutLst.forEach(item => {
+
+            totalDuration.add(moment.duration(item.piece.duration, moment.ISO_8601));
+
+        })
+        
+        this._totalDuration = moment.utc(totalDuration.asMilliseconds()).format("HH:mm:ss");
+            
+
     }
 	
  }

@@ -2,25 +2,14 @@
     display: inline-table;
     height: 100%;
     margin: 10px;
-    bottom:0px;
+    bottom:0px;  
 }
 
-.mp-item-media{
-    border-left: medium solid #0040FF;
-}
-.mp-item-pl{
-    border-left: medium solid #81DAF5;
-}
 
 .mp-item-playout,.mp-item-media,.mp-item-sketch,.mp-item-playout{
     margin-bottom: 10px;
     font-size: 0.8em;
     word-break: break-all
-}
-
-.thumbnail{  
-    width: 72px;
-    height: 72px;
 }
 
 

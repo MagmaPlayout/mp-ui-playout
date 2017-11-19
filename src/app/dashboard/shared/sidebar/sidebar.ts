@@ -4,7 +4,9 @@ import { PermissionService } from '../../../_core/_services/permission.service';
 @Component({
 	moduleId: module.id,
 	selector: 'sidebar-cmp',
-	templateUrl: 'sidebar.html'
+	templateUrl: 'sidebar.html',
+    styles: ['.sidebar .list-group a.router-link-active, .sidebar .list-group a:hover'+
+    '{background: #9c1700;color: #fff; font-weight:bold;}'],
 })
 
 export class SidebarComponent implements OnInit{

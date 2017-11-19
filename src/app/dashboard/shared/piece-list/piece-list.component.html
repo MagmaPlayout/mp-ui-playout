@@ -6,16 +6,16 @@
                 <input type="text" 
                         class="form-control" 
                         (keyup)=onSearch($event)
-                        placeholder="Search" >
+                        placeholder="Search..." >
                 <span class="input-group-addon">
                     <button type="submit">
-                        <span class="glyphicon glyphicon-search"></span>
+                        <span class="fa fa-search"></span>
                     </button>  
                 </span>
             </div>
            
                 <div class="events-list events-page">
-                    <div *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: 2, currentPage: p}; let i=index"
+                    <div *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: 4, currentPage: p}; let i=index"
                         class="draggable"
                         dnd-draggable 
                         dnd-sortable 

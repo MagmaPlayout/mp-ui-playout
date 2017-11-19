@@ -1,56 +1,6 @@
-.mp-list-box {
-    
-}
-.mp-item-sketch{
-    border-left: medium solid #FE9A2E;
-}
-.mp-item-media{
-    border-left: medium solid #0040FF;
-}
-.mp-item-pl{
-    border-left: medium solid #81DAF5;
-}
-.mp-item-playout{
-    border-left: medium solid #04B404;
-}
-.mp-item-playout,.mp-item-media,.mp-item-sketch,.mp-item-playout{
-    margin-bottom: 10px;
-    font-size: 0.8em;
-    word-break: break-all
-}
-.mp-video-box {
-    display: inline-flex;
-    width: 20%;
-    /*height: 100%;
-    margin: 10px;*/
-    padding-right: 0px;
-    margin-right: 0px;
-   
-}
-
-.thumbnail{  
-    width: 72px;
-    height: 72px;
-}
-.mp-video-box video{
-    background-color:black;
-}
-
-.mp-timer{
-    background-color: dimgrey;
-    color:white;
-    margin-top: 20px;
-    padding-left: 10px;
-    
-}
-
-.mp-sketch-preview{
-    background-color: limegreen;
-    color:white;
-    margin-top: 40px;
-    padding-left: 10px;
-    height: 200px;
-    
+.mp-playout-list{
+    max-height: 633px;  
+    overflow-y: scroll; 
 }
 .input-group.stylish-input-group{
     margin-bottom: 20px;
