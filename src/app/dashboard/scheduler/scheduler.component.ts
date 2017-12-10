@@ -141,8 +141,9 @@ export class SchedulerComponent implements AfterViewInit {
    * Drop external event
    */
   private dropEvent(date, jsEvent, ui, resourceId) {
-    console.log(date);
+   
     var piece = jQuery(ui.helper).data("pieceData").piece;
+    console.log(piece);
     let eventLst = jQuery(this.calendarElementId).fullCalendar('clientEvents');
 
     let occurrence = <OccurrenceModel>{

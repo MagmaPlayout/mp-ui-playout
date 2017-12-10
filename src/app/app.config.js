@@ -11,6 +11,9 @@ module.exports = {
         "admin" : "http://localhost:8080/api/", 
         "core" : "http://localhost:8003"    
     },
+    "mediaPlaylist" : {
+        itemsPerPage : 6
+    },
     "scheduler" : {
         slotDuration : '00:05:00',
         snapDuration : '00:05:00',

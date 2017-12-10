@@ -1,6 +1,6 @@
 <div class="card mp-list-box"    
         dnd-sortable-container [sortableData]="pieceFilteredList" [dropZones]="['playoutItem']">
-        <div class="card-header">Medias</div>
+        <div class="card-header">Medias {{itemPerPage}}</div>
         <div class="card-block">
             <div class="input-group stylish-input-group">
                 <input type="text" 
@@ -15,7 +15,7 @@
             </div>
            
                 <div class="events-list events-page">
-                    <div *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: 4, currentPage: p}; let i=index"
+                    <div *ngFor="let piece of pieceFilteredList | paginate: { itemsPerPage: itemsPerPage, currentPage: p}; let i=index"
                         class="draggable"
                         dnd-draggable 
                         dnd-sortable 

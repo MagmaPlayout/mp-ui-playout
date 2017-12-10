@@ -51,8 +51,6 @@
 
 .main-container{overflow-y: hidden}
 
-
-
 /**************************************************************************************************/
 
 /* BEGIN events */
@@ -74,14 +72,12 @@
   top: 0;
   bottom: 0;
   left: 0;
-  width: 60px;
+  width: 90px;
   /*text-align: center;*/
   background-color: #e74c3c;
   color: white;
 }
-.events-list .event .date .mp-thumb{
-  
-}
+
 .events-list .event .date strong {
   font-size: 24px;
   font-weight: 700;
@@ -130,13 +126,13 @@
   position: relative;
   z-index: 1;
   min-height: 90px;
-  margin-left: 61px;
+  margin-left: 90px;
   zoom: 1;
   background-color: transparent\9;
   /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffffff, endColorstr=#ffffffff)";
   /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffffff, endColorstr=#ffffffff);*/
   background-color: #ffffff;
-  padding: 16px 20px 20px 20px;
+  padding: 16px 20px 0px 20px;
   -webkit-transition: padding 300ms cubic-bezier(0.23, 1, 0.32, 1);
   -moz-transition: padding 300ms cubic-bezier(0.23, 1, 0.32, 1);
   -o-transition: padding 300ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -147,7 +143,6 @@
   font-size: 14px;
   font-weight: bold;
   color: #000000;
-  text-transform: uppercase;
   color: #e74c3c;
   margin: 0;
   display: block;
@@ -165,7 +160,7 @@
   font-weight: normal;
   color: #000000;
   color: rgba(0, 0, 0, 0.5);
-  font-size: 13px;
+  font-size: 12px;
   margin-top: 4px;
   display: inline-block;
 }
@@ -174,7 +169,7 @@
   margin-right: 6px;
 }
 .events-list .event:hover .date span.details {
-  width: 60px;
+  width: 90px;
 }
 .events-list .event:hover .details {
   padding-left: 15px;
@@ -207,28 +202,28 @@
   opacity: 1;
 }
 .events-page .event {
-  min-height: 120px;
+  min-height: 90px;
 }
 .events-page .event .details {
-  min-height: 120px;
+  min-height: 90px;
 }
 .events-page .event .details .icon-time,
 .events-page .event .details .icon-calendar {
   margin-left: 10px;
 }
 .events-page .event .details h1 {
-  margin-right: 100px;
+  margin-right: 40px;
 }
 .events-page .event .details .rating {
   margin: 0;
   padding: 0;
   list-style-type: none;
   display: block;
-  width: 100px;
+  width: 40px;
   height: 10px;
   position: absolute;
   top: 20px;
-  right: 10px;
+  right: 0px;
 }
 .events-page .event .details .rating li {
   display: block;

@@ -2,6 +2,7 @@ import { Component, ElementRef, AfterViewChecked, ViewChild, Input } from '@angu
 import { PlayoutService } from '../../../_core/_services/playout.service'
 import { PieceModel } from '../../../_core/_models/piece.model';
 import { MediainfoComponent } from './mediainfo/mediainfo.component';
+var config = require("../../../app.config");
 declare var jQuery: any;
 declare var moment: any;
 
@@ -14,7 +15,8 @@ declare var moment: any;
     styleUrls: ['./piece-list.component.css']
 })
 export class PieceListComponent implements AfterViewChecked {
-
+    private itemsPerPage : number = config.mediaPlaylist.itemsPerPage;
+    private p : number = 1;
     @ViewChild(MediainfoComponent)
     private mediaInfoPopup: MediainfoComponent;
     @Input('isJuiDraggable') isJuiDraggable: boolean = false;
@@ -44,16 +46,17 @@ export class PieceListComponent implements AfterViewChecked {
         if (this.isJuiDraggable) {
             let piecesLiDraggables = jQuery(".mp-item-media.list-group-item.draggable.ui-draggable.ui-draggable-handle");
             let piecesLiElements = jQuery(".mp-item-media");
-
+            console.log("ngAfterView");
+            console.log(this.p);
             if (piecesLiElements.length != piecesLiDraggables.length) {
 
                 for (var i = 0; i <= piecesLiElements.length - 1; i++) {
+                    console.log(this.pieceFilteredList[i * this.p]);
                     jQuery(piecesLiElements[i]).draggable({ revert: true, zIndex: 999, revertDuration: 100 });
-
                     jQuery(piecesLiElements[i]).data('pieceData', {
                         title: this.pieceLst[i].name, // use the element's text as the event title
                         stick: true, // maintain when user navigates (see docs on the renderEvent method)
-                        piece: this.pieceLst[i]
+                        piece: this.pieceFilteredList[((this.p * this.itemsPerPage) - this.itemsPerPage) + i ]
                     });
                 }
             }
